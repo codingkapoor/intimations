@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 const LeavesStatusScreen = () => {
     return (
@@ -32,5 +33,10 @@ const styles = StyleSheet.create({
         fontSize: 24
     }
 });
+
+LeavesStatusScreen.navigationOptions = {
+    title: 'Leaves',
+    tabBarIcon: <FontAwesome name="leaf" size={20} />
+}
 
 export default LeavesStatusScreen;
