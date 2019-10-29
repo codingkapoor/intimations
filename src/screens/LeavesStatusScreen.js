@@ -19,7 +19,7 @@ const LeavesStatusScreen = () => {
 const styles = StyleSheet.create({
     parent: {
         flex: 1,
-        justifyContent: 'space-around'
+        justifyContent: 'space-evenly'
 
     },
     container: {
