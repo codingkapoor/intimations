@@ -1,10 +1,12 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import LeavesStatusScreen from './src/screens/LeavesStatusScreen';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import ProfileScreen from './src/screens/ProfileScreen';
 
-const AppNavigator = createStackNavigator({
-  Leaves: LeavesStatusScreen
+const AppNavigator = createBottomTabNavigator({
+  Leaves: LeavesStatusScreen,
+  Profile: ProfileScreen
 });
 
 const App = createAppContainer(AppNavigator);
