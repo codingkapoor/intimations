@@ -10,6 +10,7 @@ const ProfileScreen = () => {
                 <Text style={styles.label}>Shivam Kapoor</Text>
                 <Text style={styles.label}>Sr. Big Data Developer</Text>
                 <Text style={styles.label}>@glassbeam since Jan 16th, 2017</Text>
+                <Text style={styles.label}>Bangalore, India</Text>
                 <View style={styles.container}>
                     <View style={styles.contact}>
                         <FontAwesome name='phone' type='font-awesome' size={16} />
