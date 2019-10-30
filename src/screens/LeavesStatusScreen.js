@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     figure: {
-        fontSize: 110
+        fontSize: 80
     },
     label: {
-        fontSize: 24
+        fontSize: 20
     }
 });
 
