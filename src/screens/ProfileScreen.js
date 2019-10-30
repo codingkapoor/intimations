@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 const ProfileScreen = () => {
     return (
@@ -13,11 +12,11 @@ const ProfileScreen = () => {
                 <Text style={styles.label}>Bangalore, India</Text>
                 <View style={styles.container}>
                     <View style={styles.contact}>
-                        <FontAwesome name='phone' type='font-awesome' size={16} />
+                        <FontAwesomeIcon icon='phone-square-alt' size={16} />
                         <Text style={styles.label}>  +91-9663006554</Text>
                     </View>
                     <View style={styles.contact}>
-                        <FontAwesome name='envelope' type='font-awesome' size={16} />
+                        <FontAwesomeIcon icon='envelope' size={16} />
                         <Text style={styles.label}>  mailtoshivamk@gmail.com</Text>
                     </View>
                 </View>
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
 
 ProfileScreen.navigationOptions = {
     title: 'Profile',
-    tabBarIcon: <MaterialCommunityIcons name="account" size={28} />
+    tabBarIcon: <FontAwesomeIcon icon='user-alt' size={20} />
 }
 
 export default ProfileScreen;
