@@ -5,8 +5,8 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ProfileScreen from './src/screens/ProfileScreen';
 
 const AppNavigator = createBottomTabNavigator({
-  Leaves: LeavesStatusScreen,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
+  Leaves: LeavesStatusScreen
 });
 
 const App = createAppContainer(AppNavigator);

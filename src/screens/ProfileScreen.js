@@ -5,29 +5,40 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ProfileScreen = () => {
     return (
-        <View style={styles.container}>
+        <View style={styles.parent}>
             <View style={styles.info}>
                 <Text style={styles.label}>Shivam Kapoor</Text>
                 <Text style={styles.label}>Sr. Big Data Developer</Text>
                 <Text style={styles.label}>@glassbeam since Jan 16th, 2017</Text>
-                <View style={styles.contact}><FontAwesome name='phone' type='font-awesome' size={16} /><Text style={styles.label}>  +91-9663006554</Text></View>
-                <View style={styles.contact}><FontAwesome name='envelope' type='font-awesome' size={16} /><Text style={styles.label}>  mailtoshivamk@gmail.com</Text></View>
+                <View style={styles.container}>
+                    <View style={styles.contact}>
+                        <FontAwesome name='phone' type='font-awesome' size={16} />
+                        <Text style={styles.label}>  +91-9663006554</Text>
+                    </View>
+                    <View style={styles.contact}>
+                        <FontAwesome name='envelope' type='font-awesome' size={16} />
+                        <Text style={styles.label}>  mailtoshivamk@gmail.com</Text>
+                    </View>
+                </View>
             </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    parent: {
         flex: 1,
         justifyContent: 'space-evenly'
+    },
+    container: {
+        marginTop: 50
     },
     info: {
         alignItems: 'center'
     },
     contact: {
         flexDirection: 'row',
-        alignItems: 'flex-start'
+        alignItems: 'center'
     },
     label: {
         fontSize: 16
