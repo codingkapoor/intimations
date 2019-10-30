@@ -10,10 +10,13 @@ import {
   faPhoneSquareAlt, 
   faEnvelope,
   faUserAlt,
-  faBox
+  faBox,
+  faMapMarkerAlt,
+  faBusinessTime,
+  faIdBadge
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox);
+library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge);
 
 const AppNavigator = createBottomTabNavigator({
   Profile: ProfileScreen,

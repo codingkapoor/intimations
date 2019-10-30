@@ -6,10 +6,26 @@ const ProfileScreen = () => {
     return (
         <View style={styles.parent}>
             <View style={styles.info}>
-                <Text style={styles.label}>Shivam Kapoor</Text>
-                <Text style={styles.label}>Sr. Big Data Developer</Text>
-                <Text style={styles.label}>@glassbeam since Jan 16th, 2017</Text>
-                <Text style={styles.label}>Bangalore, India</Text>
+                <View style={styles.contact}>
+                    <FontAwesomeIcon icon='id-badge' size={16} />
+                    <Text style={styles.label}>  128</Text>
+                </View>
+                <Text style={{ fontSize: 20, marginTop: 10 }}>Shivam Kapoor</Text>
+                <Text style={{ fontSize: 20, marginBottom: 10 }}>Sr. Big Data Developer</Text>
+                <View style={styles.contact}>
+                    <Text style={styles.label}>@glassbeam </Text>
+                    <FontAwesomeIcon icon='business-time' size={16} />
+                    <Text style={styles.label}> Jan </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+                        <Text style={{ fontSize: 16, lineHeight: 30 }}>16</Text>
+                        <Text style={{ fontSize: 11, lineHeight: 18 }}>th</Text>
+                    </View>
+                    <Text>, 2017</Text>
+                </View>
+                <View style={styles.contact}>
+                    <FontAwesomeIcon icon='map-marker-alt' size={16} />
+                    <Text style={styles.label}>  Bangalore, India</Text>
+                </View>
                 <View style={styles.container}>
                     <View style={styles.contact}>
                         <FontAwesomeIcon icon='phone-square-alt' size={16} />
