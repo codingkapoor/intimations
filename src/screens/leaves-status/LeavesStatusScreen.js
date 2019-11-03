@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-const LeavesStatusScreen = () => {
-    return (
-        <View style={styles.parent}>
-            <View style={styles.container}>
-                <Text style={styles.figure}>23</Text>
-                <Text style={styles.label}>Earned Leaves</Text>
+class LeavesStatusScreen extends Component {
+    componentDidMount() {
+        console.log(this.props);
+        this.props.fetchEmployeeDetails(128);
+        console.log(this.props.employeeDetails);
+    }
+
+    render() {
+        return (
+            <View style={styles.parent}>
+                <View style={styles.container}>
+                    <Text style={styles.figure}>23</Text>
+                    <Text style={styles.label}>Earned Leaves</Text>
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.figure}>11</Text>
+                    <Text style={styles.label}>Sick Leaves</Text>
+                </View>
             </View>
-            <View style={styles.container}>
-                <Text style={styles.figure}>11</Text>
-                <Text style={styles.label}>Sick Leaves</Text>
-            </View>
-        </View>
-    );
+        );
+    }
 };
 
 const styles = StyleSheet.create({
