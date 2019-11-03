@@ -1,9 +1,6 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import LeavesStatusScreen from './src/screens/LeavesStatusScreen';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import ProfileScreen from './src/screens/ProfileScreen';
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { 
@@ -16,11 +13,14 @@ import {
   faIdBadge
 } from '@fortawesome/free-solid-svg-icons';
 
+import LeavesStatusScreen from './src/screens/leaves-status/LeavesStatusScreen';
+import ProfileScreen from './src/screens/profile/ProfileScreen';
+
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge);
 
 const AppNavigator = createBottomTabNavigator({
-  Profile: ProfileScreen,
-  Leaves: LeavesStatusScreen
+  Leaves: LeavesStatusScreen,
+  Profile: ProfileScreen
 });
 
 const App = createAppContainer(AppNavigator);
