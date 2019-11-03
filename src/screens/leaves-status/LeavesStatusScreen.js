@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 class LeavesStatusScreen extends Component {
     componentDidMount() {
-        console.log(this.props);
         this.props.fetchEmployeeDetails(128);
         console.log(this.props.employeeDetails);
     }

@@ -2,7 +2,8 @@ import platform from '../../../common/apis/platform';
 import { FETCH_EMPLOYEE_DETAILS } from '../actionTypes';
 
 const fetchEmployeeDetails = id => async dispatch => {
-    const employeeDetails = await platform.get(`/employees/${id}`).data;
+    const res = await platform.get(`/employees/${id}`);
+    const employeeDetails = res.data;
 
     dispatch({
         type: FETCH_EMPLOYEE_DETAILS,

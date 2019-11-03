@@ -1,4 +1,4 @@
 export const platform = {
-    interface: '127.0.0.1',
+    interface: '192.168.1.4',
     port: '9000'
 }
