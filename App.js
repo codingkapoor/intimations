@@ -25,12 +25,10 @@ const AppNavigator = createBottomTabNavigator({
   Profile: ProfileScreen
 });
 
-const Navigation = createAppContainer(AppNavigator);
+const App = createAppContainer(AppNavigator);
 
-const App = () => {
+export default () => {
   return <Provider store={store}>
-    <Navigation />
+    <App />
   </Provider>
-};
-
-export default App; 
+}; 
