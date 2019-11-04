@@ -1,1 +1,1 @@
-export { default as leavesStatusReducer } from './leavesStatusReducer';
+export { default as employeeDetailsReducer } from './employeeDetailsReducer';
