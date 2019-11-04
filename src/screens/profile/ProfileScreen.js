@@ -1,14 +1,17 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { SpinnerWrapper } from '../../common/StyledComponents';
+import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper } from './StyledComponents';
+import { Id, Name, Designation, StyledDate,  StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
 
-const ProfileScreen = ({employeeDetails}) => {
+const ProfileScreen = ({ employeeDetails }) => {
 
     if (!employeeDetails.leaves)
         return (
-            <View style={styles.spinner}>
+            <SpinnerWrapper>
                 <ActivityIndicator size="large" color="#000000" />
-            </View>
+            </SpinnerWrapper>
         );
 
     let id = employeeDetails.id;
@@ -21,62 +24,49 @@ const ProfileScreen = ({employeeDetails}) => {
     let doj = new Date(employeeDetails.doj);
 
     return (
-        <View style={styles.parent}>
-            <View style={styles.info}>
-                <View style={styles.contact}>
+        <Wrapper>
+            <StyledProfile>
+                <IdWrapper>
                     <FontAwesomeIcon icon='id-badge' size={16} />
-                    <Text style={styles.label}>  {id}</Text>
-                </View>
-                <Text style={{ fontSize: 20, marginTop: 10 }}>{name}</Text>
-                <Text style={{ fontSize: 20, marginBottom: 10 }}>{designation}</Text>
-                <View style={styles.contact}>
-                    <Text style={styles.label}>@glassbeam </Text>
+                    <Id>  {id}</Id>
+                </IdWrapper>
+
+                <Name>{name}</Name>
+                <Designation>{designation}</Designation>
+
+                <DOJWrapper>
+                    <Company>@glassbeam </Company>
+
                     <FontAwesomeIcon icon='business-time' size={16} />
-                    <Text style={styles.label}> {MONTH_NAMES[doj.getMonth()]} </Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-                        <Text style={{ fontSize: 16, lineHeight: 30 }}>{doj.getDate()}</Text>
-                        <Text style={{ fontSize: 11, lineHeight: 18 }}>{_getOrdinal(doj.getDate())}</Text>
-                    </View>
-                    <Text>, {doj.getFullYear()}</Text>
-                </View>
-                <View style={styles.contact}>
+                    
+                    <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
+                    <DateWrapper>
+                        <StyledDate>{doj.getDate()}</StyledDate>
+                        <Ordinal>{_getOrdinal(doj.getDate())}</Ordinal>
+                    </DateWrapper>
+                    <StyledYear>, {doj.getFullYear()}</StyledYear>
+                </DOJWrapper>
+
+                <LocationWrapper>
                     <FontAwesomeIcon icon='map-marker-alt' size={16} />
-                    <Text style={styles.label}>  {city}, {country}</Text>
-                </View>
-                <View style={styles.container}>
-                    <View style={styles.contact}>
+                    <Location>  {city}, {country}</Location>
+                </LocationWrapper>
+
+                <ContactInfoWrapper>
+                    <PhoneWrapper>
                         <FontAwesomeIcon icon='phone-square-alt' size={16} />
-                        <Text style={styles.label}>  {phone}</Text>
-                    </View>
-                    <View style={styles.contact}>
+                        <Phone>  {phone}</Phone>
+                    </PhoneWrapper>
+
+                    <EmailWrapper>
                         <FontAwesomeIcon icon='envelope' size={16} />
-                        <Text style={styles.label}>  {email}</Text>
-                    </View>
-                </View>
-            </View>
-        </View>
+                        <Email>  {email}</Email>
+                    </EmailWrapper>
+                </ContactInfoWrapper>
+            </StyledProfile>
+        </Wrapper>
     );
 };
-
-const styles = StyleSheet.create({
-    parent: {
-        flex: 1,
-        justifyContent: 'space-evenly'
-    },
-    container: {
-        marginTop: 50
-    },
-    info: {
-        alignItems: 'center'
-    },
-    contact: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    label: {
-        fontSize: 16
-    }
-});
 
 ProfileScreen.navigationOptions = {
     title: 'Profile',
@@ -85,7 +75,7 @@ ProfileScreen.navigationOptions = {
 
 const _getOrdinal = n => {
     return (n > 0 ? ['th', 'st', 'nd', 'rd'][(n > 3 && n < 21) || n % 10 > 3 ? 0 : n % 10] : '');
-  }
+}
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
