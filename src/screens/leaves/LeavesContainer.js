@@ -1,12 +1,10 @@
 import { connect } from 'react-redux';
 
 import { fetchEmployeeDetails } from '../../store/employee-details/actions';
-import LeavesStatusScreen from './LeavesStatusScreen';
+import LeavesScreen from './LeavesScreen';
 
 const mapStateToProps = ({ employeeDetails }) => {
     return { employeeDetails };
 };
 
-const LeavesStatusContainer = connect(mapStateToProps, { fetchEmployeeDetails })(LeavesStatusScreen);
-
-export default LeavesStatusContainer;
+export default connect(mapStateToProps, { fetchEmployeeDetails })(LeavesScreen);

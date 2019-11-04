@@ -15,13 +15,13 @@ import {
 import { Provider } from 'react-redux';
 import store from './src/store';
 
-import LeavesStatusContainer from './src/screens/leaves-status/LeavesStatusContainer';
+import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge);
 
 const AppNavigator = createBottomTabNavigator({
-  Leaves: LeavesStatusContainer,
+  Leaves: LeavesContainer,
   Profile: ProfileContainer
 });
 

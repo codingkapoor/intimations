@@ -5,6 +5,4 @@ const mapStateToProps = ({ employeeDetails }) => {
     return { employeeDetails };
 };
 
-const ProfileContainer = connect(mapStateToProps)(ProfileScreen);
-
-export default ProfileContainer;
+export default connect(mapStateToProps)(ProfileScreen);

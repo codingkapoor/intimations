@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-class LeavesStatusScreen extends Component {
+class LeavesScreen extends Component {
     componentDidMount() {
         this.props.fetchEmployeeDetails(11);
     }
@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
     }
 });
 
-LeavesStatusScreen.navigationOptions = {
+LeavesScreen.navigationOptions = {
     title: 'Leaves',
     tabBarIcon: <FontAwesomeIcon icon='box' size={20} />
 }
 
-export default LeavesStatusScreen;
+export default LeavesScreen;
