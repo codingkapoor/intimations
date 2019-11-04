@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ActivityIndicator } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { SpinnerWrapper, Figure, Label, LeavesContainer, StyledLeaves, Wrapper } from './StyledComponents';
+import { Figure, Label, StyledLeaves, Wrapper } from './StyledComponents';
+import { SpinnerWrapper } from '../../common/StyledComponents';
 
 class LeavesScreen extends Component {
     componentDidMount() {
