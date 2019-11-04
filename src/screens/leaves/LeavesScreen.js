@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { SpinnerWrapper, Figure, Label, LeavesContainer, StyledLeaves, Wrapper } from './StyledComponents';
 
 class LeavesScreen extends Component {
     componentDidMount() {
@@ -12,52 +13,28 @@ class LeavesScreen extends Component {
 
         if (!employeeDetails.leaves)
             return (
-                <View style={styles.spinner}>
+                <SpinnerWrapper>
                     <ActivityIndicator size="large" color="#000000" />
-                </View>
+                </SpinnerWrapper>
             );
 
         let el = employeeDetails.leaves.earned;
         let sl = employeeDetails.leaves.sick;
 
         return (
-            <View style={styles.parent}>
-                <View style={styles.container}>
-                    <Text style={styles.figure}>{el}</Text>
-                    <Text style={styles.label}>Earned Leaves</Text>
-                </View>
-                <View style={styles.container}>
-                    <Text style={styles.figure}>{sl}</Text>
-                    <Text style={styles.label}>Sick Leaves</Text>
-                </View>
-            </View>
+            <Wrapper>
+                <StyledLeaves>
+                    <Figure>{el}</Figure>
+                    <Label>Earned Leaves</Label>
+                </StyledLeaves>
+                <StyledLeaves>
+                    <Figure>{sl}</Figure>
+                    <Label>Sick Leaves</Label>
+                </StyledLeaves>
+            </Wrapper>
         );
     }
 };
-
-const styles = StyleSheet.create({
-    parent: {
-        flex: 1,
-        justifyContent: 'space-evenly'
-
-    },
-    container: {
-        alignItems: 'center'
-    },
-    figure: {
-        fontSize: 80
-    },
-    label: {
-        fontSize: 20
-    },
-    spinner: {
-        flex: 1,
-        justifyContent: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        padding: 10
-    }
-});
 
 LeavesScreen.navigationOptions = {
     title: 'Leaves',
