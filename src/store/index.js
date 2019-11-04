@@ -3,6 +3,4 @@ import thunk from 'redux-thunk';
 
 import reducers from './reducers.js';
 
-const store = createStore(reducers, applyMiddleware(thunk));
-
-export default store;
+export default createStore(reducers, applyMiddleware(thunk));

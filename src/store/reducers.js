@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { leavesStatusReducer } from '../screens/leaves-status/reducers';
+import { leavesStatusReducer } from './employee-details/reducers';
 
 export default combineReducers({
     employeeDetails: leavesStatusReducer
