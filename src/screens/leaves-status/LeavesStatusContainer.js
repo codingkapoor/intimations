@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { fetchEmployeeDetails } from './actions';
+import { fetchEmployeeDetails } from '../../store/employee-details/actions';
 import LeavesStatusScreen from './LeavesStatusScreen';
 
 const mapStateToProps = ({ employeeDetails }) => {

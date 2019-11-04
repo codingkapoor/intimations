@@ -1,5 +1,5 @@
 import platform from '../../../common/apis/platform';
-import { FETCH_EMPLOYEE_DETAILS } from '../actionTypes';
+import { FETCH_EMPLOYEE_DETAILS } from './types';
 
 const fetchEmployeeDetails = id => async dispatch => {
     const res = await platform.get(`/employees/${id}`);

@@ -13,7 +13,7 @@ import {
   faIdBadge
 } from '@fortawesome/free-solid-svg-icons';
 import { Provider } from 'react-redux';
-import store from './src/core/store';
+import store from './src/store';
 
 import LeavesStatusContainer from './src/screens/leaves-status/LeavesStatusContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
