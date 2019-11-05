@@ -12,7 +12,7 @@ import {
   faBusinessTime,
   faIdBadge,
   faCalendarDay,
-  faEdit
+  faPenSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { Provider } from 'react-redux';
 import store from './src/store';
@@ -23,7 +23,7 @@ import TodaysIntimationsScreen from './src/screens/todays/TodaysIntimationsScree
 import PlannedIntimationsScreen from './src/screens/planned/PlannedIntimationsScreen';
 import EditIntimationScreen from './src/screens/edit/EditIntimationScreen';
 
-library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge, faCalendarDay,faEdit);
+library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge, faCalendarDay,faPenSquare);
 
 const AppNavigator = createBottomTabNavigator({
   Planned: PlannedIntimationsScreen,

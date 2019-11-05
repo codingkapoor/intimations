@@ -10,7 +10,7 @@ const EditIntimationScreen = () => {
 
 EditIntimationScreen.navigationOptions = {
     title: 'Edit',
-    tabBarIcon: <FontAwesomeIcon icon='edit' size={22} />
+    tabBarIcon: <FontAwesomeIcon icon='pen-square' size={20} />
 }
 
 export default EditIntimationScreen;
