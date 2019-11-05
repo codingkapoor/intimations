@@ -10,18 +10,26 @@ import {
   faBox,
   faMapMarkerAlt,
   faBusinessTime,
-  faIdBadge
+  faIdBadge,
+  faCalendarDay,
+  faEdit
 } from '@fortawesome/free-solid-svg-icons';
 import { Provider } from 'react-redux';
 import store from './src/store';
 
 import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
+import TodaysIntimationsScreen from './src/screens/todays/TodaysIntimationsScreen';
+import PlannedIntimationsScreen from './src/screens/planned/PlannedIntimationsScreen';
+import EditIntimationScreen from './src/screens/edit/EditIntimationScreen';
 
-library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge);
+library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge, faCalendarDay,faEdit);
 
 const AppNavigator = createBottomTabNavigator({
+  Planned: PlannedIntimationsScreen,
+  Today: TodaysIntimationsScreen,
   Leaves: LeavesContainer,
+  Edit: EditIntimationScreen,
   Profile: ProfileContainer
 });
 
