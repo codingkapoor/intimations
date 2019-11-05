@@ -19,9 +19,9 @@ import store from './src/store';
 
 import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
-import TodaysIntimationsScreen from './src/screens/todays/TodaysIntimationsScreen';
-import PlannedIntimationsScreen from './src/screens/planned/PlannedIntimationsScreen';
-import EditIntimationScreen from './src/screens/edit/EditIntimationScreen';
+import TodaysIntimationsScreen from './src/screens/intimations/todays/TodaysIntimationsScreen';
+import PlannedIntimationsScreen from './src/screens/intimations/planned/PlannedIntimationsScreen';
+import EditIntimationScreen from './src/screens/intimations/edit/EditIntimationScreen';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge, faCalendarDay,faPenSquare);
 
