@@ -27,7 +27,7 @@ const ProfileScreen = ({ employeeDetails }) => {
         <Wrapper>
             <StyledProfile>
                 <IdWrapper>
-                    <FontAwesomeIcon icon='id-badge' size={16} />
+                    <FontAwesomeIcon icon='id-badge' size={18} />
                     <Id>  {id}</Id>
                 </IdWrapper>
 
@@ -37,7 +37,7 @@ const ProfileScreen = ({ employeeDetails }) => {
                 <DOJWrapper>
                     <Company>@glassbeam </Company>
 
-                    <FontAwesomeIcon icon='business-time' size={16} />
+                    <FontAwesomeIcon icon='business-time' size={18} />
                     
                     <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
                     <DateWrapper>
@@ -48,18 +48,18 @@ const ProfileScreen = ({ employeeDetails }) => {
                 </DOJWrapper>
 
                 <LocationWrapper>
-                    <FontAwesomeIcon icon='map-marker-alt' size={16} />
+                    <FontAwesomeIcon icon='map-marker-alt' size={18} />
                     <Location>  {city}, {country}</Location>
                 </LocationWrapper>
 
                 <ContactInfoWrapper>
                     <PhoneWrapper>
-                        <FontAwesomeIcon icon='phone-square-alt' size={16} />
+                        <FontAwesomeIcon icon='phone-square-alt' size={18} />
                         <Phone>  {phone}</Phone>
                     </PhoneWrapper>
 
                     <EmailWrapper>
-                        <FontAwesomeIcon icon='envelope' size={16} />
+                        <FontAwesomeIcon icon='envelope' size={18} />
                         <Email>  {email}</Email>
                     </EmailWrapper>
                 </ContactInfoWrapper>
