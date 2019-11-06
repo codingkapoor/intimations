@@ -34,6 +34,7 @@ const AppNavigator = createBottomTabNavigator(
     Profile: ProfileContainer
   },
   {
+    initialRouteName: "Leaves", 
     tabBarOptions: {
       activeTintColor: '#0977D3',
       labelStyle: {
