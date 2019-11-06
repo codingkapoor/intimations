@@ -11,8 +11,8 @@ const EditIntimationScreen = () => {
 EditIntimationScreen.navigationOptions = {
     title: 'Edit',
     tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon='pen-square' size={28} color={'#0977D3'} />
-            : <FontAwesomeIcon icon='pen-square' size={28} />
+        let i = focused ? <FontAwesomeIcon icon='pen-square' size={25} color={'#0977D3'} />
+            : <FontAwesomeIcon icon='pen-square' size={25} />
         return i;
     }
 }
