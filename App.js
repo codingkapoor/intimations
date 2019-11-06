@@ -23,15 +23,29 @@ import TodaysIntimationsScreen from './src/screens/intimations/todays/TodaysInti
 import PlannedIntimationsScreen from './src/screens/intimations/planned/PlannedIntimationsScreen';
 import EditIntimationScreen from './src/screens/intimations/edit/EditIntimationScreen';
 
-library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge, faCalendarDay,faPenSquare);
+library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge, faCalendarDay, faPenSquare);
 
-const AppNavigator = createBottomTabNavigator({
-  Planned: PlannedIntimationsScreen,
-  Today: TodaysIntimationsScreen,
-  Leaves: LeavesContainer,
-  Edit: EditIntimationScreen,
-  Profile: ProfileContainer
-});
+const AppNavigator = createBottomTabNavigator(
+  {
+    Planned: PlannedIntimationsScreen,
+    Today: TodaysIntimationsScreen,
+    Leaves: LeavesContainer,
+    Edit: EditIntimationScreen,
+    Profile: ProfileContainer
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: '#0977D3',
+      labelStyle: {
+        fontSize: 12,
+        paddingBottom: 3
+      },
+      style: {
+        height: 61
+      }
+    }
+  }
+);
 
 const App = createAppContainer(AppNavigator);
 

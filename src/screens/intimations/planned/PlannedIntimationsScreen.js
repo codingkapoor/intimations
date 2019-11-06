@@ -10,7 +10,11 @@ const PlannedIntimationsScreen = () => {
 
 PlannedIntimationsScreen.navigationOptions = {
     title: 'Planned',
-    tabBarIcon: <FontAwesomeIcon icon={['fab', 'telegram-plane']} size={22} />
+    tabBarIcon: ({ focused }) => {
+        let i = focused ? <FontAwesomeIcon icon={['fab', 'telegram-plane']} size={30} color={'#0977D3'} />
+            : <FontAwesomeIcon icon={['fab', 'telegram-plane']} size={30} />
+        return i;
+    }
 }
 
 export default PlannedIntimationsScreen;

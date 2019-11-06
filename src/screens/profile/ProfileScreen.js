@@ -70,7 +70,11 @@ const ProfileScreen = ({ employeeDetails }) => {
 
 ProfileScreen.navigationOptions = {
     title: 'Profile',
-    tabBarIcon: <FontAwesomeIcon icon='user-alt' size={18} />
+    tabBarIcon: ({ focused }) => {
+        let i = focused ? <FontAwesomeIcon icon='user-alt' size={22} color={'#0977D3'} />
+            : <FontAwesomeIcon icon='user-alt' size={22} />
+        return i;
+    }
 }
 
 const _getOrdinal = n => {

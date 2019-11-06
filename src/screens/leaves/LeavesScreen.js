@@ -39,7 +39,11 @@ class LeavesScreen extends Component {
 
 LeavesScreen.navigationOptions = {
     title: 'Leaves',
-    tabBarIcon: <FontAwesomeIcon icon='box' size={18} />
+    tabBarIcon: ({ focused }) => {
+        let i = focused ? <FontAwesomeIcon icon='box' size={25} color={'#0977D3'} />
+            : <FontAwesomeIcon icon='box' size={25} />
+        return i;
+    }
 }
 
 export default LeavesScreen;
