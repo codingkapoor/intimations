@@ -6,7 +6,7 @@ import { SpinnerWrapper } from '../../common/StyledComponents';
 
 class LeavesScreen extends Component {
     componentDidMount() {
-        this.props.fetchEmployeeDetails(11);
+        this.props.fetchEmployeeDetails(144);
     }
 
     render() {
