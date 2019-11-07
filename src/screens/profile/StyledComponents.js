@@ -9,6 +9,7 @@ export const AboutWrapper = styled.View`
 export const Wrapper = styled.View`
     flex: 1;
     margin-top: 50;
+    color: #393939;
 `;
 
 export const StyledProfile = styled.View`

@@ -11,8 +11,10 @@ export const StyledLeaves = styled.View`
 
 export const Figure = styled.Text`
     font-size: 80px;
+    color: #393939;
 `;
 
 export const Label = styled.Text`
-font-size: 20px;
+    font-size: 20px;
+    color: #393939;
 `;

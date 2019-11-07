@@ -12,7 +12,7 @@ TodaysIntimationsScreen.navigationOptions = {
     title: 'Today',
     tabBarIcon: ({ focused }) => {
         let i = focused ? <FontAwesomeIcon icon='calendar-day' size={25} color={'#0977D3'} />
-            : <FontAwesomeIcon icon='calendar-day' size={25} />
+            : <FontAwesomeIcon icon='calendar-day' size={25} color={'#393939'} />
         return i;
     }
 }

@@ -10,6 +10,7 @@ const AboutScreen = () => {
 
 AboutScreen.navigationOptions = {
     title: 'About',
+    headerTintColor: '#393939',
     headerTitleStyle: { width: Dimensions.get('window').width },
     tabBarVisible: 'false'
 }

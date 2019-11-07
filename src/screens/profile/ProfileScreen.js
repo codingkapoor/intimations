@@ -31,7 +31,7 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
         <>
             <AboutWrapper>
                 <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                    <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} />
+                    <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'}/>
                 </TouchableOpacity>
             </AboutWrapper>
             
@@ -42,7 +42,7 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
                     </AvatarWrapper>
 
                     <IdWrapper>
-                        <FontAwesomeIcon icon='id-badge' size={18} />
+                        <FontAwesomeIcon icon='id-badge' size={18} color={'#393939'}/>
                         <Id>  {id}</Id>
                     </IdWrapper>
 
@@ -52,7 +52,7 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
                     <DOJWrapper>
                         <Company>@glassbeam </Company>
 
-                        <FontAwesomeIcon icon='business-time' size={18} />
+                        <FontAwesomeIcon icon='business-time' size={18} color={'#393939'}/>
 
                         <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
                         <DateWrapper>
@@ -63,18 +63,18 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
                     </DOJWrapper>
 
                     <LocationWrapper>
-                        <FontAwesomeIcon icon='map-marker-alt' size={18} />
+                        <FontAwesomeIcon icon='map-marker-alt' size={18} color={'#393939'}/>
                         <Location>  {city}, {country}</Location>
                     </LocationWrapper>
 
                     <ContactInfoWrapper>
                         <PhoneWrapper>
-                            <FontAwesomeIcon icon='phone-square-alt' size={17} />
+                            <FontAwesomeIcon icon='phone-square-alt' size={17} color={'#393939'}/>
                             <Phone>  {phone}</Phone>
                         </PhoneWrapper>
 
                         <EmailWrapper>
-                            <FontAwesomeIcon icon='envelope' size={17} />
+                            <FontAwesomeIcon icon='envelope' size={17} color={'#393939'}/>
                             <Email>  {email}</Email>
                         </EmailWrapper>
                     </ContactInfoWrapper>
