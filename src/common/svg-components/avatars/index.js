@@ -1,8 +1,12 @@
 import React from 'react'
 import Svg, { Path, G } from 'react-native-svg'
 
+const avatarStyle = {
+  width: "200%", height: "100%", viewBox: "0 0 250 300"
+}
+
 export const James = props => (
-  <Svg width="200%" height="100%" viewBox="0 0 250 300" {...props}>
+  <Svg {...avatarStyle} {...props}>
     <Path fill="none" pointerEvents="none" d="M0 0h235.457v259.385H0z" />
     <Path
       className="prefix__st1"
@@ -159,7 +163,7 @@ export const James = props => (
 );
 
 export const Oliver = props => (
-  <Svg width="200%" height="100%" viewBox="0 0 250 300" {...props}>
+  <Svg {...avatarStyle} {...props}>
     <Path fill="none" pointerEvents="none" d="M0 0h232.998v271.682H0z" />
     <Path
       className="prefix__st7"
@@ -277,7 +281,7 @@ export const Oliver = props => (
 );
 
 export const Luke = props => (
-  <Svg width="200%" height="100%" viewBox="0 0 250 300" {...props}>
+  <Svg {...avatarStyle} {...props}>
     <Path fill="none" pointerEvents="none" d="M0 0h217.011v234.791H0z" />
     <Path
       className="prefix__st9"
@@ -350,7 +354,7 @@ export const Luke = props => (
 );
 
 export const Henry = props => (
-  <Svg width="200%" height="100%" viewBox="0 0 250 300" {...props}>
+  <Svg {...avatarStyle} {...props}>
     <Path fill="none" pointerEvents="none" d="M0 0h226.849v276.601H0z" />
     <Path
       className="prefix__st10"
@@ -426,7 +430,7 @@ export const Henry = props => (
 );
 
 export const Ellie = props => (
-  <Svg width="200%" height="100%" viewBox="0 0 250 300" {...props}>
+  <Svg {...avatarStyle} {...props}>
     <Path fill="none" pointerEvents="none" d="M0 0h256.362v249.547H0z" />
     <Path
       className="prefix__st14"
@@ -594,7 +598,7 @@ export const Ellie = props => (
 );
 
 export const Maya = props => (
-  <Svg width="200%" height="100%" viewBox="0 0 250 300" {...props}>
+  <Svg {...avatarStyle} {...props}>
     <Path fill="none" pointerEvents="none" d="M0 0h278.497v252.007H0z" />
     <Path
       className="prefix__st11"
@@ -720,7 +724,7 @@ export const Maya = props => (
 );
 
 export const Lily = props => (
-  <Svg width="200%" height="100%" viewBox="0 0 250 300" {...props}>
+  <Svg {...avatarStyle} {...props}>
     <Path fill="none" pointerEvents="none" d="M0 0h230.538v264.304H0z" />
     <Path
       className="prefix__st4"
@@ -806,7 +810,7 @@ export const Lily = props => (
 );
 
 export const Zoey = props => (
-  <Svg width="200%" height="100%" viewBox="0 0 250 300" {...props}>
+  <Svg {...avatarStyle} {...props}>
     <Path fill="none" pointerEvents="none" d="M0 0h224.389v245.858H0z" />
     <Path
       className="prefix__st16"
