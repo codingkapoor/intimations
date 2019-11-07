@@ -18,6 +18,7 @@ const ProfileScreen = ({ employeeDetails }) => {
 
     let id = employeeDetails.id;
     let name = employeeDetails.name;
+    let gender = employeeDetails.gender;
     let designation = employeeDetails.designation;
     let city = employeeDetails.location.city;
     let country = employeeDetails.location.country;
@@ -29,7 +30,7 @@ const ProfileScreen = ({ employeeDetails }) => {
         <Wrapper>
             <StyledProfile>
                 <AvatarWrapper>
-                    <Zoey />
+                    {_getRamdonlyPickedAvator(gender)}
                 </AvatarWrapper>
 
                 <IdWrapper>
@@ -80,6 +81,20 @@ ProfileScreen.navigationOptions = {
         let i = focused ? <FontAwesomeIcon icon='user-alt' size={19} color={'#0977D3'} />
             : <FontAwesomeIcon icon='user-alt' size={19} />
         return i;
+    }
+}
+
+const maleAvatars = [<Henry />, <James />, <Luke />, <Oliver />];
+const femaleAvatars = [<Ellie />, <Lily />, <Maya />, <Zoey />];
+
+const _getRamdonlyPickedAvator = gender => {
+    switch(gender) {
+        case 'M':
+            return maleAvatars[Math.floor(Math.random() * maleAvatars.length)];
+        case 'F':
+            return femaleAvatars[Math.floor(Math.random() * femaleAvatars.length)];
+        default:
+            return null;
     }
 }
 
