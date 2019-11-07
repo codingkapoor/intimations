@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
-import { James } from '../../common/svg-components/avatars'
+import { James, Oliver } from '../../common/svg-components/avatars'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper } from './StyledComponents';
@@ -28,7 +28,7 @@ const ProfileScreen = ({ employeeDetails }) => {
         <Wrapper>
             <StyledProfile>
                 <AvatarWrapper>
-                    <James />
+                    <Oliver />
                 </AvatarWrapper>
 
                 <IdWrapper>
