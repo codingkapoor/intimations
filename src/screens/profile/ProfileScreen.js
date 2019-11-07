@@ -61,12 +61,12 @@ const ProfileScreen = ({ employeeDetails }) => {
 
                 <ContactInfoWrapper>
                     <PhoneWrapper>
-                        <FontAwesomeIcon icon='phone-square-alt' size={18} />
+                        <FontAwesomeIcon icon='phone-square-alt' size={17} />
                         <Phone>  {phone}</Phone>
                     </PhoneWrapper>
 
                     <EmailWrapper>
-                        <FontAwesomeIcon icon='envelope' size={18} />
+                        <FontAwesomeIcon icon='envelope' size={17} />
                         <Email>  {email}</Email>
                     </EmailWrapper>
                 </ContactInfoWrapper>
