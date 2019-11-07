@@ -1,8 +1,14 @@
 import styled from 'styled-components/native';
 
+export const AboutWrapper = styled.View`
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 20px;
+`;
+
 export const Wrapper = styled.View`
     flex: 1;
-    margin-top: 100;
+    margin-top: 50;
 `;
 
 export const StyledProfile = styled.View`

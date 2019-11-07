@@ -4,10 +4,11 @@ import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars'
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SpinnerWrapper } from '../../common/StyledComponents';
-import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper } from './StyledComponents';
+import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper } from './StyledComponents';
 import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const ProfileScreen = ({ employeeDetails }) => {
+const ProfileScreen = ({ employeeDetails, navigation }) => {
 
     if (!employeeDetails.leaves)
         return (
@@ -27,68 +28,70 @@ const ProfileScreen = ({ employeeDetails }) => {
     let doj = new Date(employeeDetails.doj);
 
     return (
-        <Wrapper>
-            <StyledProfile>
-                <AvatarWrapper>
-                    {_getRamdonlyPickedAvator(gender)}
-                </AvatarWrapper>
+        <>
+            <AboutWrapper>
+                <TouchableOpacity onPress={() => navigation.navigate('About')}>
+                    <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} />
+                </TouchableOpacity>
+            </AboutWrapper>
+            <Wrapper>
+                <StyledProfile>
+                    <AvatarWrapper>
+                        {_getRamdonlyPickedAvator(gender)}
+                    </AvatarWrapper>
 
-                <IdWrapper>
-                    <FontAwesomeIcon icon='id-badge' size={18} />
-                    <Id>  {id}</Id>
-                </IdWrapper>
+                    <IdWrapper>
+                        <FontAwesomeIcon icon='id-badge' size={18} />
+                        <Id>  {id}</Id>
+                    </IdWrapper>
 
-                <Name>{name}</Name>
-                <Designation>{designation}</Designation>
+                    <Name>{name}</Name>
+                    <Designation>{designation}</Designation>
 
-                <DOJWrapper>
-                    <Company>@glassbeam </Company>
+                    <DOJWrapper>
+                        <Company>@glassbeam </Company>
 
-                    <FontAwesomeIcon icon='business-time' size={18} />
+                        <FontAwesomeIcon icon='business-time' size={18} />
 
-                    <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
-                    <DateWrapper>
-                        <StyledDate>{doj.getDate()}</StyledDate>
-                        <Ordinal>{_getOrdinal(doj.getDate())}</Ordinal>
-                    </DateWrapper>
-                    <StyledYear>, {doj.getFullYear()}</StyledYear>
-                </DOJWrapper>
+                        <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
+                        <DateWrapper>
+                            <StyledDate>{doj.getDate()}</StyledDate>
+                            <Ordinal>{_getOrdinal(doj.getDate())}</Ordinal>
+                        </DateWrapper>
+                        <StyledYear>, {doj.getFullYear()}</StyledYear>
+                    </DOJWrapper>
 
-                <LocationWrapper>
-                    <FontAwesomeIcon icon='map-marker-alt' size={18} />
-                    <Location>  {city}, {country}</Location>
-                </LocationWrapper>
+                    <LocationWrapper>
+                        <FontAwesomeIcon icon='map-marker-alt' size={18} />
+                        <Location>  {city}, {country}</Location>
+                    </LocationWrapper>
 
-                <ContactInfoWrapper>
-                    <PhoneWrapper>
-                        <FontAwesomeIcon icon='phone-square-alt' size={17} />
-                        <Phone>  {phone}</Phone>
-                    </PhoneWrapper>
+                    <ContactInfoWrapper>
+                        <PhoneWrapper>
+                            <FontAwesomeIcon icon='phone-square-alt' size={17} />
+                            <Phone>  {phone}</Phone>
+                        </PhoneWrapper>
 
-                    <EmailWrapper>
-                        <FontAwesomeIcon icon='envelope' size={17} />
-                        <Email>  {email}</Email>
-                    </EmailWrapper>
-                </ContactInfoWrapper>
-            </StyledProfile>
-        </Wrapper>
+                        <EmailWrapper>
+                            <FontAwesomeIcon icon='envelope' size={17} />
+                            <Email>  {email}</Email>
+                        </EmailWrapper>
+                    </ContactInfoWrapper>
+                </StyledProfile>
+            </Wrapper>
+        </>
     );
 };
 
 ProfileScreen.navigationOptions = {
-    title: 'Profile',
-    tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon='user-alt' size={19} color={'#0977D3'} />
-            : <FontAwesomeIcon icon='user-alt' size={19} />
-        return i;
-    }
+    header: null
 }
 
 const maleAvatars = [<Henry />, <James />, <Luke />, <Oliver />];
 const femaleAvatars = [<Ellie />, <Lily />, <Maya />, <Zoey />];
 
 const _getRamdonlyPickedAvator = gender => {
-    switch(gender) {
+    switch (gender) {
         case 'M':
             return maleAvatars[Math.floor(Math.random() * maleAvatars.length)];
         case 'F':
