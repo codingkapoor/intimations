@@ -34,6 +34,7 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
                     <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} />
                 </TouchableOpacity>
             </AboutWrapper>
+            
             <Wrapper>
                 <StyledProfile>
                     <AvatarWrapper>
