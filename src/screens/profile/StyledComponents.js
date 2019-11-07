@@ -9,7 +9,7 @@ export const StyledProfile = styled.View`
     align-items: center;
 `;
 
-export const AvatarProfile = styled.View`
+export const AvatarWrapper = styled.View`
     aspect-ratio: 1; 
     align-items: center;
     justify-content: center;

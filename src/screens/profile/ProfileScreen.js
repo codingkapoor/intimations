@@ -3,7 +3,7 @@ import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import { James } from '../../common/svg-components/avatars'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SpinnerWrapper } from '../../common/StyledComponents';
-import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarProfile } from './StyledComponents';
+import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper } from './StyledComponents';
 import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
 
 const ProfileScreen = ({ employeeDetails }) => {
@@ -27,10 +27,10 @@ const ProfileScreen = ({ employeeDetails }) => {
     return (
         <Wrapper>
             <StyledProfile>
-                <AvatarProfile>
+                <AvatarWrapper>
                     <James />
-                </AvatarProfile>
-                
+                </AvatarWrapper>
+
                 <IdWrapper>
                     <FontAwesomeIcon icon='id-badge' size={18} />
                     <Id>  {id}</Id>
