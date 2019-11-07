@@ -1,9 +1,11 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
+import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
+import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SpinnerWrapper } from '../../common/StyledComponents';
-import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper } from './StyledComponents';
-import { Id, Name, Designation, StyledDate,  StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
+import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper } from './StyledComponents';
+import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
 
 const ProfileScreen = ({ employeeDetails }) => {
 
@@ -16,6 +18,7 @@ const ProfileScreen = ({ employeeDetails }) => {
 
     let id = employeeDetails.id;
     let name = employeeDetails.name;
+    let gender = employeeDetails.gender;
     let designation = employeeDetails.designation;
     let city = employeeDetails.location.city;
     let country = employeeDetails.location.country;
@@ -26,6 +29,10 @@ const ProfileScreen = ({ employeeDetails }) => {
     return (
         <Wrapper>
             <StyledProfile>
+                <AvatarWrapper>
+                    {_getRamdonlyPickedAvator(gender)}
+                </AvatarWrapper>
+
                 <IdWrapper>
                     <FontAwesomeIcon icon='id-badge' size={18} />
                     <Id>  {id}</Id>
@@ -38,7 +45,7 @@ const ProfileScreen = ({ employeeDetails }) => {
                     <Company>@glassbeam </Company>
 
                     <FontAwesomeIcon icon='business-time' size={18} />
-                    
+
                     <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
                     <DateWrapper>
                         <StyledDate>{doj.getDate()}</StyledDate>
@@ -54,12 +61,12 @@ const ProfileScreen = ({ employeeDetails }) => {
 
                 <ContactInfoWrapper>
                     <PhoneWrapper>
-                        <FontAwesomeIcon icon='phone-square-alt' size={18} />
+                        <FontAwesomeIcon icon='phone-square-alt' size={17} />
                         <Phone>  {phone}</Phone>
                     </PhoneWrapper>
 
                     <EmailWrapper>
-                        <FontAwesomeIcon icon='envelope' size={18} />
+                        <FontAwesomeIcon icon='envelope' size={17} />
                         <Email>  {email}</Email>
                     </EmailWrapper>
                 </ContactInfoWrapper>
@@ -74,6 +81,20 @@ ProfileScreen.navigationOptions = {
         let i = focused ? <FontAwesomeIcon icon='user-alt' size={19} color={'#0977D3'} />
             : <FontAwesomeIcon icon='user-alt' size={19} />
         return i;
+    }
+}
+
+const maleAvatars = [<Henry />, <James />, <Luke />, <Oliver />];
+const femaleAvatars = [<Ellie />, <Lily />, <Maya />, <Zoey />];
+
+const _getRamdonlyPickedAvator = gender => {
+    switch(gender) {
+        case 'M':
+            return maleAvatars[Math.floor(Math.random() * maleAvatars.length)];
+        case 'F':
+            return femaleAvatars[Math.floor(Math.random() * femaleAvatars.length)];
+        default:
+            return null;
     }
 }
 

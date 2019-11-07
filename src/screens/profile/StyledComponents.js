@@ -2,11 +2,20 @@ import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
     flex: 1;
-    justify-content: space-evenly;
+    margin-top: 100;
 `;
 
 export const StyledProfile = styled.View`
     align-items: center;
+`;
+
+export const AvatarWrapper = styled.View`
+    aspect-ratio: 1; 
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
 `;
 
 export const IdWrapper = styled.View`
