@@ -1,9 +1,10 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { James } from '../../common/svg-components/avatars'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SpinnerWrapper } from '../../common/StyledComponents';
-import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper } from './StyledComponents';
-import { Id, Name, Designation, StyledDate,  StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
+import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarProfile } from './StyledComponents';
+import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
 
 const ProfileScreen = ({ employeeDetails }) => {
 
@@ -26,6 +27,10 @@ const ProfileScreen = ({ employeeDetails }) => {
     return (
         <Wrapper>
             <StyledProfile>
+                <AvatarProfile>
+                    <James />
+                </AvatarProfile>
+                
                 <IdWrapper>
                     <FontAwesomeIcon icon='id-badge' size={18} />
                     <Id>  {id}</Id>
@@ -38,7 +43,7 @@ const ProfileScreen = ({ employeeDetails }) => {
                     <Company>@glassbeam </Company>
 
                     <FontAwesomeIcon icon='business-time' size={18} />
-                    
+
                     <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
                     <DateWrapper>
                         <StyledDate>{doj.getDate()}</StyledDate>
