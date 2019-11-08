@@ -60,7 +60,7 @@ const AppNavigator = createBottomTabNavigator(
     infoFlow
   },
   {
-    initialRouteName: "Leaves",
+    initialRouteName: "Edit",
     tabBarOptions: {
       activeTintColor: '#0977D3',
       labelStyle: {

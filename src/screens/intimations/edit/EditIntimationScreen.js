@@ -1,10 +1,23 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { View } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { Calendar } from 'react-native-calendars';
 
 const EditIntimationScreen = () => {
     return (
-        <Text>Edit</Text>
+        <View style={{ alignItems: 'center' }}>
+            <Calendar
+                style={
+                    {
+                        marginTop: 80,
+                        width: 350,
+                        borderWidth: 1,
+                        borderColor: '#D8DADA',
+                        borderRadius: 10
+                    }
+                }
+            />
+        </View>
     );
 };
 
