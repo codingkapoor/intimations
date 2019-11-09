@@ -6,12 +6,6 @@ export const AboutWrapper = styled.View`
     margin-right: 20px;
 `;
 
-export const Wrapper = styled.View`
-    flex: 1;
-    margin-top: 50;
-    color: #393939;
-`;
-
 export const StyledProfile = styled.View`
     align-items: center;
 `;

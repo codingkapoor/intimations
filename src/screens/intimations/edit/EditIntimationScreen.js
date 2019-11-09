@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Calendar } from 'react-native-calendars';
-import SafeAreaView from '../../../common/SafeAreaView';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const EditIntimationScreen = () => {
 

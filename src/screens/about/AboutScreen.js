@@ -1,10 +1,12 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
-import SafeAreaView from '../../common/SafeAreaView';
+import { Dimensions, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AboutScreen = () => {
     return (
-        <SafeAreaView></SafeAreaView>
+        <SafeAreaView>
+            <Text>Contributions</Text>
+        </SafeAreaView>
     );
 };
 
