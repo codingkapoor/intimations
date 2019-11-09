@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Text, Dimensions, View } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import React from 'react';
+import { Dimensions } from 'react-native';
+import SafeAreaView from '../../common/SafeAreaView';
 
 const AboutScreen = () => {
     return (
-        <Text></Text>
+        <SafeAreaView></SafeAreaView>
     );
 };
 
