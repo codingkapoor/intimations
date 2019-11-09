@@ -1,10 +1,13 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TodaysIntimationsScreen = () => {
     return (
-        <Text>Today</Text>
+        <SafeAreaView>
+            <Text>Today</Text>
+        </SafeAreaView>
     );
 };
 

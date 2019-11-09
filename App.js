@@ -18,8 +18,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Provider } from 'react-redux';
-import store from './src/store';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import store from './src/store';
 import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
 import TodaysIntimationsScreen from './src/screens/intimations/todays/TodaysIntimationsScreen';
@@ -78,6 +79,8 @@ const App = createAppContainer(AppNavigator);
 
 export default () => {
   return <Provider store={store}>
-    <App />
+    <SafeAreaProvider>
+      <App />
+    </SafeAreaProvider>
   </Provider>
 }; 

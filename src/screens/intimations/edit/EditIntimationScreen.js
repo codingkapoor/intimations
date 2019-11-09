@@ -1,15 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Calendar } from 'react-native-calendars';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const EditIntimationScreen = () => {
+
     return (
-        <View style={{ alignItems: 'center' }}>
+        <SafeAreaView style={{ alignItems: 'center' }}>
             <Calendar
                 style={
                     {
-                        marginTop: 80,
+                        marginTop: 30,
                         width: 350,
                         borderWidth: 1,
                         borderColor: '#D8DADA',
@@ -17,7 +18,7 @@ const EditIntimationScreen = () => {
                     }
                 }
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

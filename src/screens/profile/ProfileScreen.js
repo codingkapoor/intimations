@@ -7,6 +7,7 @@ import { SpinnerWrapper } from '../../common/StyledComponents';
 import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper } from './StyledComponents';
 import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreen = ({ employeeDetails, navigation }) => {
 
@@ -28,59 +29,57 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
     let doj = new Date(employeeDetails.doj);
 
     return (
-        <>
+        <SafeAreaView>
             <AboutWrapper>
                 <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                    <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'}/>
+                    <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'} />
                 </TouchableOpacity>
             </AboutWrapper>
-            
-            <Wrapper>
-                <StyledProfile>
-                    <AvatarWrapper>
-                        {_getRamdonlyPickedAvator(gender)}
-                    </AvatarWrapper>
 
-                    <IdWrapper>
-                        <FontAwesomeIcon icon='id-badge' size={18} color={'#393939'}/>
-                        <Id>  {id}</Id>
-                    </IdWrapper>
+            <StyledProfile>
+                <AvatarWrapper>
+                    {_getRamdonlyPickedAvator(gender)}
+                </AvatarWrapper>
 
-                    <Name>{name}</Name>
-                    <Designation>{designation}</Designation>
+                <IdWrapper>
+                    <FontAwesomeIcon icon='id-badge' size={18} color={'#393939'} />
+                    <Id>  {id}</Id>
+                </IdWrapper>
 
-                    <DOJWrapper>
-                        <Company>@glassbeam </Company>
+                <Name>{name}</Name>
+                <Designation>{designation}</Designation>
 
-                        <FontAwesomeIcon icon='business-time' size={18} color={'#393939'}/>
+                <DOJWrapper>
+                    <Company>@glassbeam </Company>
 
-                        <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
-                        <DateWrapper>
-                            <StyledDate>{doj.getDate()}</StyledDate>
-                            <Ordinal>{_getOrdinal(doj.getDate())}</Ordinal>
-                        </DateWrapper>
-                        <StyledYear>, {doj.getFullYear()}</StyledYear>
-                    </DOJWrapper>
+                    <FontAwesomeIcon icon='business-time' size={18} color={'#393939'} />
 
-                    <LocationWrapper>
-                        <FontAwesomeIcon icon='map-marker-alt' size={18} color={'#393939'}/>
-                        <Location>  {city}, {country}</Location>
-                    </LocationWrapper>
+                    <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
+                    <DateWrapper>
+                        <StyledDate>{doj.getDate()}</StyledDate>
+                        <Ordinal>{_getOrdinal(doj.getDate())}</Ordinal>
+                    </DateWrapper>
+                    <StyledYear>, {doj.getFullYear()}</StyledYear>
+                </DOJWrapper>
 
-                    <ContactInfoWrapper>
-                        <PhoneWrapper>
-                            <FontAwesomeIcon icon='phone-square-alt' size={17} color={'#393939'}/>
-                            <Phone>  {phone}</Phone>
-                        </PhoneWrapper>
+                <LocationWrapper>
+                    <FontAwesomeIcon icon='map-marker-alt' size={18} color={'#393939'} />
+                    <Location>  {city}, {country}</Location>
+                </LocationWrapper>
 
-                        <EmailWrapper>
-                            <FontAwesomeIcon icon='envelope' size={17} color={'#393939'}/>
-                            <Email>  {email}</Email>
-                        </EmailWrapper>
-                    </ContactInfoWrapper>
-                </StyledProfile>
-            </Wrapper>
-        </>
+                <ContactInfoWrapper>
+                    <PhoneWrapper>
+                        <FontAwesomeIcon icon='phone-square-alt' size={17} color={'#393939'} />
+                        <Phone>  {phone}</Phone>
+                    </PhoneWrapper>
+
+                    <EmailWrapper>
+                        <FontAwesomeIcon icon='envelope' size={17} color={'#393939'} />
+                        <Email>  {email}</Email>
+                    </EmailWrapper>
+                </ContactInfoWrapper>
+            </StyledProfile>
+        </SafeAreaView>
     );
 };
 
