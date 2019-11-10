@@ -87,7 +87,7 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
                                 backgroundColor: '#2282D3',
                                 padding: 20,
                                 width: 350,
-                                borderRadius: 3,
+                                borderRadius: 5,
                                 marginTop: 100,
                                 marginBottom: 20
                             }

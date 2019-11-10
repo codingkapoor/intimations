@@ -14,7 +14,9 @@ import {
   faIdBadge,
   faCalendarDay,
   faPenSquare,
-  faInfoCircle
+  faInfoCircle,
+  faHeart,
+  faExternalLinkSquareAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Provider } from 'react-redux';
@@ -26,13 +28,14 @@ import ProfileContainer from './src/screens/profile/ProfileContainer';
 import TodaysIntimationsScreen from './src/screens/intimations/todays/TodaysIntimationsScreen';
 import PlannedIntimationsScreen from './src/screens/intimations/planned/PlannedIntimationsScreen';
 import EditIntimationScreen from './src/screens/intimations/edit/EditIntimationScreen';
-import AboutScreen from './src/screens/about/AboutScreen';
+import AboutContainer from './src/screens/about/AboutContainer';
 
-library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge, faCalendarDay, faPenSquare, faInfoCircle);
+library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
+  faCalendarDay, faPenSquare, faInfoCircle, faHeart, faExternalLinkSquareAlt);
 
 const infoFlow = createStackNavigator({
   Profile: ProfileContainer,
-  About: AboutScreen
+  About: AboutContainer
 });
 
 infoFlow.navigationOptions = ({ navigation }) => {
@@ -61,7 +64,7 @@ const AppNavigator = createBottomTabNavigator(
     infoFlow
   },
   {
-    initialRouteName: "Edit",
+    initialRouteName: "Leaves",
     tabBarOptions: {
       activeTintColor: '#0977D3',
       labelStyle: {
