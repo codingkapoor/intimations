@@ -1,10 +1,10 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Text, ScrollView } from 'react-native';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SpinnerWrapper } from '../../common/StyledComponents';
-import { Wrapper, StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper } from './StyledComponents';
+import { StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper } from './StyledComponents';
 import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -29,56 +29,74 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
     let doj = new Date(employeeDetails.doj);
 
     return (
-        <SafeAreaView>
-            <AboutWrapper>
-                <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                    <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'} />
-                </TouchableOpacity>
-            </AboutWrapper>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1, padding: 32, paddingTop: 0 }}>
+                <AboutWrapper>
+                    <TouchableOpacity onPress={() => navigation.navigate('About')}>
+                        <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'} />
+                    </TouchableOpacity>
+                </AboutWrapper>
 
-            <StyledProfile>
-                <AvatarWrapper>
-                    {_getRamdonlyPickedAvator(gender)}
-                </AvatarWrapper>
+                <StyledProfile>
+                    <AvatarWrapper>
+                        {_getRamdonlyPickedAvator(gender)}
+                    </AvatarWrapper>
 
-                <IdWrapper>
-                    <FontAwesomeIcon icon='id-badge' size={18} color={'#393939'} />
-                    <Id>  {id}</Id>
-                </IdWrapper>
+                    <IdWrapper>
+                        <FontAwesomeIcon icon='id-badge' size={18} color={'#393939'} />
+                        <Id>  {id}</Id>
+                    </IdWrapper>
 
-                <Name>{name}</Name>
-                <Designation>{designation}</Designation>
+                    <Name>{name}</Name>
+                    <Designation>{designation}</Designation>
 
-                <DOJWrapper>
-                    <Company>@glassbeam </Company>
+                    <DOJWrapper>
+                        <Company>@glassbeam </Company>
 
-                    <FontAwesomeIcon icon='business-time' size={18} color={'#393939'} />
+                        <FontAwesomeIcon icon='business-time' size={18} color={'#393939'} />
 
-                    <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
-                    <DateWrapper>
-                        <StyledDate>{doj.getDate()}</StyledDate>
-                        <Ordinal>{_getOrdinal(doj.getDate())}</Ordinal>
-                    </DateWrapper>
-                    <StyledYear>, {doj.getFullYear()}</StyledYear>
-                </DOJWrapper>
+                        <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
+                        <DateWrapper>
+                            <StyledDate>{doj.getDate()}</StyledDate>
+                            <Ordinal>{_getOrdinal(doj.getDate())}</Ordinal>
+                        </DateWrapper>
+                        <StyledYear>, {doj.getFullYear()}</StyledYear>
+                    </DOJWrapper>
 
-                <LocationWrapper>
-                    <FontAwesomeIcon icon='map-marker-alt' size={18} color={'#393939'} />
-                    <Location>  {city}, {country}</Location>
-                </LocationWrapper>
+                    <LocationWrapper>
+                        <FontAwesomeIcon icon='map-marker-alt' size={18} color={'#393939'} />
+                        <Location>  {city}, {country}</Location>
+                    </LocationWrapper>
 
-                <ContactInfoWrapper>
-                    <PhoneWrapper>
-                        <FontAwesomeIcon icon='phone-square-alt' size={17} color={'#393939'} />
-                        <Phone>  {phone}</Phone>
-                    </PhoneWrapper>
+                    <ContactInfoWrapper>
+                        <PhoneWrapper>
+                            <FontAwesomeIcon icon='phone-square-alt' size={17} color={'#393939'} />
+                            <Phone>  {phone}</Phone>
+                        </PhoneWrapper>
 
-                    <EmailWrapper>
-                        <FontAwesomeIcon icon='envelope' size={17} color={'#393939'} />
-                        <Email>  {email}</Email>
-                    </EmailWrapper>
-                </ContactInfoWrapper>
-            </StyledProfile>
+                        <EmailWrapper>
+                            <FontAwesomeIcon icon='envelope' size={17} color={'#393939'} />
+                            <Email>  {email}</Email>
+                        </EmailWrapper>
+                    </ContactInfoWrapper>
+
+                    <TouchableOpacity
+                        style={
+                            {
+                                alignItems: 'center',
+                                backgroundColor: '#2282D3',
+                                padding: 20,
+                                width: 350,
+                                borderRadius: 3,
+                                marginTop: 100,
+                                marginBottom: 20
+                            }
+                        }
+                    >
+                        <Text style={{ color: 'white', fontSize: 16 }}>Logout</Text>
+                    </TouchableOpacity>
+                </StyledProfile>
+            </ScrollView>
         </SafeAreaView>
     );
 };
