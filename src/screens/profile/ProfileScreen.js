@@ -30,13 +30,13 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ flex: 1, padding: 32, paddingTop: 0 }}>
-                <AboutWrapper>
-                    <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                        <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'} />
-                    </TouchableOpacity>
-                </AboutWrapper>
+            <AboutWrapper>
+                <TouchableOpacity onPress={() => navigation.navigate('About')}>
+                    <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'} />
+                </TouchableOpacity>
+            </AboutWrapper>
 
+            <ScrollView style={{ flex: 1, padding: 32, paddingTop: 0 }}>
                 <StyledProfile>
                     <AvatarWrapper>
                         {_getRamdonlyPickedAvator(gender)}
