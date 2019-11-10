@@ -1,10 +1,13 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PlannedIntimationsScreen = () => {
     return (
-        <Text>Planned</Text>
+        <SafeAreaView>
+            <Text>Planned</Text>
+        </SafeAreaView>
     );
 };
 
