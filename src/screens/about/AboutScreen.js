@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Dimensions, Linking, Text, View, ActivityIndicator } from 'react-native';
+import { Dimensions, View, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { HeaderTitle } from './StyledComponents';
 import { SpinnerWrapper } from '../../common/StyledComponents';
-import { FlatList } from 'react-native-gesture-handler';
 import FooterComponent from './components/FooterComponent';
+import SectionComponent from './components/SectionComponent';
+import sections from './about.json';
 
 class AboutScreen extends Component {
     componentDidMount() {
@@ -25,68 +25,26 @@ class AboutScreen extends Component {
         return (
             <SafeAreaView style={{ flex: 1, wordWrap: 'break-word', alignItems: 'center', justifyContent: 'space-between' }}>
                 <View>
-                    <HeaderTitle>Contributors</HeaderTitle>
-                    <FlatList
-                        data={githubContributors}
-                        style={{ marginBottom: 15 }}
-                        renderItem={({ item }) =>
-                            <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 5 }}
-                                onPress={() => Linking.openURL(`${item.html_url}`)}>
-                                {item.login}
-                            </Text>
-                        }
-                        flexGrow={0}
-                        keyExtractor={item => item.login}
-                    />
-
-                    <HeaderTitle>Attributions</HeaderTitle>
-                    <FlatList
-                        data={githubContributors}
-                        style={{ marginBottom: 15 }}
-                        renderItem={({ item }) =>
-                            <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 5 }}
-                                onPress={() => Linking.openURL(`https://www.vecteezy.com/free-vector/husky`)}>
-                                Husky Vectors by Vecteezy
-                            </Text>
-                        }
-                        flexGrow={0}
-                        keyExtractor={item => item.login}
-                    />
-
-                    <HeaderTitle>Report Issues</HeaderTitle>
-                    <FlatList
-                        data={githubContributors}
-                        style={{ marginBottom: 15 }}
-                        renderItem={({ item }) =>
-                            <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 5 }}
-                                onPress={() => Linking.openURL(`https://github.com/codingkapoor/simple-lms-mobile/issues`)}>
-                                https://github.com/codingkapoor/simple-lms-mobile/issues
-                            </Text>
-                        }
-                        flexGrow={0}
-                        keyExtractor={item => item.login}
-                    />
-
-                    <HeaderTitle>Request Features/Enhancements</HeaderTitle>
-                    <FlatList
-                        data={githubContributors}
-                        style={{ marginBottom: 15 }}
-                        renderItem={({ item }) =>
-                            <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 5 }}
-                                onPress={() => Linking.openURL(`https://github.com/codingkapoor/simple-lms-mobile/issues`)}>
-                                https://github.com/codingkapoor/simple-lms-mobile/issues
-                            </Text>
-                        }
-                        flexGrow={0}
-                        keyExtractor={item => item.login}
-                    />
+                    <SectionComponent headerTitle='Contributors' data={_redefineContributorsDataKeys(githubContributors)} />
+                    {sections.map(e => { return <SectionComponent key={e.headerTitle} headerTitle={e.headerTitle} data={e.data} /> })}
                 </View>
 
-                <FooterComponent/>
+                <FooterComponent />
             </SafeAreaView>
         );
     };
 }
+
+const _redefineContributorsDataKeys = data => {
+    var keyMap = {
+        login: "title",
+        html_url: "url"
+    };
+
+    return data.map(i => _.mapKeys(i, function (value, key) {
+        return keyMap[key];
+    }));
+};
 
 AboutScreen.navigationOptions = {
     title: 'About',
