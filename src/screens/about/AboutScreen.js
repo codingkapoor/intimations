@@ -3,9 +3,9 @@ import _ from 'lodash';
 import { Dimensions, Linking, Text, View, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { HeaderTitle } from './StyledComponents';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import { FlatList } from 'react-native-gesture-handler';
+import FooterComponent from './components/FooterComponent';
 
 class AboutScreen extends Component {
     componentDidMount() {
@@ -38,31 +38,51 @@ class AboutScreen extends Component {
                         flexGrow={0}
                         keyExtractor={item => item.login}
                     />
+
                     <HeaderTitle>Attributions</HeaderTitle>
-                    <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 20 }}
-                        onPress={() => Linking.openURL('https://www.vecteezy.com/free-vector/husky')}>
-                        Husky Vectors by Vecteezy
-                    </Text>
+                    <FlatList
+                        data={githubContributors}
+                        style={{ marginBottom: 15 }}
+                        renderItem={({ item }) =>
+                            <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 5 }}
+                                onPress={() => Linking.openURL(`https://www.vecteezy.com/free-vector/husky`)}>
+                                Husky Vectors by Vecteezy
+                            </Text>
+                        }
+                        flexGrow={0}
+                        keyExtractor={item => item.login}
+                    />
+
                     <HeaderTitle>Report Issues</HeaderTitle>
-                    <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 20 }}
-                        onPress={() => Linking.openURL('https://github.com/codingkapoor/simple-lms-mobile/issues')}>
-                        https://github.com/codingkapoor/simple-lms-mobile/issues
-                    </Text>
+                    <FlatList
+                        data={githubContributors}
+                        style={{ marginBottom: 15 }}
+                        renderItem={({ item }) =>
+                            <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 5 }}
+                                onPress={() => Linking.openURL(`https://github.com/codingkapoor/simple-lms-mobile/issues`)}>
+                                https://github.com/codingkapoor/simple-lms-mobile/issues
+                            </Text>
+                        }
+                        flexGrow={0}
+                        keyExtractor={item => item.login}
+                    />
+
                     <HeaderTitle>Request Features/Enhancements</HeaderTitle>
-                    <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18 }}
-                        onPress={() => Linking.openURL('https://github.com/codingkapoor/simple-lms-mobile/issues')}>
-                        https://github.com/codingkapoor/simple-lms-mobile/issues
-                    </Text>
+                    <FlatList
+                        data={githubContributors}
+                        style={{ marginBottom: 15 }}
+                        renderItem={({ item }) =>
+                            <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 5 }}
+                                onPress={() => Linking.openURL(`https://github.com/codingkapoor/simple-lms-mobile/issues`)}>
+                                https://github.com/codingkapoor/simple-lms-mobile/issues
+                            </Text>
+                        }
+                        flexGrow={0}
+                        keyExtractor={item => item.login}
+                    />
                 </View>
-                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                    <Text>Made with </Text>
-                    <FontAwesomeIcon icon='heart' size={16} color={'#393939'} />
-                    <Text> by </Text>
-                    <Text style={{ color: 'blue' }}
-                        onPress={() => Linking.openURL('https://github.com/codingkapoor')}>
-                        codingkapoor
-                    </Text>
-                </View>
+
+                <FooterComponent/>
             </SafeAreaView>
         );
     };
