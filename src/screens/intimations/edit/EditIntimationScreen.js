@@ -1,15 +1,16 @@
 import React from 'react';
+import _ from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Calendar } from 'react-native-calendars';
 import { TextInput, Text, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const EditIntimationScreen = () => {
+const EditIntimationScreen = ({ updateSelectedDates, selectedDates }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
-            <ScrollView style={{ flex: 1, padding: 32, paddingTop: 0}}>
+            <ScrollView style={{ flex: 1, padding: 32, paddingTop: 0 }}>
                 <Calendar
                     style={
                         {
@@ -20,6 +21,8 @@ const EditIntimationScreen = () => {
                             borderRadius: 10
                         }
                     }
+                    markedDates={selectedDates}
+                    onDayPress={day => updateSelectedDates(day.dateString)}
                 />
 
                 <TextInput
@@ -40,7 +43,8 @@ const EditIntimationScreen = () => {
                     }
                     placeholder='Reason...'
                     multiline
-                    textAlignVertical={'top'}>
+                    textAlignVertical={'top'}
+                >
                 </TextInput>
 
                 <TouchableOpacity
