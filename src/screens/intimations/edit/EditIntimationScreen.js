@@ -55,7 +55,7 @@ const EditIntimationScreen = ({ updateSelectedDates, selectedDates }) => {
                             padding: 20,
                             width: 350,
                             borderRadius: 3,
-                            marginTop: 50,
+                            marginTop: 30,
                             marginBottom: 20
                         }
                     }
