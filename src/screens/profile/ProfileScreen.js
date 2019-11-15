@@ -1,5 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, Text, ScrollView, RefreshControl } from 'react-native';
+import { Text, ScrollView, RefreshControl } from 'react-native';
+import { WaveIndicator } from 'react-native-indicators';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -15,7 +16,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
     if (!employeeDetails.leaves)
         return (
             <SpinnerWrapper>
-                <ActivityIndicator size="large" color="#000000" />
+                <WaveIndicator color="#000000" />
             </SpinnerWrapper>
         );
 

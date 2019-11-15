@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, RefreshControl } from 'react-native';
+import { RefreshControl } from 'react-native';
+import { WaveIndicator } from 'react-native-indicators';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Figure, Label, StyledLeaves, Wrapper } from './StyledComponents';
 import { SpinnerWrapper } from '../../common/StyledComponents';
@@ -19,7 +20,7 @@ class LeavesScreen extends Component {
         if (!employeeDetails.leaves)
             return (
                 <SpinnerWrapper>
-                    <ActivityIndicator size="large" color="#000000" />
+                    <WaveIndicator color='#000000' />
                 </SpinnerWrapper>
             );
 
