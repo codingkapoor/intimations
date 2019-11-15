@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Text, ScrollView, View, RefreshControl } from 'react-native';
+import { ActivityIndicator, Text, ScrollView, RefreshControl } from 'react-native';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -9,20 +9,8 @@ import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Or
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-function wait(timeout) {
-    return new Promise(resolve => {
-        setTimeout(resolve, timeout);
-    });
-}
-
-const ProfileScreen = ({ employeeDetails, fetchEmployeeDetails, navigation }) => {
-    const [refreshing, setRefreshing] = React.useState(false);
-
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-
-        wait(2000).then(() => setRefreshing(false));
-    }, [refreshing]);
+const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, navigation }) => {
+    const onRefresh = () => fetchEmployeeDetails(128);
 
     if (!employeeDetails.leaves)
         return (
@@ -43,7 +31,7 @@ const ProfileScreen = ({ employeeDetails, fetchEmployeeDetails, navigation }) =>
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView refreshControl={<RefreshControl progressViewOffset={20} refreshing={refreshing} onRefresh={onRefresh} />} >
+            <ScrollView refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
 
                 <AboutWrapper>
                     <TouchableOpacity onPress={() => navigation.navigate('About')}>
