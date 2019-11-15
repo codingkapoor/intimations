@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { RefreshControl } from 'react-native';
+import { WaveIndicator } from 'react-native-indicators';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Figure, Label, StyledLeaves, Wrapper } from './StyledComponents';
 import { SpinnerWrapper } from '../../common/StyledComponents';
+import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 class LeavesScreen extends Component {
+    onRefresh = () => this.props.fetchEmployeeDetails(11);
+
     componentDidMount() {
         this.props.fetchEmployeeDetails(11);
     }
@@ -15,7 +20,7 @@ class LeavesScreen extends Component {
         if (!employeeDetails.leaves)
             return (
                 <SpinnerWrapper>
-                    <ActivityIndicator size="large" color="#000000" />
+                    <WaveIndicator color='#000000' />
                 </SpinnerWrapper>
             );
 
@@ -23,16 +28,20 @@ class LeavesScreen extends Component {
         let sl = employeeDetails.leaves.sick;
 
         return (
-            <Wrapper>
-                <StyledLeaves>
-                    <Figure>{el}</Figure>
-                    <Label>Earned Leaves</Label>
-                </StyledLeaves>
-                <StyledLeaves>
-                    <Figure>{sl}</Figure>
-                    <Label>Sick Leaves</Label>
-                </StyledLeaves>
-            </Wrapper>
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "space-evenly" }} refreshControl={
+                    <RefreshControl progressViewOffset={30} refreshing={this.props.pullToRefresh} onRefresh={this.onRefresh} />
+                }>
+                    <StyledLeaves>
+                        <Figure>{el}</Figure>
+                        <Label>Earned Leaves</Label>
+                    </StyledLeaves>
+                    <StyledLeaves>
+                        <Figure>{sl}</Figure>
+                        <Label>Sick Leaves</Label>
+                    </StyledLeaves>
+                </ScrollView>
+            </SafeAreaView>
         );
     }
 };

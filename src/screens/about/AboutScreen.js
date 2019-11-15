@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Dimensions, View, ActivityIndicator } from 'react-native';
+import { Dimensions, View } from 'react-native';
+import { WaveIndicator } from 'react-native-indicators';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import FooterComponent from './components/FooterComponent';
@@ -18,7 +19,7 @@ class AboutScreen extends Component {
         if (githubContributors.size === 0)
             return (
                 <SpinnerWrapper>
-                    <ActivityIndicator size="large" color="#000000" />
+                    <WaveIndicator color="#000000" />
                 </SpinnerWrapper>
             );
 

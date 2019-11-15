@@ -1,5 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, Text, ScrollView } from 'react-native';
+import { Text, ScrollView, RefreshControl } from 'react-native';
+import { WaveIndicator } from 'react-native-indicators';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -9,12 +10,13 @@ import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Or
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const ProfileScreen = ({ employeeDetails, navigation }) => {
+const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, navigation }) => {
+    const onRefresh = () => fetchEmployeeDetails(128);
 
     if (!employeeDetails.leaves)
         return (
             <SpinnerWrapper>
-                <ActivityIndicator size="large" color="#000000" />
+                <WaveIndicator color="#000000" />
             </SpinnerWrapper>
         );
 
@@ -30,13 +32,14 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <AboutWrapper>
-                <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                    <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'} />
-                </TouchableOpacity>
-            </AboutWrapper>
+            <ScrollView refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
 
-            <ScrollView style={{ flex: 1, padding: 32, paddingTop: 0 }}>
+                <AboutWrapper>
+                    <TouchableOpacity onPress={() => navigation.navigate('About')}>
+                        <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'} />
+                    </TouchableOpacity>
+                </AboutWrapper>
+
                 <StyledProfile>
                     <AvatarWrapper>
                         {_getRamdonlyPickedAvator(gender)}
@@ -88,7 +91,7 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
                                 padding: 20,
                                 width: 350,
                                 borderRadius: 5,
-                                marginTop: 100,
+                                marginTop: 80,
                                 marginBottom: 20
                             }
                         }
@@ -96,6 +99,7 @@ const ProfileScreen = ({ employeeDetails, navigation }) => {
                         <Text style={{ color: 'white', fontSize: 16 }}>Logout</Text>
                     </TouchableOpacity>
                 </StyledProfile>
+
             </ScrollView>
         </SafeAreaView>
     );

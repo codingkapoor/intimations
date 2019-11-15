@@ -9,6 +9,7 @@ export const AboutWrapper = styled.View`
 export const StyledProfile = styled.View`
     align-items: center;
     justify-content: center;
+    padding-top: 30px;
 `;
 
 export const AvatarWrapper = styled.View`
