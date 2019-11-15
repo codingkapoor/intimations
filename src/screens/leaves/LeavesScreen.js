@@ -6,23 +6,8 @@ import { SpinnerWrapper } from '../../common/StyledComponents';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-function wait(timeout) {
-    return new Promise(resolve => {
-        setTimeout(resolve, timeout);
-    });
-}
-
 class LeavesScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { refreshing: false }
-    }
-
-    onRefresh = () => {
-        this.setState({ refreshing: true })
-        this.props.fetchEmployeeDetails(11);
-        wait(2000).then(() => this.setState({ refreshing: false }));
-    }
+    onRefresh = () => this.props.fetchEmployeeDetails(11);
 
     componentDidMount() {
         this.props.fetchEmployeeDetails(11);
@@ -44,7 +29,7 @@ class LeavesScreen extends Component {
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "space-evenly" }} refreshControl={
-                    <RefreshControl progressViewOffset={30} refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                    <RefreshControl progressViewOffset={30} refreshing={this.props.pullToRefresh} onRefresh={this.onRefresh} />
                 }>
                     <StyledLeaves>
                         <Figure>{el}</Figure>
