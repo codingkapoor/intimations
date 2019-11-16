@@ -25,7 +25,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import store from './src/store';
 import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
-import TodaysIntimationsScreen from './src/screens/intimations/todays/TodaysIntimationsScreen';
+import TodaysIntimationsContainer from './src/screens/intimations/todays/TodaysIntimationsContainer';
 import PlannedIntimationsContainer from './src/screens/intimations/planned/PlannedIntimationsContainer';
 import EditIntimationContainer from './src/screens/intimations/edit/EditIntimationContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
@@ -58,7 +58,7 @@ infoFlow.navigationOptions = ({ navigation }) => {
 const AppNavigator = createBottomTabNavigator(
   {
     Planned: PlannedIntimationsContainer,
-    Today: TodaysIntimationsScreen,
+    Today: TodaysIntimationsContainer,
     Leaves: LeavesContainer,
     Edit: EditIntimationContainer,
     infoFlow
