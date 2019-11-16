@@ -1,12 +1,25 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, ScrollView, RefreshControl } from 'react-native';
+import { WaveIndicator } from 'react-native-indicators';
+import { SpinnerWrapper } from '../../../common/StyledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const PlannedIntimationsScreen = () => {
+const PlannedIntimationsScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }) => {
+    onRefresh = () => fetchActiveIntimations();
+
+    if (!activeIntimations)
+        return (
+            <SpinnerWrapper>
+                <WaveIndicator color="#000000" />
+            </SpinnerWrapper>
+        );
+
     return (
-        <SafeAreaView>
-            <Text>Planned</Text>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
+                <Text>Planned</Text>
+            </ScrollView>
         </SafeAreaView>
     );
 };

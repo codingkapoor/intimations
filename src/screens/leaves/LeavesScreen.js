@@ -12,6 +12,7 @@ class LeavesScreen extends Component {
 
     componentDidMount() {
         this.props.fetchEmployeeDetails(11);
+        this.props.fetchActiveIntimations();
     }
 
     render() {

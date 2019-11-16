@@ -1,6 +1,6 @@
 import { FETCH_ACTIVE_INTIMATIONS } from '../actions/types';
 
-const activeIntimationsReducer = (activeIntimations = {}, { type, payload }) => {
+const activeIntimationsReducer = (activeIntimations = [], { type, payload }) => {
     if (type === FETCH_ACTIVE_INTIMATIONS)
         return payload;
 
