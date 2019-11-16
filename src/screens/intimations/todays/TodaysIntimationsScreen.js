@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     activeTabStyle: {
-        backgroundColor: '#3A8BCF',
+        backgroundColor: '#3780BE',
         borderWidth: 0
     },
     name: {
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
 TodaysIntimationsScreen.navigationOptions = {
     title: 'Today',
     tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon='calendar-day' size={25} color={'#0977D3'} />
+        let i = focused ? <FontAwesomeIcon icon='calendar-day' size={25} color={'#3780BE'} />
             : <FontAwesomeIcon icon='calendar-day' size={25} color={'#393939'} />
         return i;
     }

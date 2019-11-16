@@ -51,7 +51,7 @@ const EditIntimationScreen = ({ updateSelectedDates, selectedDates }) => {
                     style={
                         {
                             alignItems: 'center',
-                            backgroundColor: '#3A8BCF',
+                            backgroundColor: '#3780BE',
                             padding: 20,
                             width: 350,
                             borderRadius: 3,
@@ -70,7 +70,7 @@ const EditIntimationScreen = ({ updateSelectedDates, selectedDates }) => {
 EditIntimationScreen.navigationOptions = {
     title: 'Edit',
     tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon='pen-square' size={25} color={'#0977D3'} />
+        let i = focused ? <FontAwesomeIcon icon='pen-square' size={25} color={'#3780BE'} />
             : <FontAwesomeIcon icon='pen-square' size={25} color={'#393939'} />
         return i;
     }

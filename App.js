@@ -47,7 +47,7 @@ infoFlow.navigationOptions = ({ navigation }) => {
   return {
     title: 'Profile',
     tabBarIcon: ({ focused }) => {
-      let i = focused ? <FontAwesomeIcon icon='user-alt' size={19} color={'#0977D3'} />
+      let i = focused ? <FontAwesomeIcon icon='user-alt' size={19} color={'#3780BE'} />
         : <FontAwesomeIcon icon='user-alt' size={19} color={'#393939'} />
       return i;
     },

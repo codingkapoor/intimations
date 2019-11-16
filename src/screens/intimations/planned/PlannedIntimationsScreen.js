@@ -27,7 +27,7 @@ const PlannedIntimationsScreen = ({ activeIntimations, pullToRefresh, fetchActiv
 PlannedIntimationsScreen.navigationOptions = {
     title: 'Planned',
     tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon={['fab', 'telegram-plane']} size={27} color={'#0977D3'} />
+        let i = focused ? <FontAwesomeIcon icon={['fab', 'telegram-plane']} size={27} color={'#3780BE'} />
             : <FontAwesomeIcon icon={['fab', 'telegram-plane']} size={27} color={'#393939'} />
         return i;
     }
