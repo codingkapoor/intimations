@@ -4,11 +4,13 @@ import { githubContributorsReducer } from './github-contributors/reducers';
 import { selectedDatesReducer } from './selected-dates/reducers';
 import { pullToRefreshReducer } from './pull-to-refresh/reducers';
 import { activeIntimationsReducer } from './active-intimations/reducers';
+import { todaysIntimationsReducer } from './todays-intimations/reducers';
 
 export default combineReducers({
     employeeDetails: employeeDetailsReducer,
     githubContributors: githubContributorsReducer,
     selectedDates: selectedDatesReducer,
     pullToRefresh: pullToRefreshReducer,
-    activeIntimations: activeIntimationsReducer
+    activeIntimations: activeIntimationsReducer,
+    todaysIntimations: todaysIntimationsReducer
 });
