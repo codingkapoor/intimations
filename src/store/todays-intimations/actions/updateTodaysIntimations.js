@@ -12,7 +12,7 @@ const updateTodaysIntimations = activeIntimations => {
                 {
                     empName: i.empName,
                     reason: i.reason,
-                    type: i.requests.filter(r => r.date === today).map(r => r.requestType)
+                    type: i.requests.filter(r => r.date === today).map(r => r.requestType)[0]
                 }
             )
         );

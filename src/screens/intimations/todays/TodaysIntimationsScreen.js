@@ -8,8 +8,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const TodaysIntimationsScreen = ({ todaysIntimations, pullToRefresh, fetchActiveIntimations }) => {
     onRefresh = () => fetchActiveIntimations();
 
-    console.log(todaysIntimations);
-
     if (!todaysIntimations)
         return (
             <SpinnerWrapper>
