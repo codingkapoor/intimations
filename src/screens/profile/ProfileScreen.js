@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView, RefreshControl } from 'react-native';
+import { Text, ScrollView, RefreshControl, View } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
@@ -31,7 +31,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
     let doj = new Date(employeeDetails.doj);
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
             <ScrollView refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
 
                 <AboutWrapper>
@@ -87,7 +87,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
                         style={
                             {
                                 alignItems: 'center',
-                                backgroundColor: '#2282D3',
+                                backgroundColor: '#3A8BCF',
                                 padding: 20,
                                 width: 350,
                                 borderRadius: 5,

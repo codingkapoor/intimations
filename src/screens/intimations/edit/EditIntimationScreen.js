@@ -9,7 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const EditIntimationScreen = ({ updateSelectedDates, selectedDates }) => {
 
     return (
-        <SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
+        <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: '#FCFCFC' }}>
             <ScrollView style={{ flex: 1, padding: 32, paddingTop: 0 }}>
                 <Calendar
                     style={
@@ -51,7 +51,7 @@ const EditIntimationScreen = ({ updateSelectedDates, selectedDates }) => {
                     style={
                         {
                             alignItems: 'center',
-                            backgroundColor: '#2282D3',
+                            backgroundColor: '#3780BE',
                             padding: 20,
                             width: 350,
                             borderRadius: 3,
@@ -70,7 +70,7 @@ const EditIntimationScreen = ({ updateSelectedDates, selectedDates }) => {
 EditIntimationScreen.navigationOptions = {
     title: 'Edit',
     tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon='pen-square' size={25} color={'#0977D3'} />
+        let i = focused ? <FontAwesomeIcon icon='pen-square' size={25} color={'#3780BE'} />
             : <FontAwesomeIcon icon='pen-square' size={25} color={'#393939'} />
         return i;
     }

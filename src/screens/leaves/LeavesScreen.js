@@ -29,8 +29,8 @@ class LeavesScreen extends Component {
         let sl = employeeDetails.leaves.sick;
 
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "space-evenly" }} refreshControl={
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
+                <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "space-evenly", alignItems: 'center' }} refreshControl={
                     <RefreshControl progressViewOffset={30} refreshing={this.props.pullToRefresh} onRefresh={this.onRefresh} />
                 }>
                     <StyledLeaves>
@@ -50,7 +50,7 @@ class LeavesScreen extends Component {
 LeavesScreen.navigationOptions = {
     title: 'Leaves',
     tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon='box' size={22} color={'#0977D3'} />
+        let i = focused ? <FontAwesomeIcon icon='box' size={22} color={'#3780BE'} />
             : <FontAwesomeIcon icon='box' size={22} color={'#393939'} />
         return i;
     }
