@@ -24,7 +24,7 @@ class AboutScreen extends Component {
             );
 
         return (
-            <SafeAreaView style={{ flex: 1, wordWrap: 'break-word', alignItems: 'center', justifyContent: 'space-between' }}>
+            <SafeAreaView style={{ flex: 1, wordWrap: 'break-word', justifyContent: 'space-between' }}>
                 <View>
                     <SectionComponent headerTitle='Contributors' data={_redefineContributorsDataKeys(githubContributors)} />
                     {sections.map(e => { return <SectionComponent key={e.headerTitle} headerTitle={e.headerTitle} data={e.data} /> })}

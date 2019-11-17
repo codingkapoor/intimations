@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 export default () => {
     return (
-        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+        <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent:'center' }}>
             <Text>Made with </Text>
             <FontAwesomeIcon icon='heart' size={16} color={'#393939'} />
             <Text> by </Text>
