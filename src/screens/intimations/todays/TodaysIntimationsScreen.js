@@ -17,7 +17,7 @@ const TodaysIntimationsScreen = ({ todaysIntimations, pullToRefresh, fetchActive
         );
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
             <ScrollView contentContainerStyle={{ paddingBottom: 20 }} refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
                 <SegmentedControlTab
                     tabsContainerStyle={styles.tabsContainerStyle}
