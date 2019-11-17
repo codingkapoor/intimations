@@ -109,7 +109,8 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         borderWidth: 1,
         borderColor: '#D8DADA',
-        borderRadius: 10
+        borderRadius: 10,
+        backgroundColor: 'white'
     },
     tabsContainerStyle: {
         marginTop: 30,
