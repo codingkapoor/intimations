@@ -8,6 +8,8 @@ const fetchEmployeeDetails = (id, pullToRefresh = false) => async dispatch => {
     const res = await platform.get(`/employees/${id}`);
     const employeeDetails = res.data;
 
+    console.log(employeeDetails);
+
     dispatch({
         type: FETCH_EMPLOYEE_DETAILS,
         payload: employeeDetails

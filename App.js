@@ -24,9 +24,10 @@ import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import store from './src/store';
+
 import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
-import PlannedIntimationsContainer from './src/screens/intimations/planned/PlannedIntimationsContainer';
+import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
@@ -56,7 +57,7 @@ infoFlow.navigationOptions = ({ navigation }) => {
 
 const AppNavigator = createBottomTabNavigator(
   {
-    Planned: PlannedIntimationsContainer,
+    Feed: FeedContainer,
     Leaves: LeavesContainer,
     infoFlow
   },
