@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
 });
 
 PlannedIntimationsScreen.navigationOptions = {
-    title: 'Planned',
+    title: 'Feed',
     tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon={['fab', 'telegram-plane']} size={27} color={'#3780BE'} />
-            : <FontAwesomeIcon icon={['fab', 'telegram-plane']} size={27} color={'#393939'} />
+        let i = focused ? <FontAwesomeIcon icon={'bell'} size={29} color={'#3780BE'} />
+            : <FontAwesomeIcon icon={'bell'} size={29} color={'#393939'} />
         return i;
     }
 }

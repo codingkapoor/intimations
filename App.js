@@ -16,7 +16,8 @@ import {
   faPenSquare,
   faInfoCircle,
   faHeart,
-  faExternalLinkSquareAlt
+  faExternalLinkSquareAlt,
+  faBell
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Provider } from 'react-redux';
@@ -25,13 +26,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import store from './src/store';
 import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
-import TodaysIntimationsContainer from './src/screens/intimations/todays/TodaysIntimationsContainer';
 import PlannedIntimationsContainer from './src/screens/intimations/planned/PlannedIntimationsContainer';
-import EditIntimationContainer from './src/screens/intimations/edit/EditIntimationContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
-  faCalendarDay, faPenSquare, faInfoCircle, faHeart, faExternalLinkSquareAlt);
+  faCalendarDay, faPenSquare, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
 
 const infoFlow = createStackNavigator({
   Profile: ProfileContainer,
@@ -47,8 +46,8 @@ infoFlow.navigationOptions = ({ navigation }) => {
   return {
     title: 'Profile',
     tabBarIcon: ({ focused }) => {
-      let i = focused ? <FontAwesomeIcon icon='user-alt' size={19} color={'#3780BE'} />
-        : <FontAwesomeIcon icon='user-alt' size={19} color={'#393939'} />
+      let i = focused ? <FontAwesomeIcon icon='user-alt' size={24} color={'#3780BE'} />
+        : <FontAwesomeIcon icon='user-alt' size={24} color={'#393939'} />
       return i;
     },
     tabBarVisible
@@ -58,9 +57,7 @@ infoFlow.navigationOptions = ({ navigation }) => {
 const AppNavigator = createBottomTabNavigator(
   {
     Planned: PlannedIntimationsContainer,
-    Today: TodaysIntimationsContainer,
     Leaves: LeavesContainer,
-    Edit: EditIntimationContainer,
     infoFlow
   },
   {
@@ -69,10 +66,11 @@ const AppNavigator = createBottomTabNavigator(
       activeTintColor: '#0977D3',
       labelStyle: {
         fontSize: 12,
-        paddingBottom: 3
+        paddingBottom: 2
       },
       style: {
-        height: 61
+        paddingTop: 5,
+        height: 59
       }
     }
   }
