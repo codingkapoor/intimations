@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RefreshControl } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { Figure, Label, StyledLeaves, Wrapper } from './StyledComponents';
+import { Figure, Label, StyledLeaves } from './StyledComponents';
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';

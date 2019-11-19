@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Text, ScrollView, RefreshControl, View, StyleSheet } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
-import { SpinnerWrapper } from '../../../common/StyledComponents';
+import { SpinnerWrapper } from '../../common/StyledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar } from 'react-native-calendars';
 import Accordion from 'react-native-collapsible/Accordion';
 
-const PlannedIntimationsScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }) => {
+const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }) => {
     const [activeSections, setActiveSections] = useState([]);
 
     onRefresh = () => fetchActiveIntimations();
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     }
 });
 
-PlannedIntimationsScreen.navigationOptions = {
+FeedScreen.navigationOptions = {
     title: 'Feed',
     tabBarIcon: ({ focused }) => {
         let i = focused ? <FontAwesomeIcon icon={'bell'} size={29} color={'#3780BE'} />
@@ -96,4 +96,4 @@ PlannedIntimationsScreen.navigationOptions = {
     }
 }
 
-export default PlannedIntimationsScreen;
+export default FeedScreen;
