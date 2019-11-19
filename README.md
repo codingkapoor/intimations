@@ -1,4 +1,4 @@
-# simple-lms-mobile
+# intimations-mobile
 Mobile app for simple lms.
 
 ## Scope
