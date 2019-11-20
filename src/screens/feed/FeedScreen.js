@@ -7,9 +7,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SectionComponent from './components/SectionComponent';
 
 const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }) => {
-    onRefresh = () => fetchActiveIntimations();
+    const onRefresh = () => fetchActiveIntimations();
 
-    if (!activeIntimations)
+    if (!activeIntimations || activeIntimations.length === 0)
         return (
             <SpinnerWrapper>
                 <WaveIndicator color="#000000" />
@@ -18,7 +18,10 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
-            <ScrollView contentContainerStyle={{ paddingBottom: 20, marginTop: 10 }} refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
+            <ScrollView
+                contentContainerStyle={{ paddingBottom: 20, marginTop: 10 }}
+                refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />}
+            >
                 <SectionComponent
                     activeIntimations={activeIntimations[Object.keys(activeIntimations)[0]]}
                     lastModified={Object.keys(activeIntimations)[0]}

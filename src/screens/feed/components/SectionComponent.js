@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import Accordion from 'react-native-collapsible/Accordion';
+import { WaveIndicator } from 'react-native-indicators';
 import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
-import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
+import { SpinnerWrapper, DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
 
 const styles = StyleSheet.create({
     container: {
@@ -58,12 +59,13 @@ _renderContent = () => {
 };
 
 export default ({ activeIntimations, lastModified }) => {
+
     const [activeSections, setActiveSections] = useState([]);
     let _lastModified = new Date(lastModified);
 
     return (
         <View style={{ marginBottom: 10, justifyContent: 'center' }}>
-            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <StyledMonth> {MONTH_NAMES[_lastModified.getMonth()]} </StyledMonth>
                 <DateWrapper>
                     <StyledDate>{_lastModified.getDate()}</StyledDate>
