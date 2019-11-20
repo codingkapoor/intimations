@@ -7,3 +7,26 @@ export const SpinnerWrapper = styled.View`
     justify-content: space-around;
     padding: 10px;
 `;
+
+export const DateWrapper = styled.View`
+    flex-direction: row; 
+    align-items: flex-start;
+`;
+
+export const StyledDate = styled.Text`
+    font-size: 16px;
+    line-height: 30px;
+`;
+
+export const Ordinal = styled.Text`
+    font-size: 11px;
+    line-height: 18px;
+`;
+
+export const StyledMonth = styled.Text`
+    font-size: 16px;
+`;
+
+export const StyledYear = styled.Text`
+    font-size: 16px;
+`;
