@@ -5,6 +5,7 @@ import { SpinnerWrapper } from '../../common/StyledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SectionComponent from './components/SectionComponent';
+import shortid from 'shortid';
 
 const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }) => {
     const onRefresh = () => fetchActiveIntimations();
@@ -22,10 +23,13 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }
                 contentContainerStyle={{ paddingBottom: 20, marginTop: 10 }}
                 refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />}
             >
-                <SectionComponent
-                    activeIntimations={activeIntimations[Object.keys(activeIntimations)[0]]}
-                    lastModified={Object.keys(activeIntimations)[0]}
-                />
+                {Object.keys(activeIntimations).map((key, _) => {
+                    return <SectionComponent key={shortid.generate()}
+                        activeIntimations={activeIntimations[key]}
+                        lastModified={key}
+                    />
+                })}
+
             </ScrollView>
         </SafeAreaView>
     );
