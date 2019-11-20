@@ -3,11 +3,8 @@ import styled from 'styled-components/native';
 export const StyledLeaves = styled.View`
     align-items: center;
     justify-content: center;
-    background-color: white;
-    border-color: #FCFCFC;
     width: 200;
     height: 200;
-    border-radius: 100;
 `;
 
 export const Figure = styled.Text`

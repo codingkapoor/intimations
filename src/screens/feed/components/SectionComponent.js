@@ -64,7 +64,7 @@ export default ({ activeIntimations, lastModified }) => {
 
     return (
         <View style={{ marginBottom: 10, justifyContent: 'center' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
                 <StyledMonth> {MONTH_NAMES[_lastModified.getMonth()]} </StyledMonth>
                 <DateWrapper>
                     <StyledDate>{_lastModified.getDate()}</StyledDate>

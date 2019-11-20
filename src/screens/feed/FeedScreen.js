@@ -18,7 +18,7 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }
         );
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
             <ScrollView
                 contentContainerStyle={{ paddingBottom: 20, marginTop: 10 }}
                 refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />}

@@ -32,7 +32,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
     let doj = new Date(employeeDetails.doj);
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
             <ScrollView refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
 
                 <AboutWrapper>
