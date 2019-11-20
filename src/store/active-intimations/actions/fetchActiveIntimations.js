@@ -2,6 +2,26 @@ import platform from '../../../common/apis/platform';
 import { FETCH_ACTIVE_INTIMATIONS } from './types';
 import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 
+const remodelActiveintimations = activeIntimations => {
+    let _activeIntimations = {};
+    let today = new Date().toISOString().split('T')[0];
+
+    const push = (intimation, isToday) => {
+        let lastModified = intimation.lastModified.split('T')[0];
+        if (!_activeIntimations[lastModified]) _activeIntimations[lastModified] = [];
+
+        intimation["isToday"] = isToday;
+        _activeIntimations[lastModified].push(intimation);
+    }
+
+    activeIntimations.forEach(intimation =>
+        intimation.requests.filter(request => request.date === today).length > 0 ?
+            push(intimation, true) : push(intimation, false)
+    );
+
+    return _activeIntimations;
+}
+
 const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
     if (pullToRefresh) dispatch(updatePullToRefresh(pullToRefresh));
 
@@ -10,7 +30,7 @@ const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
 
     dispatch({
         type: FETCH_ACTIVE_INTIMATIONS,
-        payload: activeIntimations
+        payload: remodelActiveintimations(activeIntimations)
     });
 
     if (pullToRefresh) dispatch(updatePullToRefresh(!pullToRefresh));
