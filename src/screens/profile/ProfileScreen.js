@@ -4,11 +4,12 @@ import { WaveIndicator } from 'react-native-indicators';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { SpinnerWrapper } from '../../common/StyledComponents';
-import { StyledProfile, IdWrapper, DOJWrapper, DateWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper } from './StyledComponents';
-import { Id, Name, Designation, StyledDate, StyledMonth, StyledYear, Company, Ordinal, Location, Phone, Email } from './StyledComponents';
+import { SpinnerWrapper, DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../common/StyledComponents';
+import { StyledProfile, IdWrapper, DOJWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper } from './StyledComponents';
+import { Id, Name, Designation, Company, Location, Phone, Email } from './StyledComponents';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MONTH_NAMES, getOrdinal } from '../../common/utils/dates';
 
 const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, navigation }) => {
     const onRefresh = () => fetchEmployeeDetails(128);
@@ -31,7 +32,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
     let doj = new Date(employeeDetails.doj);
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
             <ScrollView refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
 
                 <AboutWrapper>
@@ -61,7 +62,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
                         <StyledMonth> {MONTH_NAMES[doj.getMonth()]} </StyledMonth>
                         <DateWrapper>
                             <StyledDate>{doj.getDate()}</StyledDate>
-                            <Ordinal>{_getOrdinal(doj.getDate())}</Ordinal>
+                            <Ordinal>{getOrdinal(doj.getDate())}</Ordinal>
                         </DateWrapper>
                         <StyledYear>, {doj.getFullYear()}</StyledYear>
                     </DOJWrapper>
@@ -89,7 +90,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
                                 alignItems: 'center',
                                 backgroundColor: '#3A8BCF',
                                 padding: 20,
-                                width: 350,
+                                width: 200,
                                 borderRadius: 5,
                                 marginTop: 80,
                                 marginBottom: 20
@@ -122,11 +123,5 @@ const _getRamdonlyPickedAvator = gender => {
             return null;
     }
 }
-
-const _getOrdinal = n => {
-    return (n > 0 ? ['th', 'st', 'nd', 'rd'][(n > 3 && n < 21) || n % 10 > 3 ? 0 : n % 10] : '');
-}
-
-const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 export default ProfileScreen;

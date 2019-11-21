@@ -25,8 +25,8 @@
     "react-native-indicators": "^0.17.0",
     "react-native-reanimated": "~1.2.0",
     "react-native-safe-area-context": "0.6.0",
-    "react-native-segmented-control-tab": "^3.4.1",
     "react-native-svg": "9.9.5",
+    "react-native-switch-toggle": "^1.1.2",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3",
@@ -34,6 +34,7 @@
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "shortid": "^2.2.15",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {

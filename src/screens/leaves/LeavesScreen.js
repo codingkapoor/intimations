@@ -29,7 +29,7 @@ class LeavesScreen extends Component {
         let sl = employeeDetails.leaves.sick;
 
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
                 <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "space-evenly", alignItems: 'center' }} refreshControl={
                     <RefreshControl progressViewOffset={30} refreshing={this.props.pullToRefresh} onRefresh={this.onRefresh} />
                 }>

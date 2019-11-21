@@ -1,91 +1,56 @@
 import React, { useState } from 'react';
-import { Text, ScrollView, RefreshControl, View, StyleSheet } from 'react-native';
+import { ScrollView, RefreshControl, View, Text } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Calendar } from 'react-native-calendars';
-import Accordion from 'react-native-collapsible/Accordion';
+import SectionComponent from './components/SectionComponent';
+import shortid from 'shortid';
+import SwitchToggle from 'react-native-switch-toggle';
 
 const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }) => {
-    const [activeSections, setActiveSections] = useState([]);
+    const [toggle, switchToggle] = useState(false);
 
-    onRefresh = () => fetchActiveIntimations();
+    const onRefresh = () => fetchActiveIntimations();
 
-    if (!activeIntimations)
+    if (!activeIntimations || activeIntimations.length === 0)
         return (
             <SpinnerWrapper>
                 <WaveIndicator color="#000000" />
             </SpinnerWrapper>
         );
 
-    _renderHeader = activeIntimation => {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.name}>{activeIntimation.empName}</Text>
-                <Text style={styles.reason}>{activeIntimation.reason}</Text>
-            </View>
-        );
-    };
-
-    _renderContent = () => {
-        return (
-            <View style={{ alignItems: 'center' }}>
-                <Calendar
-                    style={{
-                        width: 370,
-                        marginTop: 20,
-                        borderWidth: 1,
-                        borderColor: '#D8DADA',
-                        borderRadius: 10
-                    }}
-
-                />
-            </View>
-        );
-    };
-
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#FCFCFC' }}>
-            <ScrollView contentContainerStyle={{ paddingBottom: 20, marginTop: 10 }} refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />} >
-                <Accordion
-                    sections={activeIntimations}
-                    activeSections={activeSections}
-                    renderHeader={_renderHeader}
-                    renderContent={_renderContent}
-                    onChange={setActiveSections}
-                    underlayColor={'white'}
-                />
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
+            <ScrollView
+                contentContainerStyle={{ paddingBottom: 20, marginTop: 10 }}
+                refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />}
+            >
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                    <Text style={{ color: "black", fontSize: 17, paddingRight: 12 }}>Today</Text>
+                    <SwitchToggle
+                        switchOn={toggle}
+                        onPress={() => switchToggle(!toggle)}
+                        circleColorOn='#3A8BCF'
+                    />
+                    <Text style={{ color: "black", fontSize: 17, paddingLeft: 12 }}>Planned</Text>
+                </View>
+
+                {Object.keys(activeIntimations).map((key, _) => {
+                    let intimations = (toggle === false) ? activeIntimations[key].filter(i => i.isToday) : activeIntimations[key].filter(i => i.isPlanned)
+
+                    return (intimations.length > 0) ?
+                        <SectionComponent key={shortid.generate()}
+                            activeIntimations={intimations}
+                            lastModified={key}
+                            toggle={toggle}
+                        /> : null;
+                })}
+
             </ScrollView>
         </SafeAreaView>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        padding: 10,
-        paddingLeft: 15,
-        borderWidth: 1,
-        borderColor: '#D8DADA',
-        borderRadius: 10,
-        backgroundColor: 'white'
-    },
-    name: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        paddingBottom: 2
-    },
-    reason: {
-        fontSize: 16,
-        paddingBottom: 5,
-        marginBottom: 5,
-        marginTop: 8
-    }
-});
 
 FeedScreen.navigationOptions = {
     title: 'Feed',

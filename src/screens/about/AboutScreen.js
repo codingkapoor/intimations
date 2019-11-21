@@ -7,6 +7,7 @@ import { SpinnerWrapper } from '../../common/StyledComponents';
 import FooterComponent from './components/FooterComponent';
 import SectionComponent from './components/SectionComponent';
 import sections from './about.json';
+import shortid from 'shortid';
 
 class AboutScreen extends Component {
     componentDidMount() {
@@ -24,10 +25,10 @@ class AboutScreen extends Component {
             );
 
         return (
-            <SafeAreaView style={{ flex: 1, wordWrap: 'break-word', justifyContent: 'space-between', backgroundColor: '#FCFCFC' }}>
+            <SafeAreaView style={{ flex: 1, wordWrap: 'break-word', justifyContent: 'space-between', backgroundColor: '#FEFEFE' }}>
                 <View>
                     <SectionComponent headerTitle='Contributors' data={_redefineContributorsDataKeys(githubContributors)} />
-                    {sections.map(e => { return <SectionComponent key={e.headerTitle} headerTitle={e.headerTitle} data={e.data} /> })}
+                    {sections.map(e => { return <SectionComponent key={shortid.generate()} headerTitle={e.headerTitle} data={e.data} /> })}
                 </View>
 
                 <FooterComponent />
