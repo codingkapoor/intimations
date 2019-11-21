@@ -1,6 +1,7 @@
 import platform from '../../../common/apis/platform';
 import { FETCH_ACTIVE_INTIMATIONS } from './types';
 import { updatePullToRefresh } from '../../pull-to-refresh/actions';
+import _ from 'lodash';
 
 const remodelActiveintimations = activeIntimations => {
     let _activeIntimations = {};
@@ -12,6 +13,7 @@ const remodelActiveintimations = activeIntimations => {
 
         intimation["isToday"] = isToday;
         _activeIntimations[lastModified].push(intimation);
+        _activeIntimations[lastModified] = _.sortBy(_activeIntimations[lastModified], i => i.empName);
     }
 
     activeIntimations.forEach(intimation =>
