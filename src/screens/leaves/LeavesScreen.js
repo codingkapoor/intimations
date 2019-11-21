@@ -10,11 +10,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 class LeavesScreen extends Component {
     onRefresh = () => this.props.fetchEmployeeDetails(11);
 
-    componentDidMount() {
-        this.props.fetchEmployeeDetails(11);
-        this.props.fetchActiveIntimations();
-    }
-
     render() {
         let employeeDetails = this.props.employeeDetails;
 
