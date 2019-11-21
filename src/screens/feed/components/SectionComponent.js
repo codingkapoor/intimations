@@ -4,6 +4,7 @@ import { Calendar } from 'react-native-calendars';
 import Accordion from 'react-native-collapsible/Accordion';
 import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
+import Badge from './Badge';
 
 const styles = StyleSheet.create({
     container: {
@@ -34,7 +35,10 @@ const styles = StyleSheet.create({
 _renderHeader = activeIntimation => {
     return (
         <View style={styles.container}>
-            <Text style={styles.name}>{activeIntimation.empName}</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Text style={styles.name}>{activeIntimation.empName}</Text>
+                <Badge firstHalf={'WFH'} secondHalf={'Leave'}/>
+            </View>
             <Text style={styles.reason}>{activeIntimation.reason}</Text>
         </View>
     );
@@ -55,8 +59,8 @@ _renderContent = (toggle) => {
                     borderRadius: 10
                 }}
                 markedDates={{
-                    '2019-11-21': { dots: [{ key: 'vacation', color: 'green' }, { key: 'massage', color: 'red' }] },
-                    '2019-11-22': { dots: [{ key: 'vacation', color: 'grey' }, { key: 'massage', color: 'red' }] }
+                    '2019-11-21': { dots: [{ key: 'WFH', color: 'green', borderColor: 'green' }, { key: 'Leave', color: 'red', borderColor: 'red' }] },
+                    '2019-11-22': { dots: [{ key: 'WFO', color: 'grey',  borderColor: 'grey' }, { key: 'Leave', color: 'red',  borderColor: 'red' }] }
                 }}
                 markingType={'multi-dot'}
                 theme={{
