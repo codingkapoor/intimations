@@ -5,14 +5,14 @@ import _ from 'lodash';
 
 let todayDate = new Date().toISOString().split('T')[0];
 
-const buildToday = (request, today) => {
+const _buildToday = (request, today) => {
     if (request.date === todayDate) {
         today['firstHalf'] = request.firstHalf;
         today['secondHalf'] = request.secondHalf;
     }
 }
 
-const remodelActiveintimations = activeIntimations => {
+const _remodelActiveintimations = activeIntimations => {
     let _activeIntimations = {};
 
     const push = (intimation, isToday, isPlanned) => {
@@ -24,7 +24,7 @@ const remodelActiveintimations = activeIntimations => {
 
         if (isToday) {
             let today = {};
-            intimation.requests.map(request => buildToday(request, today));
+            intimation.requests.map(request => _buildToday(request, today));
             intimation['today'] = today;
         }
 
@@ -49,7 +49,7 @@ const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
 
     dispatch({
         type: FETCH_ACTIVE_INTIMATIONS,
-        payload: remodelActiveintimations(activeIntimations)
+        payload: _remodelActiveintimations(activeIntimations)
     });
 
     if (pullToRefresh) dispatch(updatePullToRefresh(!pullToRefresh));
