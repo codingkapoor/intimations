@@ -1,5 +1,5 @@
 export const BadgeColor = {
-    WFO: 'grey',
-    WFH: 'green',
-    Leave: 'red'
+    WFO: '#BDBCBC',
+    WFH: '#78C12B',
+    Leave: '#D12219'
 };
