@@ -41,7 +41,7 @@ _renderHeader = activeIntimation => {
 };
 
 _renderContent = (toggle) => {
-    if(!toggle)
+    if (!toggle)
         return null;
 
     return (
@@ -54,7 +54,24 @@ _renderContent = (toggle) => {
                     borderColor: '#D8DADA',
                     borderRadius: 10
                 }}
-
+                markedDates={{
+                    '2019-11-21': { dots: [{ key: 'vacation', color: 'green' }, { key: 'massage', color: 'red' }] },
+                    '2019-11-22': { dots: [{ key: 'vacation', color: 'grey' }, { key: 'massage', color: 'red' }] }
+                }}
+                markingType={'multi-dot'}
+                theme={{
+                    'stylesheet.day.multiDot': {
+                        dot: {
+                            width: 10,
+                            height: 10,
+                            marginTop: 1,
+                            marginLeft: 1,
+                            marginRight: 1,
+                            borderRadius: 2,
+                            opacity: 0
+                        }
+                    }
+                }}
             />
         </View>
     );
