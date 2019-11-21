@@ -57,7 +57,8 @@ _renderContent = (activeIntimation, toggle) => {
                     marginTop: 20,
                     borderWidth: 1,
                     borderColor: '#D8DADA',
-                    borderRadius: 10
+                    borderRadius: 10,
+                    paddingBottom: 15
                 }}
                 markedDates={activeIntimation.markedDates}
                 markingType={'multi-dot'}
