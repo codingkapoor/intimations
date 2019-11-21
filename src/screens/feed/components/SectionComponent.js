@@ -37,7 +37,7 @@ _renderHeader = activeIntimation => {
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Text style={styles.name}>{activeIntimation.empName}</Text>
-                <Badge firstHalf={'WFH'} secondHalf={'Leave'}/>
+                {activeIntimation.today ? <Badge firstHalf={activeIntimation.today.firstHalf} secondHalf={activeIntimation.today.secondHalf} /> : null}
             </View>
             <Text style={styles.reason}>{activeIntimation.reason}</Text>
         </View>
@@ -60,7 +60,7 @@ _renderContent = (toggle) => {
                 }}
                 markedDates={{
                     '2019-11-21': { dots: [{ key: 'WFH', color: 'green', borderColor: 'green' }, { key: 'Leave', color: 'red', borderColor: 'red' }] },
-                    '2019-11-22': { dots: [{ key: 'WFO', color: 'grey',  borderColor: 'grey' }, { key: 'Leave', color: 'red',  borderColor: 'red' }] }
+                    '2019-11-22': { dots: [{ key: 'WFO', color: 'grey', borderColor: 'grey' }, { key: 'Leave', color: 'red', borderColor: 'red' }] }
                 }}
                 markingType={'multi-dot'}
                 theme={{

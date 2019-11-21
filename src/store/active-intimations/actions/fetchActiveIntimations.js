@@ -3,23 +3,37 @@ import { FETCH_ACTIVE_INTIMATIONS } from './types';
 import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import _ from 'lodash';
 
+let todayDate = new Date().toISOString().split('T')[0];
+
+const buildToday = (request, today) => {
+    if (request.date === todayDate) {
+        today['firstHalf'] = request.firstHalf;
+        today['secondHalf'] = request.secondHalf;
+    }
+}
+
 const remodelActiveintimations = activeIntimations => {
     let _activeIntimations = {};
-    let today = new Date().toISOString().split('T')[0];
 
     const push = (intimation, isToday, isPlanned) => {
         let lastModified = intimation.lastModified.split('T')[0];
         if (!_activeIntimations[lastModified]) _activeIntimations[lastModified] = [];
 
-        intimation["isToday"] = isToday;
-        intimation["isPlanned"] = isPlanned;
+        intimation['isToday'] = isToday;
+        intimation['isPlanned'] = isPlanned;
+
+        if (isToday) {
+            let today = {};
+            intimation.requests.map(request => buildToday(request, today));
+            intimation['today'] = today;
+        }
 
         _activeIntimations[lastModified].push(intimation);
         _activeIntimations[lastModified] = _.sortBy(_activeIntimations[lastModified], i => i.empName);
     }
 
     activeIntimations.forEach(intimation =>
-        intimation.requests.filter(request => request.date === today).length === 0 ?
+        intimation.requests.filter(request => request.date === todayDate).length === 0 ?
             push(intimation, false, true) :
             (intimation.requests.length === 1) ? push(intimation, true, false) : push(intimation, true, true)
     );

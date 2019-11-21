@@ -1,10 +1,5 @@
 import styled from 'styled-components/native';
-
-const BadgeColor = {
-    WHO: 'grey',
-    WFH: 'green',
-    Leave: 'red'
-};
+import {BadgeColor} from '../../common/Constants';
 
 export const BadgeContainer = styled.View`
     flex-direction: row; 
