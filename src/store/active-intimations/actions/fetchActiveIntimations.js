@@ -7,18 +7,21 @@ const remodelActiveintimations = activeIntimations => {
     let _activeIntimations = {};
     let today = new Date().toISOString().split('T')[0];
 
-    const push = (intimation, isToday) => {
+    const push = (intimation, isToday, isPlanned) => {
         let lastModified = intimation.lastModified.split('T')[0];
         if (!_activeIntimations[lastModified]) _activeIntimations[lastModified] = [];
 
         intimation["isToday"] = isToday;
+        intimation["isPlanned"] = isPlanned;
+
         _activeIntimations[lastModified].push(intimation);
         _activeIntimations[lastModified] = _.sortBy(_activeIntimations[lastModified], i => i.empName);
     }
 
     activeIntimations.forEach(intimation =>
-        intimation.requests.filter(request => request.date === today).length > 0 ?
-            push(intimation, true) : push(intimation, false)
+        intimation.requests.filter(request => request.date === today).length === 0 ?
+            push(intimation, false, true) :
+            (intimation.requests.length === 1) ? push(intimation, true, false) : push(intimation, true, true)
     );
 
     return _activeIntimations;

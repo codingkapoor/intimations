@@ -37,13 +37,13 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }
                 </View>
 
                 {Object.keys(activeIntimations).map((key, _) => {
-                    let intimations = (toggle === false) ? activeIntimations[key].filter(i => i.isToday) : activeIntimations[key]
+                    let intimations = (toggle === false) ? activeIntimations[key].filter(i => i.isToday) : activeIntimations[key].filter(i => i.isPlanned)
 
                     return (intimations.length > 0) ?
                         <SectionComponent key={shortid.generate()}
                             activeIntimations={intimations}
                             lastModified={key}
-                            isToday={toggle}
+                            toggle={toggle}
                         /> : null;
                 })}
 
