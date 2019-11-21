@@ -45,10 +45,10 @@ infoFlow.navigationOptions = ({ navigation }) => {
   }
 
   return {
-    title: 'Profile',
+    title: '',
     tabBarIcon: ({ focused }) => {
-      let i = focused ? <FontAwesomeIcon icon='user-alt' size={24} color={'#3780BE'} />
-        : <FontAwesomeIcon icon='user-alt' size={24} color={'#393939'} />
+      let i = focused ? <FontAwesomeIcon icon='user-alt' size={27} color={'#3780BE'} />
+        : <FontAwesomeIcon icon='user-alt' size={27} color={'#393939'} />
       return i;
     },
     tabBarVisible
@@ -70,8 +70,8 @@ const AppNavigator = createBottomTabNavigator(
         paddingBottom: 2
       },
       style: {
-        paddingTop: 5,
-        height: 59
+        paddingTop: 20,
+        height: 55
       }
     }
   }

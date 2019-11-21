@@ -65,7 +65,7 @@ class FeedScreen extends Component {
 }
 
 FeedScreen.navigationOptions = {
-    title: 'Feed',
+    title: '',
     tabBarIcon: ({ focused }) => {
         let i = focused ? <FontAwesomeIcon icon={'bell'} size={29} color={'#3780BE'} />
             : <FontAwesomeIcon icon={'bell'} size={29} color={'#393939'} />
