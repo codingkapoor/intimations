@@ -44,7 +44,8 @@ _renderHeader = activeIntimation => {
     );
 };
 
-_renderContent = (toggle) => {
+_renderContent = (activeIntimation, toggle) => {
+    console.log(activeIntimation.markedDates);
     if (!toggle)
         return null;
 
@@ -58,16 +59,13 @@ _renderContent = (toggle) => {
                     borderColor: '#D8DADA',
                     borderRadius: 10
                 }}
-                markedDates={{
-                    '2019-11-21': { dots: [{ key: 'WFH', color: 'green', borderColor: 'green' }, { key: 'Leave', color: 'red', borderColor: 'red' }] },
-                    '2019-11-22': { dots: [{ key: 'WFO', color: 'grey', borderColor: 'grey' }, { key: 'Leave', color: 'red', borderColor: 'red' }] }
-                }}
+                markedDates={activeIntimation.markedDates}
                 markingType={'multi-dot'}
                 theme={{
                     'stylesheet.day.multiDot': {
                         dot: {
-                            width: 10,
-                            height: 10,
+                            width: 8,
+                            height: 8,
                             marginTop: 1,
                             marginLeft: 1,
                             marginRight: 1,
@@ -101,7 +99,7 @@ export default ({ activeIntimations, lastModified, toggle }) => {
                 sections={activeIntimations}
                 activeSections={activeSections}
                 renderHeader={_renderHeader}
-                renderContent={() => _renderContent(toggle)}
+                renderContent={activeIntimation => _renderContent(activeIntimation, toggle)}
                 onChange={setActiveSections}
                 underlayColor={'white'}
             />

@@ -2,14 +2,22 @@ import platform from '../../../common/apis/platform';
 import { FETCH_ACTIVE_INTIMATIONS } from './types';
 import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import _ from 'lodash';
+import { BadgeColor } from '../../../common/Constants';
 
 let todayDate = new Date().toISOString().split('T')[0];
 
-const _buildToday = (request, today) => {
+const _buildToday = (request, today, markedDates) => {
     if (request.date === todayDate) {
         today['firstHalf'] = request.firstHalf;
         today['secondHalf'] = request.secondHalf;
     }
+
+    markedDates[request.date] = {
+        dots: [
+            { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
+            { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
+        ]
+    };
 }
 
 const _remodelActiveintimations = activeIntimations => {
@@ -22,11 +30,12 @@ const _remodelActiveintimations = activeIntimations => {
         intimation['isToday'] = isToday;
         intimation['isPlanned'] = isPlanned;
 
-        if (isToday) {
-            let today = {};
-            intimation.requests.map(request => _buildToday(request, today));
-            intimation['today'] = today;
-        }
+        let today = {};
+        let markedDates = {};
+        intimation.requests.map(request => _buildToday(request, today, markedDates));
+
+        if (isToday) intimation['today'] = today;
+        if (isPlanned) intimation['markedDates'] = markedDates;
 
         _activeIntimations[lastModified].push(intimation);
         _activeIntimations[lastModified] = _.sortBy(_activeIntimations[lastModified], i => i.empName);
@@ -38,6 +47,7 @@ const _remodelActiveintimations = activeIntimations => {
             (intimation.requests.length === 1) ? push(intimation, true, false) : push(intimation, true, true)
     );
 
+    // console.log(_activeIntimations);
     return _activeIntimations;
 }
 
