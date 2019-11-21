@@ -1,13 +1,16 @@
-import React from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, RefreshControl, View, Text } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SectionComponent from './components/SectionComponent';
 import shortid from 'shortid';
+import SwitchToggle from 'react-native-switch-toggle';
 
 const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }) => {
+    const [toggle, switchToggle] = useState(false);
+
     const onRefresh = () => fetchActiveIntimations();
 
     if (!activeIntimations || activeIntimations.length === 0)
@@ -23,11 +26,23 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }
                 contentContainerStyle={{ paddingBottom: 20, marginTop: 10 }}
                 refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />}
             >
-                {Object.keys(activeIntimations).map((key, _) => {
-                    return <SectionComponent key={shortid.generate()}
-                        activeIntimations={activeIntimations[key]}
-                        lastModified={key}
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                    <Text style={{ color: "black", fontSize: 16, paddingRight: 12 }}>Today</Text>
+                    <SwitchToggle
+                        switchOn={toggle}
+                        onPress={() => switchToggle(!toggle)}
                     />
+                    <Text style={{ color: "black", fontSize: 16, paddingLeft: 12 }}>Planned</Text>
+                </View>
+
+                {Object.keys(activeIntimations).map((key, _) => {
+                    let intimations = (toggle === false) ? activeIntimations[key].filter(i => i.isToday) : activeIntimations[key]
+
+                    return (intimations.length > 0) ?
+                        <SectionComponent key={shortid.generate()}
+                            activeIntimations={intimations}
+                            lastModified={key}
+                        /> : null;
                 })}
 
             </ScrollView>
