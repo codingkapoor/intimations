@@ -27,12 +27,13 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }
                 refreshControl={<RefreshControl progressViewOffset={20} refreshing={pullToRefresh} onRefresh={onRefresh} />}
             >
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                    <Text style={{ color: "black", fontSize: 16, paddingRight: 12 }}>Today</Text>
+                    <Text style={{ color: "black", fontSize: 17, paddingRight: 12 }}>Today</Text>
                     <SwitchToggle
                         switchOn={toggle}
                         onPress={() => switchToggle(!toggle)}
+                        circleColorOn='#3A8BCF'
                     />
-                    <Text style={{ color: "black", fontSize: 16, paddingLeft: 12 }}>Planned</Text>
+                    <Text style={{ color: "black", fontSize: 17, paddingLeft: 12 }}>Planned</Text>
                 </View>
 
                 {Object.keys(activeIntimations).map((key, _) => {
