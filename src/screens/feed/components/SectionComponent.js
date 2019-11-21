@@ -40,7 +40,10 @@ _renderHeader = activeIntimation => {
     );
 };
 
-_renderContent = () => {
+_renderContent = (isToday) => {
+    if(!isToday)
+        return null;
+        
     return (
         <View style={{ alignItems: 'center' }}>
             <Calendar
@@ -57,7 +60,7 @@ _renderContent = () => {
     );
 };
 
-export default ({ activeIntimations, lastModified }) => {
+export default ({ activeIntimations, lastModified, isToday }) => {
 
     const [activeSections, setActiveSections] = useState([]);
     let _lastModified = new Date(lastModified);
@@ -77,7 +80,7 @@ export default ({ activeIntimations, lastModified }) => {
                 sections={activeIntimations}
                 activeSections={activeSections}
                 renderHeader={_renderHeader}
-                renderContent={_renderContent}
+                renderContent={() => _renderContent(isToday)}
                 onChange={setActiveSections}
                 underlayColor={'white'}
             />

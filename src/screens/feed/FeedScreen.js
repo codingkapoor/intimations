@@ -43,6 +43,7 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchActiveIntimations }
                         <SectionComponent key={shortid.generate()}
                             activeIntimations={intimations}
                             lastModified={key}
+                            isToday={toggle}
                         /> : null;
                 })}
 
