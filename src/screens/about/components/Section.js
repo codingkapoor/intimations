@@ -3,7 +3,7 @@ import { Linking, Text} from 'react-native';
 import { Header } from '../StyledComponents';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default ({ headerTitle, data }) => {
+const Section = ({ headerTitle, data }) => {
     return (
         <>
             <Header>{headerTitle}</Header>
@@ -22,3 +22,5 @@ export default ({ headerTitle, data }) => {
         </>
     );
 };
+
+export default Section;

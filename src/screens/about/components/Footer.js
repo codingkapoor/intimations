@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-export default () => {
+const Footer = () => {
     return (
         <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent:'center' }}>
             <Text>Made with </Text>
@@ -15,3 +15,5 @@ export default () => {
         </View>
     );
 }
+
+export default Footer;
