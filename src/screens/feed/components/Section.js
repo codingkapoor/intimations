@@ -82,7 +82,7 @@ _renderContent = (activeIntimation, toggle) => {
     );
 };
 
-export default ({ activeIntimations, lastModified, toggle }) => {
+const Section = ({ activeIntimations, lastModified, toggle }) => {
 
     const [activeSections, setActiveSections] = useState([]);
     let _lastModified = new Date(lastModified);
@@ -109,3 +109,5 @@ export default ({ activeIntimations, lastModified, toggle }) => {
         </View>
     );
 }
+
+export default Section;
