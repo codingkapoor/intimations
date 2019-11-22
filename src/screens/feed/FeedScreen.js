@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SectionComponent from './components/SectionComponent';
 import shortid from 'shortid';
-import SwitchToggle from 'react-native-switch-toggle';
+import SwitchSelector from "react-native-switch-selector";
 
 class FeedScreen extends Component {
     constructor(props) {
@@ -36,13 +36,18 @@ class FeedScreen extends Component {
                     refreshControl={<RefreshControl progressViewOffset={20} refreshing={this.props.pullToRefresh} onRefresh={this.onRefresh} />}
                 >
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                        <Text style={{ color: "black", fontSize: 17, paddingRight: 12 }}>Today</Text>
-                        <SwitchToggle
-                            switchOn={this.state.toggle}
-                            onPress={() => this.setState({toggle: !this.state.toggle})}
-                            circleColorOn='#3A8BCF'
+                        <SwitchSelector
+                            initial={0}
+                            onPress={value => this.setState({ toggle: !this.state.toggle })}
+                            buttonColor={'#3A8BCF'}
+                            hasPadding
+                            style={{ width: 200 }}
+                            height={38}
+                            options={[
+                                { label: "Today", value: "1" },
+                                { label: "Planned ", value: "2" }
+                            ]}
                         />
-                        <Text style={{ color: "black", fontSize: 17, paddingLeft: 12 }}>Planned</Text>
                     </View>
 
                     {Object.keys(this.props.activeIntimations).map((key, _) => {
