@@ -11,7 +11,7 @@ import SwitchSelector from "react-native-switch-selector";
 class FeedScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { toggle: false };
+        this.state = { toggle: true };
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ class FeedScreen extends Component {
                 >
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                         <SwitchSelector
-                            initial={0}
+                            initial={1}
                             onPress={value => this.setState({ toggle: !this.state.toggle })}
                             buttonColor={'#3A8BCF'}
                             hasPadding
