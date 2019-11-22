@@ -47,7 +47,6 @@ const _remodelActiveintimations = activeIntimations => {
             (intimation.requests.length === 1) ? push(intimation, true, false) : push(intimation, true, true)
     );
 
-    // console.log(_activeIntimations);
     return _activeIntimations;
 }
 

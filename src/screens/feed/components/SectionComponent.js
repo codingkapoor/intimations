@@ -45,7 +45,6 @@ _renderHeader = activeIntimation => {
 };
 
 _renderContent = (activeIntimation, toggle) => {
-    console.log(activeIntimation.markedDates);
     if (!toggle)
         return null;
 
