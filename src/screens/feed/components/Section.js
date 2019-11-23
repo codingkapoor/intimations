@@ -6,16 +6,16 @@ import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
 import Badge from './Badge';
 import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
-import { SectionWrapper, SectionDateWrapper, HeaderWrapper } from '../StyledComponents';
+import { SectionWrapper, SectionDateWrapper, HeaderWrapper, TitleWrapper, Name, Reason } from '../StyledComponents';
 
 const _renderHeader = activeIntimation => {
     return (
         <HeaderWrapper>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Text style={styles.name}>{activeIntimation.empName}</Text>
+            <TitleWrapper>
+                <Name>{activeIntimation.empName}</Name>
                 {activeIntimation.today ? <Badge firstHalf={activeIntimation.today.firstHalf} secondHalf={activeIntimation.today.secondHalf} /> : null}
-            </View>
-            <Text style={styles.reason}>{activeIntimation.reason}</Text>
+            </TitleWrapper>
+            <Reason>{activeIntimation.reason}</Reason>
         </HeaderWrapper>
     );
 };
@@ -81,7 +81,6 @@ const Section = ({ activeIntimations, lastModified, toggle }) => {
 }
 
 const styles = StyleSheet.create({
-
     calendar: {
         width: 370,
         marginTop: 20,
@@ -89,18 +88,6 @@ const styles = StyleSheet.create({
         borderColor: '#D8DADA',
         borderRadius: 10,
         paddingBottom: 15
-    },
-
-    name: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        paddingBottom: 2
-    },
-    reason: {
-        fontSize: 16,
-        paddingBottom: 5,
-        marginBottom: 5,
-        marginTop: 8
     }
 });
 

@@ -26,6 +26,25 @@ export const HeaderWrapper = styled.View`
     background-color: white;
 `;
 
+export const TitleWrapper = styled.View`
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: center;
+`;
+
+export const Name = styled.Text`
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 2px;
+`;
+
+export const Reason = styled.Text`
+    font-size: 16;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    margin-top: 8px;
+`;
+
 export const BadgeWrapper = styled.View`
     flex-direction: row; 
     align-items: center;
