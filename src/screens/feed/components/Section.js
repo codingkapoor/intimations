@@ -5,7 +5,7 @@ import Accordion from 'react-native-collapsible/Accordion';
 import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
 import Badge from './Badge';
-import Holidays from '../../../common/components/holidays/Holidays';
+import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
 
 const styles = StyleSheet.create({
     container: {
@@ -77,7 +77,7 @@ _renderContent = (activeIntimation, toggle, holidaysRef) => {
                     }
                 }}
             />
-            <Holidays ref={holidaysRef}/>
+            <HolidaysContainer ref={holidaysRef}/>
         </View>
     );
 };
