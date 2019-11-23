@@ -13,6 +13,19 @@ export const SectionDateWrapper = styled.View`
     margin-top: 20px;
 `;
 
+export const HeaderWrapper = styled.View`
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    padding-left: 15px;
+    border-width: 1;
+    border-color: #D8DADA;
+    border-radius: 10px;
+    background-color: white;
+`;
+
 export const BadgeWrapper = styled.View`
     flex-direction: row; 
     align-items: center;

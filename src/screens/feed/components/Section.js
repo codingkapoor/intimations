@@ -6,17 +6,17 @@ import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
 import Badge from './Badge';
 import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
-import { SectionWrapper, SectionDateWrapper } from '../StyledComponents';
+import { SectionWrapper, SectionDateWrapper, HeaderWrapper } from '../StyledComponents';
 
 const _renderHeader = activeIntimation => {
     return (
-        <View style={styles.container}>
+        <HeaderWrapper>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Text style={styles.name}>{activeIntimation.empName}</Text>
                 {activeIntimation.today ? <Badge firstHalf={activeIntimation.today.firstHalf} secondHalf={activeIntimation.today.secondHalf} /> : null}
             </View>
             <Text style={styles.reason}>{activeIntimation.reason}</Text>
-        </View>
+        </HeaderWrapper>
     );
 };
 
@@ -91,18 +91,6 @@ const styles = StyleSheet.create({
         paddingBottom: 15
     },
 
-    container: {
-        justifyContent: 'center',
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        padding: 10,
-        paddingLeft: 15,
-        borderWidth: 1,
-        borderColor: '#D8DADA',
-        borderRadius: 10,
-        backgroundColor: 'white'
-    },
     name: {
         fontWeight: 'bold',
         fontSize: 18,
