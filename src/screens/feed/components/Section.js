@@ -6,6 +6,7 @@ import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
 import Badge from './Badge';
 import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
+import { SectionWrapper, SectionDateWrapper } from '../StyledComponents';
 
 const styles = StyleSheet.create({
     container: {
@@ -90,15 +91,15 @@ const Section = ({ activeIntimations, lastModified, toggle }) => {
     const holidaysRef = useRef();
 
     return (
-        <View style={{ marginBottom: 10, justifyContent: 'center' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+        <SectionWrapper>
+            <SectionDateWrapper>
                 <StyledMonth> {MONTH_NAMES[_lastModified.getMonth()]} </StyledMonth>
                 <DateWrapper>
                     <StyledDate>{_lastModified.getDate()}</StyledDate>
                     <Ordinal>{getOrdinal(_lastModified.getDate())}</Ordinal>
                 </DateWrapper>
                 <StyledYear>, {_lastModified.getFullYear()}</StyledYear>
-            </View>
+            </SectionDateWrapper>
 
             <Accordion
                 sections={activeIntimations}
@@ -108,7 +109,7 @@ const Section = ({ activeIntimations, lastModified, toggle }) => {
                 onChange={setActiveSections}
                 underlayColor={'white'}
             />
-        </View>
+        </SectionWrapper>
     );
 }
 

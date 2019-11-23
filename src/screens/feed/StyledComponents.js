@@ -1,7 +1,19 @@
 import styled from 'styled-components/native';
 import { BadgeColor } from '../../common/Constants';
 
-export const BadgeContainer = styled.View`
+export const SectionWrapper = styled.View`
+    margin-bottom: 10; 
+    justify-content: center;
+`;
+
+export const SectionDateWrapper = styled.View`
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 20px;
+`;
+
+export const BadgeWrapper = styled.View`
     flex-direction: row; 
     align-items: center;
     justify-content: center;

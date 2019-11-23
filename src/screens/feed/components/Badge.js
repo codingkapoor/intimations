@@ -1,12 +1,12 @@
 import React from 'react';
-import { BadgeContainer as BadgeContainer, StyledBadge } from '../StyledComponents';
+import { BadgeWrapper as BadgeWrapper, StyledBadge } from '../StyledComponents';
 
 const Badge = ({ firstHalf, secondHalf }) => {
     return (
-        <BadgeContainer>
+        <BadgeWrapper>
             <StyledBadge half={firstHalf} />
             <StyledBadge half={secondHalf} />
-        </BadgeContainer>
+        </BadgeWrapper>
     );
 }
 
