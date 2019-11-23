@@ -15,6 +15,7 @@ class FeedScreen extends Component {
     }
 
     componentDidMount() {
+        this.props.fetchHolidays();
         this.props.fetchEmployeeDetails(11);
         this.props.fetchActiveIntimations();
     }

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import Accordion from 'react-native-collapsible/Accordion';
 import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
 import Badge from './Badge';
-import Holiday from './Holiday';
+import Holidays from '../../../common/components/holidays/Holidays';
 
 const styles = StyleSheet.create({
     container: {
@@ -45,7 +45,7 @@ _renderHeader = activeIntimation => {
     );
 };
 
-_renderContent = (activeIntimation, toggle) => {
+_renderContent = (activeIntimation, toggle, holidaysRef) => {
     if (!toggle)
         return null;
 
@@ -60,6 +60,7 @@ _renderContent = (activeIntimation, toggle) => {
                     borderRadius: 10,
                     paddingBottom: 15
                 }}
+                onMonthChange={e => holidaysRef.current.updateMonthYear(e.month, e.year)}
                 markedDates={activeIntimation.markedDates}
                 markingType={'multi-dot'}
                 theme={{
@@ -76,8 +77,7 @@ _renderContent = (activeIntimation, toggle) => {
                     }
                 }}
             />
-            <Holiday day={'SUN'} date={'24'} occasion={"Guru Tegh Bahadur's Martyrdom Day"}/>
-            <Holiday day={'WED'} date={'27'} occasion={"National Jukebox Day"}/>
+            <Holidays ref={holidaysRef}/>
         </View>
     );
 };
@@ -86,6 +86,8 @@ const Section = ({ activeIntimations, lastModified, toggle }) => {
 
     const [activeSections, setActiveSections] = useState([]);
     let _lastModified = new Date(lastModified);
+
+    const holidaysRef = useRef();
 
     return (
         <View style={{ marginBottom: 10, justifyContent: 'center' }}>
@@ -102,7 +104,7 @@ const Section = ({ activeIntimations, lastModified, toggle }) => {
                 sections={activeIntimations}
                 activeSections={activeSections}
                 renderHeader={_renderHeader}
-                renderContent={activeIntimation => _renderContent(activeIntimation, toggle)}
+                renderContent={activeIntimation => _renderContent(activeIntimation, toggle, holidaysRef)}
                 onChange={setActiveSections}
                 underlayColor={'white'}
             />
