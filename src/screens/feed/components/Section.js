@@ -8,7 +8,7 @@ import Badge from './Badge';
 import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
 import { SectionWrapper, SectionDateWrapper } from '../StyledComponents';
 
-_renderHeader = activeIntimation => {
+const _renderHeader = activeIntimation => {
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -20,7 +20,7 @@ _renderHeader = activeIntimation => {
     );
 };
 
-_renderContent = (activeIntimation, toggle, holidaysRef) => {
+const _renderContent = (activeIntimation, toggle, holidaysRef) => {
     if (!toggle)
         return null;
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingBottom: 15
     },
-    
+
     container: {
         justifyContent: 'center',
         marginTop: 20,
