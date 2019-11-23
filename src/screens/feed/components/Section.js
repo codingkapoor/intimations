@@ -8,32 +8,6 @@ import Badge from './Badge';
 import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
 import { SectionWrapper, SectionDateWrapper } from '../StyledComponents';
 
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        padding: 10,
-        paddingLeft: 15,
-        borderWidth: 1,
-        borderColor: '#D8DADA',
-        borderRadius: 10,
-        backgroundColor: 'white'
-    },
-    name: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        paddingBottom: 2
-    },
-    reason: {
-        fontSize: 16,
-        paddingBottom: 5,
-        marginBottom: 5,
-        marginTop: 8
-    }
-});
-
 _renderHeader = activeIntimation => {
     return (
         <View style={styles.container}>
@@ -53,14 +27,7 @@ _renderContent = (activeIntimation, toggle, holidaysRef) => {
     return (
         <View style={{ alignItems: 'center' }}>
             <Calendar
-                style={{
-                    width: 370,
-                    marginTop: 20,
-                    borderWidth: 1,
-                    borderColor: '#D8DADA',
-                    borderRadius: 10,
-                    paddingBottom: 15
-                }}
+                style={styles.calendar}
                 onMonthChange={e => holidaysRef.current.updateMonthYear(e.month, e.year)}
                 markedDates={activeIntimation.markedDates}
                 markingType={'multi-dot'}
@@ -78,7 +45,7 @@ _renderContent = (activeIntimation, toggle, holidaysRef) => {
                     }
                 }}
             />
-            <HolidaysContainer ref={holidaysRef}/>
+            <HolidaysContainer ref={holidaysRef} />
         </View>
     );
 };
@@ -112,5 +79,41 @@ const Section = ({ activeIntimations, lastModified, toggle }) => {
         </SectionWrapper>
     );
 }
+
+const styles = StyleSheet.create({
+
+    calendar: {
+        width: 370,
+        marginTop: 20,
+        borderWidth: 1,
+        borderColor: '#D8DADA',
+        borderRadius: 10,
+        paddingBottom: 15
+    },
+    
+    container: {
+        justifyContent: 'center',
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20,
+        padding: 10,
+        paddingLeft: 15,
+        borderWidth: 1,
+        borderColor: '#D8DADA',
+        borderRadius: 10,
+        backgroundColor: 'white'
+    },
+    name: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        paddingBottom: 2
+    },
+    reason: {
+        fontSize: 16,
+        paddingBottom: 5,
+        marginBottom: 5,
+        marginTop: 8
+    }
+});
 
 export default Section;
