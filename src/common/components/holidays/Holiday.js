@@ -1,17 +1,17 @@
 import React from 'react';
-import { HolidayContainer, DayContainer, Day, Date, OccasionContainer, Occasion } from '../../../screens/feed/StyledComponents';
+import { HolidayWrapper, DayWrapper, Day, Date, OccasionWrapper, Occasion } from './StyledComponents';
 
 const Holiday = ({ day, date, occasion }) => {
     return (
-        <HolidayContainer>
-            <DayContainer>
+        <HolidayWrapper>
+            <DayWrapper>
                 <Day>{day}</Day>
                 <Date>{date}</Date>
-            </DayContainer>
-            <OccasionContainer>
+            </DayWrapper>
+            <OccasionWrapper>
                 <Occasion>{occasion}</Occasion>
-            </OccasionContainer>
-        </HolidayContainer>
+            </OccasionWrapper>
+        </HolidayWrapper>
     );
 }
 
