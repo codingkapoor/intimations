@@ -29,7 +29,6 @@ import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
 import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
-import Parent from './src/screens/feed/Parent';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
   faCalendarDay, faPenSquare, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
@@ -60,7 +59,6 @@ const AppNavigator = createBottomTabNavigator(
   {
     Feed: FeedContainer,
     Leaves: LeavesContainer,
-    Parent: Parent,
     infoFlow
   },
   {
