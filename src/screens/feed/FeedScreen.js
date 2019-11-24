@@ -4,17 +4,18 @@ import { WaveIndicator } from 'react-native-indicators';
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import SectionComponent from './components/SectionComponent';
+import Section from './components/Section';
 import shortid from 'shortid';
 import SwitchSelector from "react-native-switch-selector";
 
 class FeedScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { toggle: false };
+        this.state = { toggle: true };
     }
 
     componentDidMount() {
+        this.props.fetchHolidays();
         this.props.fetchEmployeeDetails(11);
         this.props.fetchActiveIntimations();
     }
@@ -37,7 +38,7 @@ class FeedScreen extends Component {
                 >
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                         <SwitchSelector
-                            initial={0}
+                            initial={1}
                             onPress={value => this.setState({ toggle: !this.state.toggle })}
                             buttonColor={'#3A8BCF'}
                             hasPadding
@@ -56,7 +57,7 @@ class FeedScreen extends Component {
                             this.props.activeIntimations[key].filter(i => i.isPlanned)
 
                         return (intimations.length > 0) ?
-                            <SectionComponent key={shortid.generate()}
+                            <Section key={shortid.generate()}
                                 activeIntimations={intimations}
                                 lastModified={key}
                                 toggle={this.state.toggle}

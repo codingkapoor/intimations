@@ -4,8 +4,8 @@ import { Dimensions, View } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SpinnerWrapper } from '../../common/StyledComponents';
-import FooterComponent from './components/FooterComponent';
-import SectionComponent from './components/SectionComponent';
+import Footer from './components/Footer';
+import Section from './components/Section';
 import sections from './about.json';
 import shortid from 'shortid';
 
@@ -27,11 +27,11 @@ class AboutScreen extends Component {
         return (
             <SafeAreaView style={{ flex: 1, wordWrap: 'break-word', justifyContent: 'space-between', backgroundColor: '#FEFEFE' }}>
                 <View>
-                    <SectionComponent headerTitle='Contributors' data={_redefineContributorsDataKeys(githubContributors)} />
-                    {sections.map(e => { return <SectionComponent key={shortid.generate()} headerTitle={e.headerTitle} data={e.data} /> })}
+                    <Section headerTitle='Contributors' data={_redefineContributorsDataKeys(githubContributors)} />
+                    {sections.map(e => { return <Section key={shortid.generate()} headerTitle={e.headerTitle} data={e.data} /> })}
                 </View>
 
-                <FooterComponent />
+                <Footer />
             </SafeAreaView>
         );
     };

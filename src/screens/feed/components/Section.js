@@ -1,64 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import Accordion from 'react-native-collapsible/Accordion';
 import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
 import Badge from './Badge';
+import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
+import { SectionWrapper, SectionDateWrapper, HeaderWrapper, TitleWrapper, Name, Reason } from '../StyledComponents';
 
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        padding: 10,
-        paddingLeft: 15,
-        borderWidth: 1,
-        borderColor: '#D8DADA',
-        borderRadius: 10,
-        backgroundColor: 'white'
-    },
-    name: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        paddingBottom: 2
-    },
-    reason: {
-        fontSize: 16,
-        paddingBottom: 5,
-        marginBottom: 5,
-        marginTop: 8
-    }
-});
-
-_renderHeader = activeIntimation => {
+const _renderHeader = activeIntimation => {
     return (
-        <View style={styles.container}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Text style={styles.name}>{activeIntimation.empName}</Text>
+        <HeaderWrapper>
+            <TitleWrapper>
+                <Name>{activeIntimation.empName}</Name>
                 {activeIntimation.today ? <Badge firstHalf={activeIntimation.today.firstHalf} secondHalf={activeIntimation.today.secondHalf} /> : null}
-            </View>
-            <Text style={styles.reason}>{activeIntimation.reason}</Text>
-        </View>
+            </TitleWrapper>
+            <Reason>{activeIntimation.reason}</Reason>
+        </HeaderWrapper>
     );
 };
 
-_renderContent = (activeIntimation, toggle) => {
+const _renderContent = (activeIntimation, toggle, holidaysRef) => {
     if (!toggle)
         return null;
 
     return (
         <View style={{ alignItems: 'center' }}>
             <Calendar
-                style={{
-                    width: 370,
-                    marginTop: 20,
-                    borderWidth: 1,
-                    borderColor: '#D8DADA',
-                    borderRadius: 10,
-                    paddingBottom: 15
-                }}
+                style={styles.calendar}
+                onMonthChange={e => holidaysRef.current.updateMonthYear(e.month, e.year)}
                 markedDates={activeIntimation.markedDates}
                 markingType={'multi-dot'}
                 theme={{
@@ -75,34 +45,50 @@ _renderContent = (activeIntimation, toggle) => {
                     }
                 }}
             />
+            <HolidaysContainer ref={holidaysRef} />
         </View>
     );
 };
 
-export default ({ activeIntimations, lastModified, toggle }) => {
+const Section = ({ activeIntimations, lastModified, toggle }) => {
 
     const [activeSections, setActiveSections] = useState([]);
     let _lastModified = new Date(lastModified);
 
+    const holidaysRef = useRef();
+
     return (
-        <View style={{ marginBottom: 10, justifyContent: 'center' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+        <SectionWrapper>
+            <SectionDateWrapper>
                 <StyledMonth> {MONTH_NAMES[_lastModified.getMonth()]} </StyledMonth>
                 <DateWrapper>
                     <StyledDate>{_lastModified.getDate()}</StyledDate>
                     <Ordinal>{getOrdinal(_lastModified.getDate())}</Ordinal>
                 </DateWrapper>
                 <StyledYear>, {_lastModified.getFullYear()}</StyledYear>
-            </View>
+            </SectionDateWrapper>
 
             <Accordion
                 sections={activeIntimations}
                 activeSections={activeSections}
                 renderHeader={_renderHeader}
-                renderContent={activeIntimation => _renderContent(activeIntimation, toggle)}
+                renderContent={activeIntimation => _renderContent(activeIntimation, toggle, holidaysRef)}
                 onChange={setActiveSections}
                 underlayColor={'white'}
             />
-        </View>
+        </SectionWrapper>
     );
 }
+
+const styles = StyleSheet.create({
+    calendar: {
+        width: 370,
+        marginTop: 20,
+        borderWidth: 1,
+        borderColor: '#D8DADA',
+        borderRadius: 10,
+        paddingBottom: 15
+    }
+});
+
+export default Section;
