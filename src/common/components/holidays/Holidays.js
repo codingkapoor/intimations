@@ -7,7 +7,7 @@ class Holidays extends Component {
     constructor(props) {
         super(props);
         let date = new Date();
-        this.state = { month: date.getMonth(), year: date.getFullYear() };
+        this.state = { month: date.getMonth() + 1, year: date.getFullYear() };
     }
 
     updateMonthYear = (_month, _year) => {
@@ -20,6 +20,7 @@ class Holidays extends Component {
             return (
                 <FlatList
                     data={data}
+                    style={{marginTop: 10}}
                     renderItem={({ item }) =>
                         <Holiday day={item.Day} date={item.Date} occasion={item.Occasion} />
                     }

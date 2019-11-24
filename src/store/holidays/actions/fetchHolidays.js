@@ -10,7 +10,7 @@ const _remodelHolidays = holidays => {
         let dt = new Date(holiday.date)
         let date = dt.getDate()
         let day = dt.getDay()
-        let month = dt.getMonth()
+        let month = dt.getMonth() + 1
         let year = dt.getFullYear()
         let occasion = holiday.occasion;
 
@@ -38,9 +38,11 @@ const _remodelHolidays = holidays => {
 const fetchHolidays = () => async dispatch => {
     const res = await axios.get('https://api.myjson.com/bins/jlx56');
 
+    let payload = _remodelHolidays(res.data);
+
     dispatch({
         type: FETCH_HOLIDAYS,
-        payload: _remodelHolidays(res.data)
+        payload
     });
 };
 

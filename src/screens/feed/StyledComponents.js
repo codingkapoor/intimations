@@ -66,18 +66,20 @@ export const HolidayContainer = styled.View`
     flex-direction: row; 
     align-items: center; 
     justify-content: flex-start; 
-    margin-top: 20;
+    margin-top: 10;
 `;
 
-export const DayContainer = styled.View``;
+export const DayContainer = styled.View`
+    width: 25;
+`;
 
 export const Day = styled.Text`
-    font-size: 12; 
+    font-size: 10; 
     color: #999898;
 `;
 
 export const Date = styled.Text`
-    font-size: 18; 
+    font-size: 16; 
     font-weight: bold;
 `;
 
@@ -93,5 +95,4 @@ export const OccasionContainer = styled.View`
 
 export const Occasion = styled.Text`
     color: #FFFFFF;
-    font-weight: bold;
 `;
