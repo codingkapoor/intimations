@@ -14,6 +14,7 @@ class FeedScreen extends Component {
         super(props);
         this.state = { toggle: true };
     }
+    
     componentDidMount() {
         this.props.fetchAll();
     }

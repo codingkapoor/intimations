@@ -6,7 +6,7 @@ import { BadgeColor } from '../../../common/Constants';
 
 let todayDate = new Date().toISOString().split('T')[0];
 
-const _buildToday = (request, today, markedDates) => {
+const _buildDates = (request, today, markedDates) => {
     if (request.date === todayDate) {
         today['firstHalf'] = request.firstHalf;
         today['secondHalf'] = request.secondHalf;
@@ -32,7 +32,7 @@ const _remodelActiveintimations = activeIntimations => {
 
         let today = {};
         let markedDates = {};
-        intimation.requests.map(request => _buildToday(request, today, markedDates));
+        intimation.requests.map(request => _buildDates(request, today, markedDates));
 
         if (isToday) intimation['today'] = today;
         if (isPlanned) intimation['markedDates'] = markedDates;
