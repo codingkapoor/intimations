@@ -14,11 +14,8 @@ class FeedScreen extends Component {
         super(props);
         this.state = { toggle: true };
     }
-
     componentDidMount() {
-        this.props.fetchHolidays();
-        this.props.fetchEmployeeDetails(11);
-        this.props.fetchActiveIntimations();
+        this.props.fetchAll();
     }
 
     onRefresh = () => this.props.fetchActiveIntimations();
