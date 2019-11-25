@@ -13,7 +13,7 @@ import {
   faBusinessTime,
   faIdBadge,
   faCalendarDay,
-  faPenSquare,
+  faPen,
   faInfoCircle,
   faHeart,
   faExternalLinkSquareAlt,
@@ -29,9 +29,10 @@ import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
 import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
+import EditScreen from './src/screens/edit/EditScreen';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
-  faCalendarDay, faPenSquare, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
+  faCalendarDay, faPen, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
 
 const infoFlow = createStackNavigator({
   Profile: ProfileContainer,
@@ -55,14 +56,36 @@ infoFlow.navigationOptions = ({ navigation }) => {
   };
 };
 
+const intimationsFlow = createStackNavigator({
+  Feed: FeedContainer,
+  Edit: EditScreen
+});
+
+intimationsFlow.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    title: '',
+    tabBarIcon: ({ focused }) => {
+      let i = focused ? <FontAwesomeIcon icon={'bell'} size={29} color={'#3780BE'} />
+          : <FontAwesomeIcon icon={'bell'} size={29} color={'#393939'} />
+      return i;
+  },
+    tabBarVisible
+  };
+};
+
 const AppNavigator = createBottomTabNavigator(
   {
-    Feed: FeedContainer,
+    intimationsFlow,
     Leaves: LeavesContainer,
     infoFlow
   },
   {
-    initialRouteName: "Feed",
+    initialRouteName: 'intimationsFlow',
     tabBarOptions: {
       activeTintColor: '#0977D3',
       labelStyle: {
