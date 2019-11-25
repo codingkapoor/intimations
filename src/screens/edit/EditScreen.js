@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
 import { TextInput, Text, ScrollView, Dimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import HolidaysContainer from '../../common/components/holidays/HolidaysContainer';
 
 const EditScreen = () => {
+    
+    const holidaysRef = useRef();
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
@@ -21,6 +24,8 @@ const EditScreen = () => {
                             }
                         }
                     />
+                    
+                    <HolidaysContainer ref={holidaysRef} />
 
                     <TextInput
                         style={
