@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Section from './components/Section';
 import shortid from 'shortid';
 import SwitchSelector from "react-native-switch-selector";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class FeedScreen extends Component {
     constructor(props) {
@@ -49,6 +50,11 @@ class FeedScreen extends Component {
                                 { label: "Planned ", value: "2" }
                             ]}
                         />
+                        <View style={{ position: 'absolute', top: 8, right: 20 }}>
+                            <TouchableOpacity>
+                                <FontAwesomeIcon icon={'pen'} size={22} color={'#3780BE'} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
                     {Object.keys(this.props.activeIntimations).map((key, _) => {

@@ -13,7 +13,7 @@ import {
   faBusinessTime,
   faIdBadge,
   faCalendarDay,
-  faPenSquare,
+  faPen,
   faInfoCircle,
   faHeart,
   faExternalLinkSquareAlt,
@@ -31,7 +31,7 @@ import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
-  faCalendarDay, faPenSquare, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
+  faCalendarDay, faPen, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
 
 const infoFlow = createStackNavigator({
   Profile: ProfileContainer,
