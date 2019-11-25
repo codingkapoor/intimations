@@ -34,7 +34,7 @@ class FeedScreen extends Component {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
                 <ScrollView
-                    contentContainerStyle={{ paddingBottom: 20, marginTop: 10 }}
+                    contentContainerStyle={{ paddingBottom: 20, marginTop: 20 }}
                     refreshControl={<RefreshControl progressViewOffset={20} refreshing={this.props.pullToRefresh} onRefresh={this.onRefresh} />}
                 >
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -51,7 +51,7 @@ class FeedScreen extends Component {
                             ]}
                         />
                         <View style={{ position: 'absolute', top: 8, right: 20 }}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Edit')}>
                                 <FontAwesomeIcon icon={'pen'} size={22} color={'#3780BE'} />
                             </TouchableOpacity>
                         </View>
@@ -77,12 +77,7 @@ class FeedScreen extends Component {
 }
 
 FeedScreen.navigationOptions = {
-    title: '',
-    tabBarIcon: ({ focused }) => {
-        let i = focused ? <FontAwesomeIcon icon={'bell'} size={29} color={'#3780BE'} />
-            : <FontAwesomeIcon icon={'bell'} size={29} color={'#393939'} />
-        return i;
-    }
+    header: null
 }
 
 export default FeedScreen;
