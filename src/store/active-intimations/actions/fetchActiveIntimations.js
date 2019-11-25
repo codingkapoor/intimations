@@ -6,7 +6,7 @@ import { BadgeColor } from '../../../common/Constants';
 
 let todayDate = new Date().toISOString().split('T')[0];
 
-const _buildDates = (request, today, markedDates) => {
+const _prepareTodayAndMarkedDates = (request, today, markedDates, holidays) => {
     if (request.date === todayDate) {
         today['firstHalf'] = request.firstHalf;
         today['secondHalf'] = request.secondHalf;
@@ -18,9 +18,13 @@ const _buildDates = (request, today, markedDates) => {
             { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
         ]
     };
+
+    holidays.forEach(holiday => markedDates[holiday.date] = {
+        dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
+    });
 }
 
-const _remodelActiveintimations = activeIntimations => {
+const _remodelActiveintimations = (activeIntimations, holidays) => {
     let _activeIntimations = {};
 
     const push = (intimation, isToday, isPlanned) => {
@@ -32,7 +36,7 @@ const _remodelActiveintimations = activeIntimations => {
 
         let today = {};
         let markedDates = {};
-        intimation.requests.map(request => _buildDates(request, today, markedDates));
+        intimation.requests.map(request => _prepareTodayAndMarkedDates(request, today, markedDates, holidays));
 
         if (isToday) intimation['today'] = today;
         if (isPlanned) intimation['markedDates'] = markedDates;
@@ -50,15 +54,17 @@ const _remodelActiveintimations = activeIntimations => {
     return _activeIntimations;
 }
 
-const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
+const fetchActiveIntimations = (pullToRefresh = false) => async (dispatch, getState) => {
     if (pullToRefresh) dispatch(updatePullToRefresh(pullToRefresh));
 
     const res = await platform.get(`/employees/intimations`);
     const activeIntimations = res.data;
 
+    const { holidays } = getState();
+
     dispatch({
         type: FETCH_ACTIVE_INTIMATIONS,
-        payload: _remodelActiveintimations(activeIntimations)
+        payload: _remodelActiveintimations(activeIntimations, holidays[1])
     });
 
     if (pullToRefresh) dispatch(updatePullToRefresh(!pullToRefresh));

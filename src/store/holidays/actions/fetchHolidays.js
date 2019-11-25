@@ -38,7 +38,8 @@ const _remodelHolidays = holidays => {
 const fetchHolidays = () => async dispatch => {
     const res = await axios.get('https://api.myjson.com/bins/jlx56');
 
-    let payload = _remodelHolidays(res.data);
+    let holidays = res.data;
+    let payload = [_remodelHolidays(holidays), holidays];
 
     dispatch({
         type: FETCH_HOLIDAYS,

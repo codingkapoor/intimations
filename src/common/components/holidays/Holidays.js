@@ -15,8 +15,8 @@ class Holidays extends Component {
     }
 
     render() {
-        if (this.props.holidays && this.props.holidays[this.state.year] && this.props.holidays[this.state.year][this.state.month]) {
-            let data = this.props.holidays[this.state.year][this.state.month];
+        if (this.props.holidays && this.props.holidays[0][this.state.year] && this.props.holidays[0][this.state.year][this.state.month]) {
+            let data = this.props.holidays[0][this.state.year][this.state.month];
             return (
                 <FlatList
                     data={data}
