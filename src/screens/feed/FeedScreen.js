@@ -12,9 +12,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 class FeedScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { toggle: true };
+        this.state = { toggle: false, value: 1 };
     }
-    
+
     componentDidMount() {
         this.props.fetchAll();
     }
@@ -37,8 +37,8 @@ class FeedScreen extends Component {
                 >
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                         <SwitchSelector
-                            initial={1}
-                            onPress={value => this.setState({ toggle: !this.state.toggle })}
+                            initial={0}
+                            onPress={value => (value !== this.state.value) ? this.setState({ toggle: !this.state.toggle, value }) : null}
                             buttonColor={'#3A8BCF'}
                             hasPadding
                             style={{ width: 200 }}
@@ -55,7 +55,7 @@ class FeedScreen extends Component {
                         </View>
                     </View>
 
-                    {Object.keys(this.props.activeIntimations).map((key, _) => {
+                    {Object.keys(this.props.activeIntimations).sort((a, b) => { return new Date(a) - new Date(b) }).map((key, _) => {
                         let intimations = (this.state.toggle === false) ?
                             this.props.activeIntimations[key].filter(i => i.isToday) :
                             this.props.activeIntimations[key].filter(i => i.isPlanned)
