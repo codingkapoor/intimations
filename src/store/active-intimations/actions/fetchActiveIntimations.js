@@ -4,10 +4,11 @@ import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import _ from 'lodash';
 import { BadgeColor } from '../../../common/Constants';
 
-let todayDate = new Date().toISOString().split('T')[0];
+const todayDate = new Date();
+const todayDateStr = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
 
 const _prepareTodayAndMarkedDates = (request, today, markedDates, holidays) => {
-    if (request.date === todayDate) {
+    if (request.date === todayDateStr) {
         today['firstHalf'] = request.firstHalf;
         today['secondHalf'] = request.secondHalf;
     }
@@ -46,7 +47,7 @@ const _remodelActiveintimations = (activeIntimations, holidays) => {
     }
 
     activeIntimations.forEach(intimation =>
-        intimation.requests.filter(request => request.date === todayDate).length === 0 ?
+        intimation.requests.filter(request => request.date === todayDateStr).length === 0 ?
             push(intimation, false, true) :
             (intimation.requests.length === 1) ? push(intimation, true, false) : push(intimation, true, true)
     );
@@ -57,14 +58,15 @@ const _remodelActiveintimations = (activeIntimations, holidays) => {
 const fetchActiveIntimations = (pullToRefresh = false) => async (dispatch, getState) => {
     if (pullToRefresh) dispatch(updatePullToRefresh(pullToRefresh));
 
-    const res = await platform.get(`/employees/intimations`);
-    const activeIntimations = res.data;
+    let res = await platform.get(`/employees/intimations`);
+    let activeIntimations = res.data;
 
-    const { holidays } = getState();
+    let { holidays } = getState();
+    let payload = _remodelActiveintimations(activeIntimations, holidays[1]);
 
     dispatch({
         type: FETCH_ACTIVE_INTIMATIONS,
-        payload: _remodelActiveintimations(activeIntimations, holidays[1])
+        payload
     });
 
     if (pullToRefresh) dispatch(updatePullToRefresh(!pullToRefresh));
