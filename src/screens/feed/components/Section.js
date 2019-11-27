@@ -44,6 +44,7 @@ const _renderContent = (activeIntimation, toggle, holidaysRef) => {
                         }
                     }
                 }}
+                hideExtraDays={true}
             />
             <HolidaysContainer ref={holidaysRef} />
         </View>
