@@ -44,6 +44,8 @@ const _renderContent = (activeIntimation, toggle, holidaysRef) => {
                         }
                     }
                 }}
+                onPressArrowLeft={substractMonth => substractMonth()}
+                onPressArrowRight={addMonth => addMonth()}
                 hideExtraDays={true}
             />
             <HolidaysContainer ref={holidaysRef} />
