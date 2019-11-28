@@ -2,19 +2,22 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
-export default ({ holidaysRef, activeIntimation }) => {
+export default ({ holidaysRef, activeIntimation, holidays }) => {
 
     let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
-    let firstRequest = requestDates[0];
-    let lastRequest = requestDates[requestDates.length - 1];
 
+    let firstRequest = requestDates[0];
     let firstRequestDate = new Date(firstRequest.date);
     let firstMonth = firstRequestDate.getMonth() + 1;
     let firstYear = firstRequestDate.getFullYear();
-
+    
+    let lastRequest = requestDates[requestDates.length - 1];
     let lastRequestDate = new Date(lastRequest.date);
     let lastMonth = lastRequestDate.getMonth() + 1;
     let lastYear = lastRequestDate.getFullYear();
+
+    // console.log(holidays[0][firstYear][firstMonth]);
+    console.log(activeIntimation);
 
     const onMonthChange = e => {
         if (e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth) {

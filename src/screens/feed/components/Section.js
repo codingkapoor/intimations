@@ -7,7 +7,7 @@ import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../..
 import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
 import { SectionWrapper, SectionDateWrapper, HeaderWrapper, TitleWrapper, Name, Reason } from '../StyledComponents';
 import Badge from './Badge';
-import Calendar from './Calendar';
+import CalendarContainer from './calendar/CalendarContainer';
 
 const _renderHeader = activeIntimation => {
     return (
@@ -27,7 +27,7 @@ const _renderContent = (activeIntimation, toggle, holidaysRef) => {
 
     return (
         <View style={{ alignItems: 'center' }}>
-            <Calendar holidaysRef={holidaysRef} activeIntimation={activeIntimation} />
+            <CalendarContainer holidaysRef={holidaysRef} activeIntimation={activeIntimation} />
             <HolidaysContainer ref={holidaysRef} />
         </View>
     );

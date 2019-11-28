@@ -1,31 +1,20 @@
-import platform from '../../../common/apis/platform';
-import { FETCH_ACTIVE_INTIMATIONS } from './types';
-import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import _ from 'lodash';
-import { BadgeColor } from '../../../common/Constants';
+
+import platform from '../../../common/apis/platform';
+import { updatePullToRefresh } from '../../pull-to-refresh/actions';
+import { FETCH_ACTIVE_INTIMATIONS } from './types';
 
 const todayDate = new Date();
 const todayDateStr = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
 
-const _prepareTodayAndMarkedDates = (request, today, markedDates, holidays) => {
+const _prepareTodayAndMarkedDates = (request, today) => {
     if (request.date === todayDateStr) {
         today['firstHalf'] = request.firstHalf;
         today['secondHalf'] = request.secondHalf;
     }
-
-    markedDates[request.date] = {
-        dots: [
-            { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
-            { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
-        ]
-    };
-
-    holidays.forEach(holiday => markedDates[holiday.date] = {
-        dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
-    });
 }
 
-const _remodelActiveintimations = (activeIntimations, holidays) => {
+const _remodelActiveintimations = (activeIntimations) => {
     let _activeIntimations = {};
 
     const push = (intimation, isToday, isPlanned) => {
@@ -36,11 +25,9 @@ const _remodelActiveintimations = (activeIntimations, holidays) => {
         intimation['isPlanned'] = isPlanned;
 
         let today = {};
-        let markedDates = {};
-        intimation.requests.map(request => _prepareTodayAndMarkedDates(request, today, markedDates, holidays));
+        intimation.requests.map(request => _prepareTodayAndMarkedDates(request, today));
 
         if (isToday) intimation['today'] = today;
-        if (isPlanned) intimation['markedDates'] = markedDates;
 
         _activeIntimations[lastModified].push(intimation);
         _activeIntimations[lastModified] = _.sortBy(_activeIntimations[lastModified], i => i.empName);
@@ -55,14 +42,13 @@ const _remodelActiveintimations = (activeIntimations, holidays) => {
     return _activeIntimations;
 }
 
-const fetchActiveIntimations = (pullToRefresh = false) => async (dispatch, getState) => {
+const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
     if (pullToRefresh) dispatch(updatePullToRefresh(pullToRefresh));
 
     let res = await platform.get(`/employees/intimations`);
     let activeIntimations = res.data;
 
-    let { holidays } = getState();
-    let payload = _remodelActiveintimations(activeIntimations, holidays[1]);
+    let payload = _remodelActiveintimations(activeIntimations);
 
     dispatch({
         type: FETCH_ACTIVE_INTIMATIONS,
