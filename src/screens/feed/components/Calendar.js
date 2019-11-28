@@ -3,8 +3,11 @@ import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
 export default ({ holidaysRef, activeIntimation }) => {
+    let currentMonth = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0];
+
     return (
         <Calendar
+            current={currentMonth.date}
             style={styles.calendar}
             onMonthChange={e => holidaysRef.current.updateMonthYear(e.month, e.year)}
             markedDates={activeIntimation.markedDates}
