@@ -92,10 +92,6 @@ const styles = StyleSheet.create({
     }
 });
 
-const _filterByMonthYear = (request, month, year) => {
-    let dt = new Date(request.date);
-    return dt.getMonth() + 1 === month && dt.getFullYear() === year;
-}
 
 const _getDatesMarkedAsHolidays = (holidays, month, year) => {
     let markedDates = {};
@@ -113,6 +109,11 @@ const _getDatesMarkedAsHolidays = (holidays, month, year) => {
 }
 
 const _getDatesMarkedAsRequests = (requests, month, year) => {
+    const _filterByMonthYear = (request, month, year) => {
+        let dt = new Date(request.date);
+        return dt.getMonth() + 1 === month && dt.getFullYear() === year;
+    }
+    
     let markedDates = {};
 
     requests.filter(request => _filterByMonthYear(request, month, year)).forEach(request =>
