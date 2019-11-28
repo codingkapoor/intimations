@@ -32,7 +32,7 @@ class FeedScreen extends Component {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
                 <ScrollView
-                    contentContainerStyle={{ paddingBottom: 20, marginTop: 20 }}
+                    contentContainerStyle={{ paddingBottom: 40, marginTop: 20 }}
                     refreshControl={<RefreshControl progressViewOffset={20} refreshing={this.props.pullToRefresh} onRefresh={this.onRefresh} />}
                 >
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
