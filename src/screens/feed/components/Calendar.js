@@ -6,9 +6,27 @@ export default ({ holidaysRef, activeIntimation }) => {
 
     let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
     let firstRequest = requestDates[0];
+    let lastRequest = requestDates[requestDates.length - 1];
+
+    let firstRequestDate = new Date(firstRequest.date);
+    let firstMonth = firstRequestDate.getMonth() + 1;
+    let firstYear = firstRequestDate.getFullYear();
+
+    let lastRequestDate = new Date(lastRequest.date);
+    let lastMonth = lastRequestDate.getMonth() + 1;
+    let lastYear = lastRequestDate.getFullYear();
 
     const onMonthChange = e => {
-        holidaysRef.current.updateMonthYear(e.month, e.year);
+        if (e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth) {
+            // console.log('e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth');
+            // console.log(`year: ${e.year}, firstYear: ${firstYear}, lastYear: ${lastYear}, month: ${e.month}, firstMonth: ${firstMonth}, lastMonth: ${lastMonth}`);
+            holidaysRef.current.updateMonthYear(e.month, e.year, true);
+        }
+        else {
+            // console.log('!(e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth)');
+            // console.log(`year: ${e.year}, firstYear: ${firstYear}, lastYear: ${lastYear}, month: ${e.month}, firstMonth: ${firstMonth}, lastMonth: ${lastMonth}`);
+            holidaysRef.current.updateMonthYear(e.month, e.year, false);
+        }
     }
 
     return (
