@@ -14,14 +14,48 @@ export default ({ holidays }) => {
 
     const [markedDates, setMarkedDates] = useState({});
 
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentYear = currentDate.getFullYear();
+
+    useEffect(() => {
+        setMarkedDates({
+            ..._getDatesMarkedAsHolidays(holidays, currentMonth, currentYear)
+        });
+
+        updateHolidaysMonthYear(currentMonth, currentYear, true);
+    }, []);
+
+    const onMonthChange = e => {
+        let month = e.month;
+        let year = e.year;
+
+        updateHolidaysMonthYear(month, year, true);
+
+        setMarkedDates({
+            ..._getDatesMarkedAsHolidays(holidays, month, year)
+        });
+    }
+
     return (
         <>
             <Calendar
-                current={'2019-12-01'}
                 style={styles.calendar}
-                hideExtraDays={true}
-                markedDates={{
-                    '2019-11-01': { marked: true, disabled: true, disableTouchEvent: true }
+                markedDates={markedDates}
+                onMonthChange={onMonthChange}
+                markingType={'multi-dot'}
+                theme={{
+                    'stylesheet.day.multiDot': {
+                        dot: {
+                            width: 8,
+                            height: 8,
+                            marginTop: 1,
+                            marginLeft: 1,
+                            marginRight: 1,
+                            borderRadius: 2,
+                            opacity: 0
+                        }
+                    }
                 }}
             />
 
@@ -40,3 +74,18 @@ const styles = StyleSheet.create({
         marginTop: 15
     }
 });
+
+const _getDatesMarkedAsHolidays = (holidays, month, year) => {
+    let _markedDates = {};
+
+    if (holidays && holidays[0][year] && holidays[0][year][month]) {
+        let data = holidays[0][year][month];
+        data.forEach(holiday =>
+            _markedDates[`${year}-${month}-${holiday.Date}`] = {
+                dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
+            }
+        );
+    }
+
+    return _markedDates;
+}
