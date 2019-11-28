@@ -7,7 +7,7 @@ import { FETCH_ACTIVE_INTIMATIONS } from './types';
 const todayDate = new Date();
 const todayDateStr = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
 
-const _prepareTodayAndMarkedDates = (request, today) => {
+const getHalvesForToday = (request, today) => {
     if (request.date === todayDateStr) {
         today['firstHalf'] = request.firstHalf;
         today['secondHalf'] = request.secondHalf;
@@ -25,7 +25,7 @@ const _remodelActiveintimations = (activeIntimations) => {
         intimation['isPlanned'] = isPlanned;
 
         let today = {};
-        intimation.requests.map(request => _prepareTodayAndMarkedDates(request, today));
+        intimation.requests.map(request => getHalvesForToday(request, today));
 
         if (isToday) intimation['today'] = today;
 
