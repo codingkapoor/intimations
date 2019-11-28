@@ -35,7 +35,7 @@ export default ({ activeIntimation, holidays }) => {
             );
         }
 
-        activeIntimation.requests.forEach(request =>
+        activeIntimation.requests.filter(request => _filterByMonthYear(request, firstMonth, firstYear)).forEach(request =>
             _markedDates[request.date] = {
                 dots: [
                     { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
@@ -105,3 +105,8 @@ const styles = StyleSheet.create({
         paddingBottom: 15
     }
 });
+
+const _filterByMonthYear = (request, month, year) => {
+    let dt = new Date(request.date);
+    return dt.getMonth() + 1 === month && dt.getFullYear() === year;
+}
