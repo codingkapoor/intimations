@@ -52,14 +52,12 @@ export default ({ requests, holidays }) => {
             ..._markedDates,
             ..._getDatesMarkedAsRequests(requests, month, year)
         });
-
-        console.log(_markedDates);
     }
 
     return (
         <>
             <Calendar
-                // current={firstRequest.date}
+                current={Object.keys(markedDates).sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0]}
                 style={styles.calendar}
                 onMonthChange={onMonthChange}
                 markedDates={markedDates}
