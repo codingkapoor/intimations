@@ -21,14 +21,13 @@ const _renderHeader = activeIntimation => {
     );
 };
 
-const _renderContent = (activeIntimation, toggle, holidaysRef) => {
+const _renderContent = (activeIntimation, toggle) => {
     if (!toggle)
         return null;
 
     return (
         <View style={{ alignItems: 'center' }}>
-            <CalendarContainer holidaysRef={holidaysRef} activeIntimation={activeIntimation} />
-            <HolidaysContainer ref={holidaysRef} />
+            <CalendarContainer activeIntimation={activeIntimation} />
         </View>
     );
 };
@@ -37,8 +36,6 @@ const Section = ({ activeIntimations, lastModified, toggle }) => {
 
     const [activeSections, setActiveSections] = useState([]);
     let _lastModified = new Date(lastModified);
-
-    const holidaysRef = useRef();
 
     return (
         <SectionWrapper>
@@ -55,7 +52,7 @@ const Section = ({ activeIntimations, lastModified, toggle }) => {
                 sections={activeIntimations}
                 activeSections={activeSections}
                 renderHeader={_renderHeader}
-                renderContent={activeIntimation => _renderContent(activeIntimation, toggle, holidaysRef)}
+                renderContent={activeIntimation => _renderContent(activeIntimation, toggle)}
                 onChange={setActiveSections}
                 underlayColor={'white'}
             />

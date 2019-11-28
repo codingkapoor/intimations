@@ -5,4 +5,4 @@ const mapStateToProps = ({ holidays }) => {
     return { holidays };
 };
 
-export default connect(mapStateToProps, null, null, { forwardRef: true })(Calendar);
+export default connect(mapStateToProps)(Calendar);

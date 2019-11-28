@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 
-export default ({ holidaysRef, activeIntimation, holidays }) => {
+export default ({ activeIntimation, holidays }) => {
+
+    const holidaysRef = useRef();
 
     const [markedDates, setMarkedDates] = useState({});
 
@@ -31,6 +34,8 @@ export default ({ holidaysRef, activeIntimation, holidays }) => {
 
             setMarkedDates(_markedDates);
         }
+
+        holidaysRef.current.updateMonthYear(firstMonth, firstYear, true);
     }, []);
 
     // console.log(holidays[0][firstYear][firstMonth]);
@@ -50,28 +55,32 @@ export default ({ holidaysRef, activeIntimation, holidays }) => {
         }
     }
 
+
     return (
-        <Calendar
-            current={firstRequest.date}
-            style={styles.calendar}
-            onMonthChange={onMonthChange}
-            markedDates={markedDates}
-            markingType={'multi-dot'}
-            theme={{
-                'stylesheet.day.multiDot': {
-                    dot: {
-                        width: 8,
-                        height: 8,
-                        marginTop: 1,
-                        marginLeft: 1,
-                        marginRight: 1,
-                        borderRadius: 2,
-                        opacity: 0
+        <>
+            <Calendar
+                current={firstRequest.date}
+                style={styles.calendar}
+                onMonthChange={onMonthChange}
+                markedDates={markedDates}
+                markingType={'multi-dot'}
+                theme={{
+                    'stylesheet.day.multiDot': {
+                        dot: {
+                            width: 8,
+                            height: 8,
+                            marginTop: 1,
+                            marginLeft: 1,
+                            marginRight: 1,
+                            borderRadius: 2,
+                            opacity: 0
+                        }
                     }
-                }
-            }}
-            hideExtraDays={true}
-        />
+                }}
+                hideExtraDays={true}
+            />
+            <HolidaysContainer ref={holidaysRef} />
+        </>
     );
 }
 
