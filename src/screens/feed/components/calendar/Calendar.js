@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
 export default ({ holidaysRef, activeIntimation, holidays }) => {
+
+    const [markedDates, setMarkedDates] = useState({});
 
     let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
 
@@ -10,14 +12,30 @@ export default ({ holidaysRef, activeIntimation, holidays }) => {
     let firstRequestDate = new Date(firstRequest.date);
     let firstMonth = firstRequestDate.getMonth() + 1;
     let firstYear = firstRequestDate.getFullYear();
-    
+
     let lastRequest = requestDates[requestDates.length - 1];
     let lastRequestDate = new Date(lastRequest.date);
     let lastMonth = lastRequestDate.getMonth() + 1;
     let lastYear = lastRequestDate.getFullYear();
 
+    useEffect(() => {
+        if (holidays && holidays[0][firstYear] && holidays[0][firstYear][firstMonth]) {
+            let data = holidays[0][firstYear][firstMonth];
+            let _markedDates = {};
+
+            data.forEach(holiday =>
+                _markedDates[`${firstYear}-${firstMonth}-${holiday.Date}`] = {
+                    dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
+                }
+            );
+
+            setMarkedDates(_markedDates);
+        }
+    }, []);
+
     // console.log(holidays[0][firstYear][firstMonth]);
-    console.log(activeIntimation);
+    // console.log(activeIntimation);
+    // console.log(markedDates);
 
     const onMonthChange = e => {
         if (e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth) {
@@ -37,7 +55,7 @@ export default ({ holidaysRef, activeIntimation, holidays }) => {
             current={firstRequest.date}
             style={styles.calendar}
             onMonthChange={onMonthChange}
-            markedDates={activeIntimation.markedDates}
+            markedDates={markedDates}
             markingType={'multi-dot'}
             theme={{
                 'stylesheet.day.multiDot': {
