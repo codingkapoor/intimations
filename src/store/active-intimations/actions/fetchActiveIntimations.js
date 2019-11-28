@@ -1,30 +1,20 @@
-import platform from '../../../common/apis/platform';
-import { FETCH_ACTIVE_INTIMATIONS } from './types';
-import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import _ from 'lodash';
-import { BadgeColor } from '../../../common/Constants';
 
-let todayDate = new Date().toISOString().split('T')[0];
+import platform from '../../../common/apis/platform';
+import { updatePullToRefresh } from '../../pull-to-refresh/actions';
+import { FETCH_ACTIVE_INTIMATIONS } from './types';
 
-const _prepareTodayAndMarkedDates = (request, today, markedDates, holidays) => {
-    if (request.date === todayDate) {
+const todayDate = new Date();
+const todayDateStr = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
+
+const _getHalvesForToday = (request, today) => {
+    if (request.date === todayDateStr) {
         today['firstHalf'] = request.firstHalf;
         today['secondHalf'] = request.secondHalf;
     }
-
-    markedDates[request.date] = {
-        dots: [
-            { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
-            { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
-        ]
-    };
-
-    holidays.forEach(holiday => markedDates[holiday.date] = {
-        dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
-    });
 }
 
-const _remodelActiveintimations = (activeIntimations, holidays) => {
+const _remodelActiveintimations = (activeIntimations) => {
     let _activeIntimations = {};
 
     const push = (intimation, isToday, isPlanned) => {
@@ -35,18 +25,16 @@ const _remodelActiveintimations = (activeIntimations, holidays) => {
         intimation['isPlanned'] = isPlanned;
 
         let today = {};
-        let markedDates = {};
-        intimation.requests.map(request => _prepareTodayAndMarkedDates(request, today, markedDates, holidays));
+        intimation.requests.map(request => _getHalvesForToday(request, today));
 
         if (isToday) intimation['today'] = today;
-        if (isPlanned) intimation['markedDates'] = markedDates;
 
         _activeIntimations[lastModified].push(intimation);
         _activeIntimations[lastModified] = _.sortBy(_activeIntimations[lastModified], i => i.empName);
     }
 
     activeIntimations.forEach(intimation =>
-        intimation.requests.filter(request => request.date === todayDate).length === 0 ?
+        intimation.requests.filter(request => request.date === todayDateStr).length === 0 ?
             push(intimation, false, true) :
             (intimation.requests.length === 1) ? push(intimation, true, false) : push(intimation, true, true)
     );
@@ -54,17 +42,17 @@ const _remodelActiveintimations = (activeIntimations, holidays) => {
     return _activeIntimations;
 }
 
-const fetchActiveIntimations = (pullToRefresh = false) => async (dispatch, getState) => {
+const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
     if (pullToRefresh) dispatch(updatePullToRefresh(pullToRefresh));
 
-    const res = await platform.get(`/employees/intimations`);
-    const activeIntimations = res.data;
+    let res = await platform.get(`/employees/intimations`);
+    let activeIntimations = res.data;
 
-    const { holidays } = getState();
+    let payload = _remodelActiveintimations(activeIntimations);
 
     dispatch({
         type: FETCH_ACTIVE_INTIMATIONS,
-        payload: _remodelActiveintimations(activeIntimations, holidays[1])
+        payload
     });
 
     if (pullToRefresh) dispatch(updatePullToRefresh(!pullToRefresh));

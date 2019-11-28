@@ -16,7 +16,7 @@ const _remodelHolidays = holidays => {
 
         let v = {};
         v['Day'] = WEEK_NAMES[day];
-        v['Date'] = date;
+        v['Date'] = `${date.toString().padStart(2, "0")}`;
         v['Occasion'] = occasion;
 
         if (_holidays[year]) {
@@ -36,7 +36,7 @@ const _remodelHolidays = holidays => {
 }
 
 const fetchHolidays = () => async dispatch => {
-    const res = await axios.get('https://api.myjson.com/bins/jlx56');
+    const res = await axios.get('https://api.myjson.com/bins/1en0qa');
 
     let holidays = res.data;
     let payload = [_remodelHolidays(holidays), holidays];
