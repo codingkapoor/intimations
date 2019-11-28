@@ -6,7 +6,9 @@ import { BadgeColor } from '../../../../common/Constants';
 
 export default ({ requests, holidays }) => {
 
-    const holidaysRef = useRef(); const updateHolidaysMonthYear = (month, year, show) => {
+    const holidaysRef = useRef();
+
+    const updateHolidaysMonthYear = (month, year, show) => {
         holidaysRef.current.updateMonthYear(month, year, show);
     }
 
@@ -33,27 +35,29 @@ export default ({ requests, holidays }) => {
         updateHolidaysMonthYear(firstMonth, firstYear, true);
     }, []);
 
-    // console.log(holidays[0][firstYear][firstMonth]);
-    // console.log(activeIntimation);
-    // console.log(markedDates);
-
     const onMonthChange = e => {
-        if (e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth) {
-            // console.log('e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth');
-            // console.log(`year: ${e.year}, firstYear: ${firstYear}, lastYear: ${lastYear}, month: ${e.month}, firstMonth: ${firstMonth}, lastMonth: ${lastMonth}`);
-            updateHolidaysMonthYear(e.month, e.year, true);
+        let month = e.month;
+        let year = e.year;
+
+        let markedDates = {};
+
+        if (year >= firstYear && year <= lastYear && month >= firstMonth && month <= lastMonth) {
+            markedDates = { ...markedDates, ..._getDatesMarkedAsHolidays(holidays, month, year) }
+            updateHolidaysMonthYear(month, year, true);
         }
-        else {
-            // console.log('!(e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth)');
-            // console.log(`year: ${e.year}, firstYear: ${firstYear}, lastYear: ${lastYear}, month: ${e.month}, firstMonth: ${firstMonth}, lastMonth: ${lastMonth}`);
-            updateHolidaysMonthYear(e.month, e.year, false);
-        }
+        else
+            updateHolidaysMonthYear(month, year, false);
+
+        setMarkedDates({
+            ...markedDates,
+            ..._getDatesMarkedAsRequests(requests, month, year)
+        });
     }
 
     return (
         <>
             <Calendar
-                current={firstRequest.date}
+                // current={firstRequest.date}
                 style={styles.calendar}
                 onMonthChange={onMonthChange}
                 markedDates={markedDates}
@@ -71,7 +75,6 @@ export default ({ requests, holidays }) => {
                         }
                     }
                 }}
-                hideExtraDays={true}
             />
             <HolidaysContainer ref={holidaysRef} />
         </>
