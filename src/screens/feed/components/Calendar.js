@@ -3,13 +3,19 @@ import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
 export default ({ holidaysRef, activeIntimation }) => {
-    let currentMonth = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0];
+
+    let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+    let firstRequest = requestDates[0];
+
+    const onMonthChange = e => {
+        holidaysRef.current.updateMonthYear(e.month, e.year);
+    }
 
     return (
         <Calendar
-            current={currentMonth.date}
+            current={firstRequest.date}
             style={styles.calendar}
-            onMonthChange={e => holidaysRef.current.updateMonthYear(e.month, e.year)}
+            onMonthChange={onMonthChange}
             markedDates={activeIntimation.markedDates}
             markingType={'multi-dot'}
             theme={{
@@ -25,8 +31,6 @@ export default ({ holidaysRef, activeIntimation }) => {
                     }
                 }
             }}
-            onPressArrowLeft={substractMonth => substractMonth()}
-            onPressArrowRight={addMonth => addMonth()}
             hideExtraDays={true}
         />
     );
