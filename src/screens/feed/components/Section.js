@@ -26,7 +26,7 @@ const _renderContent = (activeIntimation, toggle) => {
 
     return (
         <View style={{ alignItems: 'center' }}>
-            <CalendarContainer activeIntimation={activeIntimation} />
+            <CalendarContainer requests={activeIntimation.requests} />
         </View>
     );
 };

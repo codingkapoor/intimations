@@ -4,13 +4,13 @@ import { Calendar } from 'react-native-calendars';
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { BadgeColor } from '../../../../common/Constants';
 
-export default ({ activeIntimation, holidays }) => {
+export default ({ requests, holidays }) => {
 
     const holidaysRef = useRef();
 
     const [markedDates, setMarkedDates] = useState({});
 
-    let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+    let requestDates = requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
 
     let firstRequest = requestDates[0];
     let firstRequestDate = new Date(firstRequest.date);
@@ -25,17 +25,9 @@ export default ({ activeIntimation, holidays }) => {
     useEffect(() => {
         let _markedDates = {};
 
-        if (holidays && holidays[0][firstYear] && holidays[0][firstYear][firstMonth]) {
+        _markedDates = { ...markedDates, ..._getDatesMarkedAsHolidays(holidays, firstMonth, firstYear) };
 
-            let data = holidays[0][firstYear][firstMonth];
-            data.forEach(holiday =>
-                _markedDates[`${firstYear}-${firstMonth}-${holiday.Date}`] = {
-                    dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
-                }
-            );
-        }
-
-        activeIntimation.requests.filter(request => _filterByMonthYear(request, firstMonth, firstYear)).forEach(request =>
+        requests.filter(request => _filterByMonthYear(request, firstMonth, firstYear)).forEach(request =>
             _markedDates[request.date] = {
                 dots: [
                     { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
@@ -65,7 +57,6 @@ export default ({ activeIntimation, holidays }) => {
             holidaysRef.current.updateMonthYear(e.month, e.year, false);
         }
     }
-
 
     return (
         <>
@@ -109,4 +100,19 @@ const styles = StyleSheet.create({
 const _filterByMonthYear = (request, month, year) => {
     let dt = new Date(request.date);
     return dt.getMonth() + 1 === month && dt.getFullYear() === year;
+}
+
+const _getDatesMarkedAsHolidays = (holidays, month, year) => {
+    let markedDates = {};
+
+    if (holidays && holidays[0][year] && holidays[0][year][month]) {
+        let data = holidays[0][year][month];
+        data.forEach(holiday =>
+            markedDates[`${year}-${month}-${holiday.Date}`] = {
+                dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
+            }
+        );
+    }
+
+    return markedDates;
 }
