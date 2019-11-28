@@ -39,19 +39,21 @@ export default ({ requests, holidays }) => {
         let month = e.month;
         let year = e.year;
 
-        let markedDates = {};
+        let _markedDates = {};
 
         if (year >= firstYear && year <= lastYear && month >= firstMonth && month <= lastMonth) {
-            markedDates = { ...markedDates, ..._getDatesMarkedAsHolidays(holidays, month, year) }
+            _markedDates = { ..._markedDates, ..._getDatesMarkedAsHolidays(holidays, month, year) }
             updateHolidaysMonthYear(month, year, true);
         }
         else
             updateHolidaysMonthYear(month, year, false);
 
         setMarkedDates({
-            ...markedDates,
+            ..._markedDates,
             ..._getDatesMarkedAsRequests(requests, month, year)
         });
+
+        console.log(_markedDates);
     }
 
     return (
@@ -94,18 +96,18 @@ const styles = StyleSheet.create({
 
 
 const _getDatesMarkedAsHolidays = (holidays, month, year) => {
-    let markedDates = {};
+    let _markedDates = {};
 
     if (holidays && holidays[0][year] && holidays[0][year][month]) {
         let data = holidays[0][year][month];
         data.forEach(holiday =>
-            markedDates[`${year}-${month}-${holiday.Date}`] = {
+            _markedDates[`${year}-${month}-${holiday.Date}`] = {
                 dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
             }
         );
     }
 
-    return markedDates;
+    return _markedDates;
 }
 
 const _getDatesMarkedAsRequests = (requests, month, year) => {
@@ -113,11 +115,11 @@ const _getDatesMarkedAsRequests = (requests, month, year) => {
         let dt = new Date(request.date);
         return dt.getMonth() + 1 === month && dt.getFullYear() === year;
     }
-    
-    let markedDates = {};
+
+    let _markedDates = {};
 
     requests.filter(request => _filterByMonthYear(request, month, year)).forEach(request =>
-        markedDates[request.date] = {
+        _markedDates[request.date] = {
             dots: [
                 { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
                 { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
@@ -125,5 +127,5 @@ const _getDatesMarkedAsRequests = (requests, month, year) => {
         }
     );
 
-    return markedDates;
+    return _markedDates;
 }
