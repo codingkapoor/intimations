@@ -6,7 +6,9 @@ import { BadgeColor } from '../../../../common/Constants';
 
 export default ({ requests, holidays }) => {
 
-    const holidaysRef = useRef();
+    const holidaysRef = useRef(); const updateHolidaysMonthYear = (month, year, show) => {
+        holidaysRef.current.updateMonthYear(month, year, show);
+    }
 
     const [markedDates, setMarkedDates] = useState({});
 
@@ -23,17 +25,12 @@ export default ({ requests, holidays }) => {
     let lastYear = lastRequestDate.getFullYear();
 
     useEffect(() => {
-        let _markedDates = {};
-
-        _markedDates = {
-            ...markedDates,
+        setMarkedDates({
             ..._getDatesMarkedAsHolidays(holidays, firstMonth, firstYear),
             ..._getDatesMarkedAsRequests(requests, firstMonth, firstYear)
-        };
+        });
 
-        setMarkedDates(_markedDates);
-
-        holidaysRef.current.updateMonthYear(firstMonth, firstYear, true);
+        updateHolidaysMonthYear(firstMonth, firstYear, true);
     }, []);
 
     // console.log(holidays[0][firstYear][firstMonth]);
@@ -44,12 +41,12 @@ export default ({ requests, holidays }) => {
         if (e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth) {
             // console.log('e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth');
             // console.log(`year: ${e.year}, firstYear: ${firstYear}, lastYear: ${lastYear}, month: ${e.month}, firstMonth: ${firstMonth}, lastMonth: ${lastMonth}`);
-            holidaysRef.current.updateMonthYear(e.month, e.year, true);
+            updateHolidaysMonthYear(e.month, e.year, true);
         }
         else {
             // console.log('!(e.year >= firstYear && e.year <= lastYear && e.month >= firstMonth && e.month <= lastMonth)');
             // console.log(`year: ${e.year}, firstYear: ${firstYear}, lastYear: ${lastYear}, month: ${e.month}, firstMonth: ${firstMonth}, lastMonth: ${lastMonth}`);
-            holidaysRef.current.updateMonthYear(e.month, e.year, false);
+            updateHolidaysMonthYear(e.month, e.year, false);
         }
     }
 
