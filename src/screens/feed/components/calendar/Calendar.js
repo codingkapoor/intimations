@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     }
 });
 
-
 const _getDatesMarkedAsHolidays = (holidays, month, year) => {
     let _markedDates = {};
 

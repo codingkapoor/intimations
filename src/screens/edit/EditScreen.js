@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import HolidaysContainer from '../../common/components/holidays/HolidaysContainer';
 import SwitchSelector from "react-native-switch-selector";
+import { Reason } from './StyledComponents';
 
 const EditScreen = () => {
 
@@ -13,7 +14,7 @@ const EditScreen = () => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
             <ScrollView style={{ flex: 1, paddingTop: 0 }}>
-                <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <SwitchSelector
                         initial={1}
                         // onPress={value => this.setState({ toggle: !this.state.toggle })}
@@ -28,8 +29,7 @@ const EditScreen = () => {
                         ]}
                     />
                     <Calendar
-                      current={'2019-12-01'}
-
+                        current={'2019-12-01'}
                         style={
                             {
                                 width: 370,
@@ -42,33 +42,17 @@ const EditScreen = () => {
                         }
                         hideExtraDays={true}
                         markedDates={{
-                            '2019-11-01': {marked: true, disabled: true, disableTouchEvent: true}
-                          }}
+                            '2019-11-01': { marked: true, disabled: true, disableTouchEvent: true }
+                        }}
                     />
 
                     <HolidaysContainer ref={holidaysRef} />
 
-                    <TextInput
-                        style={
-                            {
-                                width: 370,
-                                height: 100,
-                                borderColor: 'gray',
-                                borderRadius: 10,
-                                borderColor: '#D8DADA',
-                                borderWidth: 1,
-                                marginTop: 30,
-                                padding: 5,
-                                paddingLeft: 12,
-                                color: '#595959',
-                                fontSize: 16
-                            }
-                        }
+                    <Reason
                         placeholder='Reason...'
                         multiline
                         textAlignVertical={'top'}
-                    >
-                    </TextInput>
+                    />
 
                     <TouchableOpacity
                         style={
