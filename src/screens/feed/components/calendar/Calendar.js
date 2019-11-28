@@ -25,16 +25,11 @@ export default ({ requests, holidays }) => {
     useEffect(() => {
         let _markedDates = {};
 
-        _markedDates = { ...markedDates, ..._getDatesMarkedAsHolidays(holidays, firstMonth, firstYear) };
-
-        requests.filter(request => _filterByMonthYear(request, firstMonth, firstYear)).forEach(request =>
-            _markedDates[request.date] = {
-                dots: [
-                    { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
-                    { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
-                ]
-            }
-        );
+        _markedDates = {
+            ...markedDates,
+            ..._getDatesMarkedAsHolidays(holidays, firstMonth, firstYear),
+            ..._getDatesMarkedAsRequests(requests, firstMonth, firstYear)
+        };
 
         setMarkedDates(_markedDates);
 
@@ -113,6 +108,21 @@ const _getDatesMarkedAsHolidays = (holidays, month, year) => {
             }
         );
     }
+
+    return markedDates;
+}
+
+const _getDatesMarkedAsRequests = (requests, month, year) => {
+    let markedDates = {};
+
+    requests.filter(request => _filterByMonthYear(request, month, year)).forEach(request =>
+        markedDates[request.date] = {
+            dots: [
+                { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
+                { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
+            ]
+        }
+    );
 
     return markedDates;
 }
