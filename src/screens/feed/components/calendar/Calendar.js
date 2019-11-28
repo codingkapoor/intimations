@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
+import { BadgeColor } from '../../../../common/Constants';
 
 export default ({ activeIntimation, holidays }) => {
 
@@ -22,18 +23,28 @@ export default ({ activeIntimation, holidays }) => {
     let lastYear = lastRequestDate.getFullYear();
 
     useEffect(() => {
-        if (holidays && holidays[0][firstYear] && holidays[0][firstYear][firstMonth]) {
-            let data = holidays[0][firstYear][firstMonth];
-            let _markedDates = {};
+        let _markedDates = {};
 
+        if (holidays && holidays[0][firstYear] && holidays[0][firstYear][firstMonth]) {
+
+            let data = holidays[0][firstYear][firstMonth];
             data.forEach(holiday =>
                 _markedDates[`${firstYear}-${firstMonth}-${holiday.Date}`] = {
                     dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
                 }
             );
-
-            setMarkedDates(_markedDates);
         }
+
+        activeIntimation.requests.forEach(request =>
+            _markedDates[request.date] = {
+                dots: [
+                    { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
+                    { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
+                ]
+            }
+        );
+
+        setMarkedDates(_markedDates);
 
         holidaysRef.current.updateMonthYear(firstMonth, firstYear, true);
     }, []);

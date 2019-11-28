@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 
 import { MONTH_NAMES, getOrdinal } from '../../../common/utils/dates';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../../common/StyledComponents';
-import HolidaysContainer from '../../../common/components/holidays/HolidaysContainer';
 import { SectionWrapper, SectionDateWrapper, HeaderWrapper, TitleWrapper, Name, Reason } from '../StyledComponents';
 import Badge from './Badge';
 import CalendarContainer from './calendar/CalendarContainer';
