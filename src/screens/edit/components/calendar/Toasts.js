@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Toast from 'react-native-root-toast';
 
 const TOASTS = {
