@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchActiveIntimations } from '../../store/active-intimations/actions';
+import { fetchActiveIntimations } from '../../store/intimations/active-intimations/actions';
 import { fetchAll } from '../../store/actions';
 ;import FeedScreen from './FeedScreen';
 
