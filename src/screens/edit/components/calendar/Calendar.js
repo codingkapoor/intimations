@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
 import { StyleSheet } from 'react-native';
-import moment from 'moment';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { BadgeColor } from '../../../../common/Constants';
@@ -49,7 +48,7 @@ export default ({ requests, holidays }) => {
     }
 
     const onDayPress = e => {
-        if (moment(e.dateString).format('l') < moment().format('l')) {
+        if (new Date(e.dateString) < new Date(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`)) {
             setShowToast(CREATE);
             setToastVisibility();
         }
