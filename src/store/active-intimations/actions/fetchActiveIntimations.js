@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import platform from '../../../../common/apis/platform';
-import { updatePullToRefresh } from '../../../pull-to-refresh/actions';
+import platform from '../../../common/apis/platform';
+import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import { FETCH_ACTIVE_INTIMATIONS } from './types';
 
 const todayDate = new Date();

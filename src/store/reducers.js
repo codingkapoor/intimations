@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import { employeeDetailsReducer } from './employee-details/reducers';
 import { githubContributorsReducer } from './github-contributors/reducers';
 import { pullToRefreshReducer } from './pull-to-refresh/reducers';
-import { activeIntimationsReducer } from './intimations/active-intimations/reducers';
+import { activeIntimationsReducer } from './active-intimations/reducers';
+import { inactiveIntimationsReducer } from './inactive-intimations/reducers';
 import { holidaysReducer } from './holidays/reducers';
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
     githubContributors: githubContributorsReducer,
     pullToRefresh: pullToRefreshReducer,
     activeIntimations: activeIntimationsReducer,
+    inactiveIntimations: inactiveIntimationsReducer,
     holidays: holidaysReducer
 });
