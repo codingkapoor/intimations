@@ -5,15 +5,14 @@ import HolidaysContainer from '../../../../common/components/holidays/HolidaysCo
 import { BadgeColor } from '../../../../common/Constants';
 
 export default ({ requests, holidays }) => {
+    
+    const [markedDates, setMarkedDates] = useState({});
 
     const holidaysRef = useRef();
-
     const updateHolidaysMonthYear = (month, year, show) => {
         holidaysRef.current.updateMonthYear(month, year, show);
     }
-
-    const [markedDates, setMarkedDates] = useState({});
-
+    
     let requestDates = requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
 
     let firstRequest = requestDates[0];
