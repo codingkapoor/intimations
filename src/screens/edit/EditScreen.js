@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, ScrollView, Dimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -7,7 +7,12 @@ import SwitchSelector from "react-native-switch-selector";
 import CalendarContainer from './components/calendar/CalendarContainer';
 import { Reason } from './StyledComponents';
 
-const EditScreen = () => {
+const EditScreen = ({ inactiveIntimations, fetchInactiveIntimations }) => {
+
+    useEffect(() => {
+        fetchInactiveIntimations();
+    }, []);
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
             <ScrollView style={{ flex: 1, paddingTop: 0 }}>

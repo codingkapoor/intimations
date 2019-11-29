@@ -29,7 +29,7 @@ import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
 import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
-import EditScreen from './src/screens/edit/EditScreen';
+import EditContainer from './src/screens/edit/EditContainer';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
   faCalendarDay, faPen, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
@@ -58,7 +58,7 @@ infoFlow.navigationOptions = ({ navigation }) => {
 
 const intimationsFlow = createStackNavigator({
   Feed: FeedContainer,
-  Edit: EditScreen
+  Edit: EditContainer
 });
 
 intimationsFlow.navigationOptions = ({ navigation }) => {
