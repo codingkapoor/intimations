@@ -1,27 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
 import { StyleSheet } from 'react-native';
-import Toast from 'react-native-root-toast';
 import moment from 'moment';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { BadgeColor } from '../../../../common/Constants';
+import Toasts, { CREATE } from './Toasts';
 
 export default ({ requests, holidays }) => {
-
-    const holidaysRef = useRef();
-
-    const updateHolidaysMonthYear = (month, year, show) => {
-        holidaysRef.current.updateMonthYear(month, year, show);
-    }
-
-    const [markedDates, setMarkedDates] = useState({});
-
-    const [showToast, setShowToast] = useState(false);
 
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
+
+    const [markedDates, setMarkedDates] = useState({});
+
+    const [showToast, setShowToast] = useState(null);
+    const [visible, setVisible] = useState(false);
+    const setToastVisibility = () => {
+        setTimeout(() => setVisible(true), 500);
+        setTimeout(() => setVisible(false), 5000);
+    }
+
+    const holidaysRef = useRef();
+    const updateHolidaysMonthYear = (month, year, show) => {
+        holidaysRef.current.updateMonthYear(month, year, show);
+    }
 
     useEffect(() => {
         setMarkedDates({
@@ -46,8 +50,8 @@ export default ({ requests, holidays }) => {
 
     const onDayPress = e => {
         if (moment(e.dateString).format('l') < moment().format('l')) {
-            setTimeout(() => setShowToast(true), 500);
-            setTimeout(() => setShowToast(false), 5000);
+            setShowToast(CREATE);
+            setToastVisibility();
         }
     }
 
@@ -76,25 +80,10 @@ export default ({ requests, holidays }) => {
 
             <HolidaysContainer ref={holidaysRef} />
 
-            <Toast
-                visible={showToast}
-                position={-30}
-                opacity={1}
-                backgroundColor={'#E70000'}
-                shadow={true}
-                animation={false}
-                hideOnPress={false}
-            >
-                {TOASTS['Create']}
-            </Toast>
+            <Toasts showToast={showToast} visible={visible} />
         </>
     );
 }
-
-const TOASTS = {
-    Create: "Intimations can't be created for dates in the past. Please select dates in present or from future.",
-    Update: "Intimations in the past can't be modified. Please select dates in present or from future."
-};
 
 const styles = StyleSheet.create({
     calendar: {
