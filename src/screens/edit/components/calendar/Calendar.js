@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
 import { StyleSheet } from 'react-native';
+import Toast from 'react-native-root-toast';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 
@@ -13,6 +14,8 @@ export default ({ holidays }) => {
     }
 
     const [markedDates, setMarkedDates] = useState({});
+
+    // const [showToast, setShowToast]
 
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth() + 1;
@@ -43,6 +46,7 @@ export default ({ holidays }) => {
                 style={styles.calendar}
                 markedDates={markedDates}
                 onMonthChange={onMonthChange}
+                onDayPress={e => alert(e)}
                 markingType={'multi-dot'}
                 theme={{
                     'stylesheet.day.multiDot': {
@@ -60,6 +64,14 @@ export default ({ holidays }) => {
             />
 
             <HolidaysContainer ref={holidaysRef} />
+
+            <Toast
+                visible={true}
+                position={50}
+                shadow={false}
+                animation={false}
+                hideOnPress={true}
+            >Intimations can't be composed of dates in the past.</Toast>
         </>
     );
 }
