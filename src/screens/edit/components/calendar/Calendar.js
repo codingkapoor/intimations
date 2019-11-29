@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
 import { StyleSheet } from 'react-native';
 import Toast from 'react-native-root-toast';
+import moment from 'moment';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 
@@ -15,7 +16,7 @@ export default ({ holidays }) => {
 
     const [markedDates, setMarkedDates] = useState({});
 
-    // const [showToast, setShowToast]
+    const [showToast, setShowToast] = useState(false);
 
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth() + 1;
@@ -40,13 +41,20 @@ export default ({ holidays }) => {
         });
     }
 
+    const onDayPress = e => {
+        if (moment(e.dateString).format('l') < moment().format('l')) {
+            setTimeout(() => setShowToast(true), 500);
+            setTimeout(() => setShowToast(false), 5000);
+        }
+    }
+
     return (
         <>
             <Calendar
                 style={styles.calendar}
                 markedDates={markedDates}
                 onMonthChange={onMonthChange}
-                onDayPress={e => alert(e)}
+                onDayPress={onDayPress}
                 markingType={'multi-dot'}
                 theme={{
                     'stylesheet.day.multiDot': {
@@ -66,15 +74,24 @@ export default ({ holidays }) => {
             <HolidaysContainer ref={holidaysRef} />
 
             <Toast
-                visible={true}
-                position={50}
-                shadow={false}
+                visible={showToast}
+                position={-30}
+                opacity={1}
+                backgroundColor={'#E70000'}
+                shadow={true}
                 animation={false}
-                hideOnPress={true}
-            >Intimations can't be composed of dates in the past.</Toast>
+                hideOnPress={false}
+            >
+                {TOASTS['Create']}
+            </Toast>
         </>
     );
 }
+
+const TOASTS = {
+    Create: "Intimations can't be created for dates in the past. Please select dates in present or from future.",
+    Update: "Intimations in the past can't be modified. Please select dates in present or from future."
+};
 
 const styles = StyleSheet.create({
     calendar: {
