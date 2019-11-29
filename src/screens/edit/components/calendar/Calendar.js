@@ -5,8 +5,9 @@ import Toast from 'react-native-root-toast';
 import moment from 'moment';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
+import { BadgeColor } from '../../../../common/Constants';
 
-export default ({ holidays }) => {
+export default ({ requests, holidays }) => {
 
     const holidaysRef = useRef();
 
@@ -24,7 +25,8 @@ export default ({ holidays }) => {
 
     useEffect(() => {
         setMarkedDates({
-            ..._getDatesMarkedAsHolidays(holidays, currentMonth, currentYear)
+            ..._getDatesMarkedAsHolidays(holidays, currentMonth, currentYear),
+            ..._getDatesMarkedAsRequests(requests, currentMonth, currentYear)
         });
 
         updateHolidaysMonthYear(currentMonth, currentYear, true);
@@ -37,7 +39,8 @@ export default ({ holidays }) => {
         updateHolidaysMonthYear(month, year, true);
 
         setMarkedDates({
-            ..._getDatesMarkedAsHolidays(holidays, month, year)
+            ..._getDatesMarkedAsHolidays(holidays, month, year),
+            ..._getDatesMarkedAsRequests(requests, month, year)
         });
     }
 
@@ -115,6 +118,26 @@ const _getDatesMarkedAsHolidays = (holidays, month, year) => {
             }
         );
     }
+
+    return _markedDates;
+}
+
+const _getDatesMarkedAsRequests = (requests, month, year) => {
+    const _filterByMonthYear = (request, month, year) => {
+        let dt = new Date(request.date);
+        return dt.getMonth() + 1 === month && dt.getFullYear() === year;
+    }
+
+    let _markedDates = {};
+
+    requests.filter(request => _filterByMonthYear(request, month, year)).forEach(request =>
+        _markedDates[request.date] = {
+            dots: [
+                { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
+                { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
+            ]
+        }
+    );
 
     return _markedDates;
 }

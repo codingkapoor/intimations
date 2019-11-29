@@ -30,7 +30,7 @@ const EditScreen = ({ inactiveIntimations, fetchInactiveIntimations }) => {
                         ]}
                     />
 
-                    <CalendarContainer />
+                    <CalendarContainer requests={inactiveIntimations.map(ii => ii.requests).flatMap(i => i)} />
 
                     <Reason
                         placeholder='Reason...'
