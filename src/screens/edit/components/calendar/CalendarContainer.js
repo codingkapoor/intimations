@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import Calendar from './Calendar';
 
-const mapStateToProps = ({ holidays, stageIntimation }) => {
-    return { holidays, stageIntimation };
+const mapStateToProps = ({ holidays }) => {
+    return { holidays };
 };
 
 export default connect(mapStateToProps)(Calendar);

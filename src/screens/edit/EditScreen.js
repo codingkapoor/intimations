@@ -7,7 +7,7 @@ import SwitchSelector from "react-native-switch-selector";
 import CalendarContainer from './components/calendar/CalendarContainer';
 import { Reason } from './StyledComponents';
 
-const EditScreen = ({ inactiveIntimations, fetchInactiveIntimations }) => {
+const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimations }) => {
 
     useEffect(() => {
         fetchInactiveIntimations();
@@ -30,7 +30,10 @@ const EditScreen = ({ inactiveIntimations, fetchInactiveIntimations }) => {
                         ]}
                     />
 
-                    <CalendarContainer requests={inactiveIntimations.map(ii => ii.requests).flatMap(i => i)} />
+                    <CalendarContainer
+                        requests={inactiveIntimations.map(ii => ii.requests).flatMap(i => i)}
+                        stageIntimation={stageIntimation}
+                    />
 
                     <Reason
                         placeholder='Reason...'
