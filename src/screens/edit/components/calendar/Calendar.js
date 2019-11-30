@@ -6,7 +6,7 @@ import HolidaysContainer from '../../../../common/components/holidays/HolidaysCo
 import { BadgeColor } from '../../../../common/Constants';
 import Toasts, { CREATE, ALREADY5, WEEKENDS } from './Toasts';
 
-export default ({ requests, holidays }) => {
+export default ({ requests, holidays, stageIntimation }) => {
 
     let currentDate = new Date(new Date().toISOString().split('T')[0]);
     let currentMonth = currentDate.getMonth() + 1;
@@ -26,10 +26,13 @@ export default ({ requests, holidays }) => {
         holidaysRef.current.updateMonthYear(month, year, show);
     }
 
+    let stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
+
     useEffect(() => {
         setMarkedDates({
             ..._getDatesMarkedAsHolidays(holidays, currentMonth, currentYear),
-            ..._getDatesMarkedAsRequests(requests, currentMonth, currentYear)
+            ..._getDatesMarkedAsRequests(requests, currentMonth, currentYear),
+            ..._getDatesMarkedAsRequests(stageRequests, currentMonth, currentYear)
         });
 
         updateHolidaysMonthYear(currentMonth, currentYear, true);
@@ -43,14 +46,15 @@ export default ({ requests, holidays }) => {
 
         setMarkedDates({
             ..._getDatesMarkedAsHolidays(holidays, month, year),
-            ..._getDatesMarkedAsRequests(requests, month, year)
+            ..._getDatesMarkedAsRequests(requests, month, year),
+            ..._getDatesMarkedAsRequests(stageRequests, month, year)
         });
     }
 
     const onDayPress = e => {
         let datePressed = new Date(e.dateString);
 
-        if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
+        if (datePressed.getDay() === 0 || datePressed.getDay() === 6) {
             setShowToast(WEEKENDS);
             setToastVisibility();
         } else if (datePressed < currentDate) {
