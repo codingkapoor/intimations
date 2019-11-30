@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { ScrollView, RefreshControl, View, Text } from 'react-native';
+import { ScrollView, RefreshControl, View } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
-import { SpinnerWrapper } from '../../common/StyledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Section from './components/Section';
 import shortid from 'shortid';
 import SwitchSelector from "react-native-switch-selector";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { SpinnerWrapper } from '../../common/StyledComponents';
+import Section from './components/Section';
 
 class FeedScreen extends Component {
     constructor(props) {
