@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
-import { StyleSheet, Vibration } from 'react-native';
+import { Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import Toasts, { CREATE, ALREADY5, WEEKENDS } from './Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
+import Styles from '../../Styles';
 
 export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
 
@@ -89,7 +90,7 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
         <>
             <Calendar
                 current={Object.keys(markedDates).sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0]}
-                style={styles.calendar}
+                style={Styles.calendar}
                 markedDates={markedDates}
                 onMonthChange={onMonthChange}
                 onDayPress={onDayPress}
@@ -116,14 +117,3 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
         </>
     );
 }
-
-const styles = StyleSheet.create({
-    calendar: {
-        width: 370,
-        borderWidth: 1,
-        borderColor: '#D8DADA',
-        borderRadius: 10,
-        paddingBottom: 15,
-        marginTop: 15
-    }
-});

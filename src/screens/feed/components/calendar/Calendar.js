@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
+import Styles from '../../Styles';
 
 export default ({ requests, holidays }) => {
-    
+
     const [markedDates, setMarkedDates] = useState({});
 
     const holidaysRef = useRef();
     const updateHolidaysMonthYear = (month, year, show) => {
         holidaysRef.current.updateMonthYear(month, year, show);
     }
-    
+
     let requestDates = requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
 
     let firstRequest = requestDates[0];
@@ -57,7 +58,7 @@ export default ({ requests, holidays }) => {
         <>
             <Calendar
                 current={Object.keys(markedDates).sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0]}
-                style={styles.calendar}
+                style={Styles.calendar}
                 onMonthChange={onMonthChange}
                 markedDates={markedDates}
                 markingType={'multi-dot'}
@@ -75,19 +76,8 @@ export default ({ requests, holidays }) => {
                     }
                 }}
             />
-            
+
             <HolidaysContainer ref={holidaysRef} />
         </>
     );
 }
-
-const styles = StyleSheet.create({
-    calendar: {
-        width: 370,
-        marginTop: 20,
-        borderWidth: 1,
-        borderColor: '#D8DADA',
-        borderRadius: 10,
-        paddingBottom: 15
-    }
-});
