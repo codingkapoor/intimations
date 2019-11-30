@@ -7,11 +7,18 @@ import SwitchSelector from "react-native-switch-selector";
 import CalendarContainer from './components/calendar/CalendarContainer';
 import { Reason } from './StyledComponents';
 
-const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimations }) => {
+const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
 
     useEffect(() => {
         fetchInactiveIntimations();
     }, []);
+
+    const _onChangeText = text => {
+        updateStageIntimation({
+            'reason': text,
+            'requests': stageIntimation.requests
+        });
+    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
@@ -39,6 +46,8 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimat
                         placeholder='Reason...'
                         multiline
                         textAlignVertical={'top'}
+                        value={stageIntimation.reason ? stageIntimation.reason : ''}
+                        onChangeText={_onChangeText}
                     />
 
                     <TouchableOpacity

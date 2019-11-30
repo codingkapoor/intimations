@@ -1,4 +1,4 @@
-import { CHECKOUT } from '../actions/types';
+import { CHECKOUT, UPDATE } from '../actions/types';
 
 const stageIntimationReducer = (stageIntimation = {}, { type, payload }) => {
     if (type === CHECKOUT || type === UPDATE)
