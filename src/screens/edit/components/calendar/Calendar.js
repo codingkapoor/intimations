@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { BadgeColor } from '../../../../common/Constants';
@@ -83,6 +83,7 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
                 markedDates={markedDates}
                 onMonthChange={onMonthChange}
                 onDayPress={onDayPress}
+                onDayLongPress={day => Vibration.vibrate()}
                 markingType={'multi-dot'}
                 theme={{
                     'stylesheet.day.multiDot': {
