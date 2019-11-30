@@ -6,11 +6,7 @@ import HolidaysContainer from '../../../../common/components/holidays/HolidaysCo
 import { BadgeColor } from '../../../../common/Constants';
 import Toasts, { CREATE, ALREADY5, WEEKENDS } from './Toasts';
 
-export default ({ requests, holidays, stageIntimation }) => {
-
-    let currentDate = new Date(new Date().toISOString().split('T')[0]);
-    let currentMonth = currentDate.getMonth() + 1;
-    let currentYear = currentDate.getFullYear();
+export default ({ inactiveRequests, holidays, stageRequests }) => {
 
     const [markedDates, setMarkedDates] = useState({});
 
@@ -26,16 +22,29 @@ export default ({ requests, holidays, stageIntimation }) => {
         holidaysRef.current.updateMonthYear(month, year, show);
     }
 
-    let stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
+    let currentDate = new Date(new Date().toISOString().split('T')[0]);
+
+    let firstMonth = currentDate.getMonth() + 1;
+    let firstYear = currentDate.getFullYear();
+
+    if (stageRequests.length > 0) {
+        let requestDates = stageRequests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+
+        let firstRequest = requestDates[0];
+        let firstRequestDate = new Date(firstRequest.date);
+
+        firstMonth = firstRequestDate.getMonth() + 1;
+        firstYear = firstRequestDate.getFullYear();
+    }
 
     useEffect(() => {
         setMarkedDates({
-            ..._getDatesMarkedAsHolidays(holidays, currentMonth, currentYear),
-            ..._getDatesMarkedAsRequests(requests, currentMonth, currentYear),
-            ..._getDatesMarkedAsRequests(stageRequests, currentMonth, currentYear)
+            ..._getDatesMarkedAsHolidays(holidays, firstMonth, firstYear),
+            ..._getDatesMarkedAsRequests(inactiveRequests, firstMonth, firstYear),
+            ..._getDatesMarkedAsRequests(stageRequests, firstMonth, firstYear)
         });
 
-        updateHolidaysMonthYear(currentMonth, currentYear, true);
+        updateHolidaysMonthYear(firstMonth, firstYear, true);
     }, []);
 
     const onMonthChange = e => {
@@ -46,7 +55,7 @@ export default ({ requests, holidays, stageIntimation }) => {
 
         setMarkedDates({
             ..._getDatesMarkedAsHolidays(holidays, month, year),
-            ..._getDatesMarkedAsRequests(requests, month, year),
+            ..._getDatesMarkedAsRequests(inactiveRequests, month, year),
             ..._getDatesMarkedAsRequests(stageRequests, month, year)
         });
     }
@@ -69,6 +78,7 @@ export default ({ requests, holidays, stageIntimation }) => {
     return (
         <>
             <Calendar
+                current={Object.keys(markedDates).sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0]}
                 style={styles.calendar}
                 markedDates={markedDates}
                 onMonthChange={onMonthChange}

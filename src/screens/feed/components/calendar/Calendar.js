@@ -75,6 +75,7 @@ export default ({ requests, holidays }) => {
                     }
                 }}
             />
+            
             <HolidaysContainer ref={holidaysRef} />
         </>
     );

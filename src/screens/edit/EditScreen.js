@@ -38,8 +38,8 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimat
                     />
 
                     <CalendarContainer
-                        requests={inactiveIntimations.map(ii => ii.requests).flatMap(i => i)}
-                        stageIntimation={stageIntimation}
+                        inactiveRequests={inactiveIntimations.map(ii => ii.requests).flatMap(i => i)}
+                        stageRequests={stageIntimation.requests ? stageIntimation.requests : []}
                     />
 
                     <Reason
