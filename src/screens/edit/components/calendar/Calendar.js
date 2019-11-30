@@ -3,8 +3,8 @@ import { Calendar } from 'react-native-calendars';
 import { StyleSheet, Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
-import { BadgeColor } from '../../../../common/Constants';
 import Toasts, { CREATE, ALREADY5, WEEKENDS } from './Toasts';
+import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 
 export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
 
@@ -16,6 +16,8 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
         setTimeout(() => setVisible(true), 500);
         setTimeout(() => setVisible(false), 5000);
     }
+
+    const [incompleteRequests, setIncompleteRequests] = useState([]);
 
     const holidaysRef = useRef();
     const updateHolidaysMonthYear = (month, year, show) => {
@@ -73,6 +75,10 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
             setShowToast(ALREADY5);
             setToastVisibility();
         }
+
+        // if (incompleteRequests.filter(i => i === datePressed).length > 0) {
+
+        // }
     }
 
     const onDayLongPress = day => {
@@ -121,38 +127,3 @@ const styles = StyleSheet.create({
         marginTop: 15
     }
 });
-
-const _getDatesMarkedAsHolidays = (holidays, month, year) => {
-    let _markedDates = {};
-
-    if (holidays && holidays[0][year] && holidays[0][year][month]) {
-        let data = holidays[0][year][month];
-        data.forEach(holiday =>
-            _markedDates[`${year}-${month}-${holiday.Date}`] = {
-                dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
-            }
-        );
-    }
-
-    return _markedDates;
-}
-
-const _getDatesMarkedAsRequests = (requests, month, year) => {
-    const _filterByMonthYear = (request, month, year) => {
-        let dt = new Date(request.date);
-        return dt.getMonth() + 1 === month && dt.getFullYear() === year;
-    }
-
-    let _markedDates = {};
-
-    requests.filter(request => _filterByMonthYear(request, month, year)).forEach(request =>
-        _markedDates[request.date] = {
-            dots: [
-                { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
-                { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
-            ]
-        }
-    );
-
-    return _markedDates;
-}
