@@ -3,6 +3,7 @@ import _ from 'lodash';
 import platform from '../../../common/apis/platform';
 import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import { FETCH_ACTIVE_INTIMATIONS } from './types';
+import checkoutFromActiveIntimation from '../../stage-intimation/actions/checkoutFromActiveIntimation';
 
 const todayDate = new Date();
 const todayDateStr = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
@@ -14,7 +15,7 @@ const _getHalvesForToday = (request, today) => {
     }
 }
 
-const _remodelActiveintimations = (activeIntimations) => {
+const _remodelActiveIntimations = activeIntimations => {
     let _activeIntimations = {};
 
     const push = (intimation, isToday, isPlanned) => {
@@ -48,12 +49,16 @@ const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
     let res = await platform.get(`/employees/intimations`);
     let activeIntimations = res.data;
 
-    let payload = _remodelActiveintimations(activeIntimations);
+    let payload = _remodelActiveIntimations(activeIntimations);
 
     dispatch({
         type: FETCH_ACTIVE_INTIMATIONS,
         payload
     });
+
+    let filterRes = activeIntimations.filter(i => i.empId === 127);
+    let loggedInUsersActiveIntimation = filterRes.length > 0 ? filterRes[0] : {};
+    dispatch(checkoutFromActiveIntimation(loggedInUsersActiveIntimation));
 
     if (pullToRefresh) dispatch(updatePullToRefresh(!pullToRefresh));
 };
