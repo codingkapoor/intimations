@@ -9,6 +9,8 @@ import Styles from '../../Styles';
 
 export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
 
+    console.log(toggleValue);
+
     const [markedDates, setMarkedDates] = useState({});
 
     const [showToast, setShowToast] = useState(null);

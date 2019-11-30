@@ -6,11 +6,11 @@ import SwitchSelector from "react-native-switch-selector";
 
 import CalendarContainer from './components/calendar/CalendarContainer';
 import { Reason } from './StyledComponents';
-import { OFFICE, WFH, LEAVE } from './toggleValues';
+import { ToggleValue } from './Constants';
 
 const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
 
-    const [toggleValue, setToggleValue] = useState(WFH);
+    const [toggleValue, setToggleValue] = useState(ToggleValue.WFH);
 
     useEffect(() => {
         fetchInactiveIntimations();
@@ -35,9 +35,9 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimat
                         style={{ width: 250, marginBottom: 10 }}
                         height={38}
                         options={[
-                            { label: 'Office ', value: OFFICE },
-                            { label: 'WFH ', value: WFH },
-                            { label: 'Leave ', value: LEAVE }
+                            { label: 'Office ', value: ToggleValue.OFFICE },
+                            { label: 'WFH ', value: ToggleValue.WFH },
+                            { label: 'Leave ', value: ToggleValue.LEAVE }
                         ]}
                     />
 
