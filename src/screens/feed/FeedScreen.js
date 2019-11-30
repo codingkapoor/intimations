@@ -22,7 +22,7 @@ class FeedScreen extends Component {
     onRefresh = () => this.props.fetchActiveIntimations();
 
     render() {
-        if (!this.props.activeIntimations || this.props.activeIntimations.length === 0)
+        if (!this.props.activeIntimations[0] || this.props.activeIntimations[0].length === 0)
             return (
                 <SpinnerWrapper>
                     <WaveIndicator color='#000000' />
@@ -55,10 +55,10 @@ class FeedScreen extends Component {
                         </View>
                     </View>
 
-                    {Object.keys(this.props.activeIntimations).sort((a, b) => { return new Date(a) - new Date(b) }).map((key, _) => {
+                    {Object.keys(this.props.activeIntimations[0]).sort((a, b) => { return new Date(a) - new Date(b) }).map((key, _) => {
                         let intimations = (this.state.toggle === false) ?
-                            this.props.activeIntimations[key].filter(i => i.isToday) :
-                            this.props.activeIntimations[key].filter(i => i.isPlanned)
+                            this.props.activeIntimations[0][key].filter(i => i.isToday) :
+                            this.props.activeIntimations[0][key].filter(i => i.isPlanned)
 
                         return (intimations.length > 0) ?
                             <Section key={shortid.generate()}

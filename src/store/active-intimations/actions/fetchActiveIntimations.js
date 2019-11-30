@@ -49,16 +49,12 @@ const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
     let res = await platform.get(`/employees/intimations`);
     let activeIntimations = res.data;
 
-    let payload = _remodelActiveIntimations(activeIntimations);
+    let payload = [_remodelActiveIntimations(activeIntimations), activeIntimations];
 
     dispatch({
         type: FETCH_ACTIVE_INTIMATIONS,
         payload
     });
-
-    let filterRes = activeIntimations.filter(i => i.empId === 127);
-    let loggedInUsersActiveIntimation = filterRes.length > 0 ? filterRes[0] : {};
-    dispatch(checkoutFromActiveIntimation(loggedInUsersActiveIntimation));
 
     if (pullToRefresh) dispatch(updatePullToRefresh(!pullToRefresh));
 };
