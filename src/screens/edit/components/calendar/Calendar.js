@@ -4,11 +4,11 @@ import { StyleSheet } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { BadgeColor } from '../../../../common/Constants';
-import Toasts, { CREATE, ALREADY5 } from './Toasts';
+import Toasts, { CREATE, ALREADY5, WEEKENDS } from './Toasts';
 
 export default ({ requests, holidays }) => {
 
-    let currentDate = new Date();
+    let currentDate = new Date(new Date().toISOString().split('T')[0]);
     let currentMonth = currentDate.getMonth() + 1;
     let currentYear = currentDate.getFullYear();
 
@@ -49,13 +49,17 @@ export default ({ requests, holidays }) => {
 
     const onDayPress = e => {
         let datePressed = new Date(e.dateString);
-        
-        if (datePressed < currentDate)
-            setShowToast(CREATE);
-        else if (datePressed === currentDate && currentDate.getHours() >= 5)
-            setShowToast(ALREADY5);
 
-        setToastVisibility();
+        if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
+            setShowToast(WEEKENDS);
+            setToastVisibility();
+        } else if (datePressed < currentDate) {
+            setShowToast(CREATE);
+            setToastVisibility();
+        } else if (datePressed === currentDate && currentDate.getHours() >= 17) {
+            setShowToast(ALREADY5);
+            setToastVisibility();
+        }
     }
 
     return (
