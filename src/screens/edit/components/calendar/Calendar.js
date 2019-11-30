@@ -6,7 +6,7 @@ import HolidaysContainer from '../../../../common/components/holidays/HolidaysCo
 import { BadgeColor } from '../../../../common/Constants';
 import Toasts, { CREATE, ALREADY5, WEEKENDS } from './Toasts';
 
-export default ({ inactiveRequests, holidays, stageRequests }) => {
+export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
 
     const [markedDates, setMarkedDates] = useState({});
 
