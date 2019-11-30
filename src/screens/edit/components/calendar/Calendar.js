@@ -75,6 +75,10 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
         }
     }
 
+    const onDayLongPress = day => {
+        Vibration.vibrate();
+    }
+
     return (
         <>
             <Calendar
@@ -83,7 +87,7 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
                 markedDates={markedDates}
                 onMonthChange={onMonthChange}
                 onDayPress={onDayPress}
-                onDayLongPress={day => Vibration.vibrate()}
+                onDayLongPress={onDayLongPress}
                 markingType={'multi-dot'}
                 theme={{
                     'stylesheet.day.multiDot': {
