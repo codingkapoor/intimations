@@ -11,8 +11,6 @@ const checkoutFromActiveIntimation = () => (dispatch, getState) => {
     stageIntimation['reason'] = loggedInUsersActiveIntimation.reason;
     stageIntimation['requests'] = loggedInUsersActiveIntimation.requests;
 
-    console.log(stageIntimation);
-
     dispatch({
         type: CHECKOUT,
         payload: stageIntimation
