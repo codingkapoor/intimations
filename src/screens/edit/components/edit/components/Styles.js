@@ -6,7 +6,7 @@ export default Styles = StyleSheet.create({
         backgroundColor: '#2282D3',
         padding: 17,
         width: 180,
-        borderRadius: 3,
+        borderRadius: 5,
         marginTop: 30,
         marginBottom: 20
     },
@@ -20,7 +20,7 @@ export default Styles = StyleSheet.create({
         backgroundColor: '#2282D3',
         padding: 17,
         width: 180,
-        borderRadius: 3,
+        borderRadius: 5,
         marginTop: 30,
         marginBottom: 20
     },
@@ -34,7 +34,7 @@ export default Styles = StyleSheet.create({
         backgroundColor: '#2282D3',
         padding: 17,
         width: 180,
-        borderRadius: 3,
+        borderRadius: 5,
         marginBottom: 20
     },
     cancel: {
