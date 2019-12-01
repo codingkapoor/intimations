@@ -4,8 +4,8 @@ export default Styles = StyleSheet.create({
     createWrapper: {
         alignItems: 'center',
         backgroundColor: '#2282D3',
-        padding: 20,
-        width: 200,
+        padding: 17,
+        width: 180,
         borderRadius: 3,
         marginTop: 30,
         marginBottom: 20
@@ -18,8 +18,8 @@ export default Styles = StyleSheet.create({
     updateWrapper: {
         alignItems: 'center',
         backgroundColor: '#2282D3',
-        padding: 20,
-        width: 200,
+        padding: 17,
+        width: 180,
         borderRadius: 3,
         marginTop: 30,
         marginBottom: 20
@@ -28,12 +28,12 @@ export default Styles = StyleSheet.create({
         color: 'white',
         fontSize: 16
     },
-    
+
     cancelWrapper: {
         alignItems: 'center',
         backgroundColor: '#2282D3',
-        padding: 20,
-        width: 200,
+        padding: 17,
+        width: 180,
         borderRadius: 3,
         marginBottom: 20
     },

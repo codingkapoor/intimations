@@ -89,8 +89,8 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
                             {
                                 alignItems: 'center',
                                 backgroundColor: '#3A8BCF',
-                                padding: 20,
-                                width: 200,
+                                padding: 17,
+                                width: 180,
                                 borderRadius: 5,
                                 marginTop: 80,
                                 marginBottom: 20
