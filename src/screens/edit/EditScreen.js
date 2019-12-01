@@ -6,7 +6,7 @@ import SwitchSelector from "react-native-switch-selector";
 import CalendarContainer from './components/calendar/CalendarContainer';
 import { Reason } from './StyledComponents';
 import { ToggleValue } from './Constants';
-import Edit from './components/Edit';
+import EditContainer from './components/edit/EditContainer';
 
 const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
 
@@ -54,7 +54,7 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimat
                         onChangeText={_onChangeText}
                     />
 
-                    <Edit />
+                    <EditContainer />
                 </View>
             </ScrollView>
         </SafeAreaView>

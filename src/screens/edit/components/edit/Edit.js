@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 
-export default () => {
+export default ({ stageIntimation }) => {
     return (
         <TouchableOpacity
             style={
