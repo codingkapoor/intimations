@@ -31,7 +31,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
     let firstMonth = currentDate.getMonth() + 1;
     let firstYear = currentDate.getFullYear();
 
-    stagedReason = stageIntimation.reason ? stageIntimation.reason : '';
+    stageReason = stageIntimation.reason ? stageIntimation.reason : '';
     stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
 
     if (stageRequests.length > 0) {
@@ -67,16 +67,16 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         });
     }
 
-    const _updateStageIntimation = (stagedReason, requests) => {
+    const _updateStageIntimation = (stageReason, requests) => {
         updateStageIntimation({
-            'reason': stagedReason,
+            'reason': stageReason,
             'requests': requests
         });
     }
 
-    const _removeFromStagedIntimationRequests = datePressed => {
+    const _removeFromStageIntimationRequests = datePressed => {
         let requests = stageRequests.filter(i => i.date !== datePressed);
-        _updateStageIntimation(stagedReason, requests);
+        _updateStageIntimation(stageReason, requests);
     }
 
     const onDayPress = e => {
@@ -101,19 +101,19 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
                     let requests = stageRequests.filter(i => i.date !== e.dateString);
                     requests.push(req);
 
-                    _updateStageIntimation(stagedReason, requests);
+                    _updateStageIntimation(stageReason, requests);
 
                     setIncompleteRequest({});
 
                     if (incompleteRequest.firstHalf === 'WFO' && toggleValue === 'WFO')
-                        setTimeout(() => { _removeFromStagedIntimationRequests(e.dateString) }, 500);
+                        setTimeout(() => { _removeFromStageIntimationRequests(e.dateString) }, 500);
                 }
             } else {
                 let req = { 'date': e.dateString, 'firstHalf': toggleValue, 'secondHalf': 'None' };
                 let requests = stageRequests.filter(i => i.date !== e.dateString);
                 requests.push(req);
 
-                _updateStageIntimation(stagedReason, requests);
+                _updateStageIntimation(stageReason, requests);
                 
                 setIncompleteRequest(req);
             }
@@ -123,7 +123,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
     const onDayLongPress = e => {
         if (stageRequests.filter(r => r.date === e.dateString).length > 0) {
             Vibration.vibrate();
-            _removeFromStagedIntimationRequests(e.dateString);
+            _removeFromStageIntimationRequests(e.dateString);
         }
     }
 
