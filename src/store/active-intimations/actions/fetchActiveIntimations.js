@@ -3,7 +3,6 @@ import _ from 'lodash';
 import platform from '../../../common/apis/platform';
 import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import { FETCH_ACTIVE_INTIMATIONS } from './types';
-import checkoutFromActiveIntimation from '../../stage-intimation/actions/checkoutFromActiveIntimation';
 
 const todayDate = new Date();
 const todayDateStr = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;

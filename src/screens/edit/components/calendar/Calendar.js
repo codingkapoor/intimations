@@ -31,6 +31,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
     let firstMonth = currentDate.getMonth() + 1;
     let firstYear = currentDate.getFullYear();
 
+    stagedReason = stageIntimation.reason ? stageIntimation.reason : '';
     stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
 
     if (stageRequests.length > 0) {
@@ -66,13 +67,16 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         });
     }
 
-    const _removeFromStagedIntimationRequests = datePressed => {
-        let requests = stageIntimation.requests.filter(i => i.date !== datePressed);
-
+    const _updateStageIntimation = (stagedReason, requests) => {
         updateStageIntimation({
-            'reason': stageIntimation.reason,
+            'reason': stagedReason,
             'requests': requests
         });
+    }
+
+    const _removeFromStagedIntimationRequests = datePressed => {
+        let requests = stageRequests.filter(i => i.date !== datePressed);
+        _updateStageIntimation(stagedReason, requests);
     }
 
     const onDayPress = e => {
@@ -94,13 +98,10 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
                     setToastVisibility();
                 } else {
                     let req = { 'date': incompleteRequest.date, 'firstHalf': incompleteRequest.firstHalf, 'secondHalf': toggleValue };
-                    let requests = stageIntimation.requests.filter(i => i.date !== e.dateString);
+                    let requests = stageRequests.filter(i => i.date !== e.dateString);
                     requests.push(req);
 
-                    updateStageIntimation({
-                        'reason': stageIntimation.reason,
-                        'requests': requests
-                    });
+                    _updateStageIntimation(stagedReason, requests);
 
                     setIncompleteRequest({});
 
@@ -109,14 +110,11 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
                 }
             } else {
                 let req = { 'date': e.dateString, 'firstHalf': toggleValue, 'secondHalf': 'None' };
-                let requests = stageIntimation.requests.filter(i => i.date !== e.dateString);
+                let requests = stageRequests.filter(i => i.date !== e.dateString);
                 requests.push(req);
 
-                updateStageIntimation({
-                    'reason': stageIntimation.reason,
-                    'requests': requests
-                });
-
+                _updateStageIntimation(stagedReason, requests);
+                
                 setIncompleteRequest(req);
             }
         }
