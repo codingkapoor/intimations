@@ -3,13 +3,12 @@ import { Calendar } from 'react-native-calendars';
 import { Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
-import Toasts, { CREATE, ALREADY5, WEEKENDS } from './Toasts';
+import Toasts, { CREATE, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from './Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from '../../Styles';
 
-export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
-
-    console.log(toggleValue);
+export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntimation, toggleValue }) => {
+    console.log(stageIntimation);
 
     const [markedDates, setMarkedDates] = useState({});
 
@@ -20,7 +19,7 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
         setTimeout(() => setVisible(false), 5000);
     }
 
-    const [incompleteRequests, setIncompleteRequests] = useState([]);
+    const [incompleteRequest, setIncompleteRequest] = useState({});
 
     const holidaysRef = useRef();
     const updateHolidaysMonthYear = (month, year, show) => {
@@ -31,6 +30,8 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
 
     let firstMonth = currentDate.getMonth() + 1;
     let firstYear = currentDate.getFullYear();
+
+    stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
 
     if (stageRequests.length > 0) {
         let requestDates = stageRequests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
@@ -50,7 +51,7 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
         });
 
         updateHolidaysMonthYear(firstMonth, firstYear, true);
-    }, []);
+    }, [stageIntimation]);
 
     const onMonthChange = e => {
         let month = e.month;
@@ -77,15 +78,47 @@ export default ({ inactiveRequests, holidays, stageRequests, toggleValue }) => {
         } else if (datePressed === currentDate && currentDate.getHours() >= 17) {
             setShowToast(ALREADY5);
             setToastVisibility();
+        } else {
+            if (incompleteRequest.date) {
+                if (e.dateString !== incompleteRequest.date) {
+                    setShowToast(INCOMPLETE_REQUEST);
+                    setToastVisibility();
+                } else {
+                    let req = { 'date': incompleteRequest.date, 'firstHalf': incompleteRequest.firstHalf, 'secondHalf': toggleValue };
+                    let requests = stageIntimation.requests.filter(i => i.date !== e.dateString);
+                    requests.push(req);
+
+                    updateStageIntimation({
+                        'reason': stageIntimation.reason,
+                        'requests': requests
+                    });
+
+                    setIncompleteRequest({});
+                }
+            } else {
+                let req = { 'date': e.dateString, 'firstHalf': toggleValue, 'secondHalf': 'None' };
+                let requests = stageIntimation.requests.filter(i => i.date !== e.dateString);
+                requests.push(req);
+
+                updateStageIntimation({
+                    'reason': stageIntimation.reason,
+                    'requests': requests
+                });
+
+                setIncompleteRequest(req);
+            }
         }
-
-        // if (incompleteRequests.filter(i => i === datePressed).length > 0) {
-
-        // }
     }
 
-    const onDayLongPress = day => {
+    const onDayLongPress = e => {
         Vibration.vibrate();
+
+        let requests = stageIntimation.requests.filter(i => i.date !== e.dateString);
+
+        updateStageIntimation({
+            'reason': stageIntimation.reason,
+            'requests': requests
+        });
     }
 
     return (

@@ -1,5 +1,5 @@
 export const ToggleValue = {
-    OFFICE: 'OFFICE',
+    OFFICE: 'WFO',
     WFH: 'WFH',
-    LEAVE: 'LEAVE'
+    LEAVE: 'Leave'
 };
