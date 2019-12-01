@@ -3,12 +3,11 @@ import { Calendar } from 'react-native-calendars';
 import { Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
-import Toasts, { CREATE, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from './Toasts';
+import Toasts, { CREATE, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from '../../Styles';
 
 export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntimation, toggleValue }) => {
-    console.log(stageIntimation);
 
     const [markedDates, setMarkedDates] = useState({});
 
