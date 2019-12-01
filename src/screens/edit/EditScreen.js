@@ -16,10 +16,12 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimat
         fetchInactiveIntimations();
     }, []);
 
+    stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
+
     const _onChangeText = text => {
         updateStageIntimation({
             'reason': text,
-            'requests': stageIntimation.requests
+            'requests': stageRequests
         });
     }
 
