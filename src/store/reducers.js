@@ -5,6 +5,8 @@ import { pullToRefreshReducer } from './pull-to-refresh/reducers';
 import { activeIntimationsReducer } from './active-intimations/reducers';
 import { inactiveIntimationsReducer } from './inactive-intimations/reducers';
 import { stageIntimationReducer } from './stage-intimation/reducers';
+import { stageIntimationIncompleteRequestReducer } from './stage-intimation-incomplete-request/reducers';
+import { stageIntimationIsDirtyReducer } from './stage-intimation-is-dirty/reducers';
 import { holidaysReducer } from './holidays/reducers';
 
 export default combineReducers({
@@ -14,5 +16,7 @@ export default combineReducers({
     activeIntimations: activeIntimationsReducer,
     inactiveIntimations: inactiveIntimationsReducer,
     stageIntimation: stageIntimationReducer,
+    stageIntimationIncompleteRequest: stageIntimationIncompleteRequestReducer,
+    stageIntimationIsDirty: stageIntimationIsDirtyReducer,
     holidays: holidaysReducer
 });
