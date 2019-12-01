@@ -123,8 +123,10 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
     }
 
     const onDayLongPress = e => {
-        Vibration.vibrate();
-        _removeFromStagedIntimationRequests(e.dateString);
+        if (stageRequests.filter(r => r.date === e.dateString).length > 0) {
+            Vibration.vibrate();
+            _removeFromStagedIntimationRequests(e.dateString);
+        }
     }
 
     return (
