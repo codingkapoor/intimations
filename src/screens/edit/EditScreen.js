@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Text, ScrollView, Dimensions, View } from 'react-native';
+import { ScrollView, Dimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import SwitchSelector from "react-native-switch-selector";
 
 import CalendarContainer from './components/calendar/CalendarContainer';
 import { Reason } from './StyledComponents';
 import { ToggleValue } from './Constants';
+import Edit from './components/Edit';
 
 const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
 
@@ -54,21 +54,7 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimat
                         onChangeText={_onChangeText}
                     />
 
-                    <TouchableOpacity
-                        style={
-                            {
-                                alignItems: 'center',
-                                backgroundColor: '#2282D3',
-                                padding: 20,
-                                width: 200,
-                                borderRadius: 3,
-                                marginTop: 30,
-                                marginBottom: 20
-                            }
-                        }
-                    >
-                        <Text style={{ color: 'white', fontSize: 16 }}>Create</Text>
-                    </TouchableOpacity>
+                    <Edit />
                 </View>
             </ScrollView>
         </SafeAreaView>
