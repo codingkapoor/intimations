@@ -4,7 +4,7 @@ import Styles from '../Styles';
 
 export default ({ stageIntimationIsDirty }) => {
     return (
-        <TouchableOpacity style={Styles.cancelWrapper}>
+        <TouchableOpacity disabled={stageIntimationIsDirty} style={Styles.cancelWrapper}>
             <Text style={Styles.cancel}>Cancel</Text>
         </TouchableOpacity>
     );

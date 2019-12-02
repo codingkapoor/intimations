@@ -4,7 +4,7 @@ import Styles from '../Styles';
 
 export default ({ stageIntimationIncompleteRequest, stageIntimationIsDirty }) => {
     return (
-        <TouchableOpacity style={Styles.updateWrapper}>
+        <TouchableOpacity disabled={!stageIntimationIsDirty} style={Styles.updateWrapper}>
             <Text style={Styles.udpate}>Update</Text>
         </TouchableOpacity>
     );

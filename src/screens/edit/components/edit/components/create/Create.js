@@ -4,7 +4,7 @@ import Styles from '../Styles';
 
 export default ({ stageIntimationIncompleteRequest, stageIntimationIsDirty }) => {
     return (
-        <TouchableOpacity style={Styles.createWrapper}>
+        <TouchableOpacity disabled={!stageIntimationIsDirty} style={Styles.createWrapper}>
             <Text style={Styles.create}>Create</Text>
         </TouchableOpacity>
     );
