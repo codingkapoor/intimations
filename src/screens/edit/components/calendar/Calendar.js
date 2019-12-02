@@ -8,7 +8,7 @@ import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../.
 import Styles from './Styles';
 
 export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntimation, toggleValue,
-    stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, setStageIntimationIsDirty }) => {
+    stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest }) => {
 
     const [markedDates, setMarkedDates] = useState({});
 
@@ -18,8 +18,6 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         setTimeout(() => setVisible(true), 500);
         setTimeout(() => setVisible(false), 5000);
     }
-
-    const [incompleteRequest, setIncompleteRequest] = useState({});
 
     const holidaysRef = useRef();
     const updateHolidaysMonthYear = (month, year, show) => {
@@ -31,8 +29,8 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
     let firstMonth = currentDate.getMonth() + 1;
     let firstYear = currentDate.getFullYear();
 
-    stageReason = stageIntimation.reason ? stageIntimation.reason : '';
-    stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
+    stageReason = stageIntimation.reason;
+    stageRequests = stageIntimation.requests;
 
     if (stageRequests.length > 0) {
         let requestDates = stageRequests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
@@ -92,21 +90,21 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
             setShowToast(ALREADY5);
             setToastVisibility();
         } else {
-            if (incompleteRequest.date) {
-                if (e.dateString !== incompleteRequest.date) {
+            if (stageIntimationIncompleteRequest.date) {
+                if (e.dateString !== stageIntimationIncompleteRequest.date) {
                     setShowToast(INCOMPLETE_REQUEST);
                     setToastVisibility();
                 } else {
-                    let req = { 'date': incompleteRequest.date, 'firstHalf': incompleteRequest.firstHalf, 'secondHalf': toggleValue };
+                    let req = { 'date': stageIntimationIncompleteRequest.date, 'firstHalf': stageIntimationIncompleteRequest.firstHalf, 'secondHalf': toggleValue };
                     let requests = stageRequests.filter(i => i.date !== e.dateString);
                     requests.push(req);
 
+                    if (stageIntimationIncompleteRequest.firstHalf === 'WFO' && toggleValue === 'WFO')
+                        setTimeout(() => { _removeFromStageIntimationRequests(e.dateString) }, 500);
+
                     _updateStageIntimation(stageReason, requests);
 
-                    setIncompleteRequest({});
-
-                    if (incompleteRequest.firstHalf === 'WFO' && toggleValue === 'WFO')
-                        setTimeout(() => { _removeFromStageIntimationRequests(e.dateString) }, 500);
+                    setStageIntimationIncompleteRequest({});
                 }
             } else {
                 let req = { 'date': e.dateString, 'firstHalf': toggleValue, 'secondHalf': 'None' };
@@ -115,15 +113,19 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
 
                 _updateStageIntimation(stageReason, requests);
 
-                setIncompleteRequest(req);
+                setStageIntimationIncompleteRequest(req);
             }
         }
     }
 
     const onDayLongPress = e => {
-        if (stageRequests.filter(r => r.date === e.dateString).length > 0) {
+        if (stageIntimationIncompleteRequest.date && e.dateString !== stageIntimationIncompleteRequest.date) {
+            setShowToast(INCOMPLETE_REQUEST);
+            setToastVisibility();
+        } else if (stageRequests.filter(r => r.date === e.dateString).length > 0) {
             Vibration.vibrate();
             _removeFromStageIntimationRequests(e.dateString);
+            setStageIntimationIncompleteRequest({});
         }
     }
 

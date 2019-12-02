@@ -1,8 +1,11 @@
 import { SET_STAGE_INTIMATION_INCOMPLETE_REQUEST } from '../actions/types';
 
 const stageIntimationIncompleteRequestReducer = (stageIntimationIncompleteRequest = {}, { type, payload }) => {
-    if (type === SET_STAGE_INTIMATION_INCOMPLETE_REQUEST)
+    if (type === SET_STAGE_INTIMATION_INCOMPLETE_REQUEST) {
+        console.log('stageIntimationIncompleteRequest: ', payload);
+        
         return payload;
+    }
 
     return stageIntimationIncompleteRequest;
 }
