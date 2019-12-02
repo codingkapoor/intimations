@@ -4,7 +4,7 @@ import UpdateContainer from './components/update/UpdateContainer';
 import CreateContainer from './components/create/CreateContainer';
 import CancelContainer from './components/cancel/CancelContainer';
 
-export default ({ stageIntimation }) => {
+export default ({ stageIntimation, stageIntimationIsDirty }) => {
 
     let currentDate = new Date(new Date().toISOString().split('T')[0]);
 
@@ -18,7 +18,7 @@ export default ({ stageIntimation }) => {
         if (stageIntimation.requests.length > 0) {
             if (stageIntimation.requests.length === 1 && isToday() && isAlready5())
                 return <CreateContainer />;
-            return <><UpdateContainer /><CancelContainer /></>;
+            return stageIntimationIsDirty ? <UpdateContainer /> : <CancelContainer />;
         }
     }
 

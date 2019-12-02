@@ -14,7 +14,6 @@ export default Styles = StyleSheet.create({
         color: 'white',
         fontSize: 16
     },
-
     updateWrapper: {
         alignItems: 'center',
         backgroundColor: '#2282D3',
@@ -28,13 +27,13 @@ export default Styles = StyleSheet.create({
         color: 'white',
         fontSize: 16
     },
-
     cancelWrapper: {
         alignItems: 'center',
-        backgroundColor: '#2282D3',
+        backgroundColor: '#D12219',
         padding: 17,
         width: 180,
         borderRadius: 5,
+        marginTop: 30,
         marginBottom: 20
     },
     cancel: {
