@@ -7,7 +7,8 @@ import Toasts, { CREATE, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../Toast
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from './Styles';
 
-export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntimation, toggleValue }) => {
+export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntimation, toggleValue,
+    stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, setStageIntimationIsDirty }) => {
 
     const [markedDates, setMarkedDates] = useState({});
 
@@ -113,7 +114,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
                 requests.push(req);
 
                 _updateStageIntimation(stageReason, requests);
-                
+
                 setIncompleteRequest(req);
             }
         }
