@@ -1,7 +1,7 @@
 # intimations
 Mobile app for Intimations.
 
-Platform:[intimations-platform](https://github.com/codingkapoor/intimations-platform),
+Platform: [intimations-platform](https://github.com/codingkapoor/intimations-platform),
 Web console: [intimations-console](https://github.com/codingkapoor/intimations-console)
 
 ## Scope
