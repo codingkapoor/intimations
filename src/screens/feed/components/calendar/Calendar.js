@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
-import { BadgeColor } from '../../../../common/Constants';
+import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
+import Styles from '../../Styles';
 
 export default ({ requests, holidays }) => {
 
-    const holidaysRef = useRef();
+    const [markedDates, setMarkedDates] = useState({});
 
+    const holidaysRef = useRef();
     const updateHolidaysMonthYear = (month, year, show) => {
         holidaysRef.current.updateMonthYear(month, year, show);
     }
-
-    const [markedDates, setMarkedDates] = useState({});
 
     let requestDates = requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
 
@@ -58,7 +58,7 @@ export default ({ requests, holidays }) => {
         <>
             <Calendar
                 current={Object.keys(markedDates).sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0]}
-                style={styles.calendar}
+                style={Styles.calendar}
                 onMonthChange={onMonthChange}
                 markedDates={markedDates}
                 markingType={'multi-dot'}
@@ -76,54 +76,8 @@ export default ({ requests, holidays }) => {
                     }
                 }}
             />
+
             <HolidaysContainer ref={holidaysRef} />
         </>
     );
-}
-
-const styles = StyleSheet.create({
-    calendar: {
-        width: 370,
-        marginTop: 20,
-        borderWidth: 1,
-        borderColor: '#D8DADA',
-        borderRadius: 10,
-        paddingBottom: 15
-    }
-});
-
-
-const _getDatesMarkedAsHolidays = (holidays, month, year) => {
-    let _markedDates = {};
-
-    if (holidays && holidays[0][year] && holidays[0][year][month]) {
-        let data = holidays[0][year][month];
-        data.forEach(holiday =>
-            _markedDates[`${year}-${month}-${holiday.Date}`] = {
-                dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
-            }
-        );
-    }
-
-    return _markedDates;
-}
-
-const _getDatesMarkedAsRequests = (requests, month, year) => {
-    const _filterByMonthYear = (request, month, year) => {
-        let dt = new Date(request.date);
-        return dt.getMonth() + 1 === month && dt.getFullYear() === year;
-    }
-
-    let _markedDates = {};
-
-    requests.filter(request => _filterByMonthYear(request, month, year)).forEach(request =>
-        _markedDates[request.date] = {
-            dots: [
-                { color: BadgeColor[request.firstHalf], borderColor: BadgeColor[request.firstHalf] },
-                { color: BadgeColor[request.secondHalf], borderColor: BadgeColor[request.secondHalf] }
-            ]
-        }
-    );
-
-    return _markedDates;
 }

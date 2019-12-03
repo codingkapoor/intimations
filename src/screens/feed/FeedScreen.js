@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { ScrollView, RefreshControl, View, Text } from 'react-native';
+import { ScrollView, RefreshControl, View } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
-import { SpinnerWrapper } from '../../common/StyledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Section from './components/Section';
 import shortid from 'shortid';
 import SwitchSelector from "react-native-switch-selector";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { SpinnerWrapper } from '../../common/StyledComponents';
+import Section from './components/Section';
 
 class FeedScreen extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class FeedScreen extends Component {
     onRefresh = () => this.props.fetchActiveIntimations();
 
     render() {
-        if (!this.props.activeIntimations || this.props.activeIntimations.length === 0)
+        if (!this.props.activeIntimations[0] || this.props.activeIntimations[0].length === 0)
             return (
                 <SpinnerWrapper>
                     <WaveIndicator color='#000000' />
@@ -55,10 +56,10 @@ class FeedScreen extends Component {
                         </View>
                     </View>
 
-                    {Object.keys(this.props.activeIntimations).sort((a, b) => { return new Date(a) - new Date(b) }).map((key, _) => {
+                    {Object.keys(this.props.activeIntimations[0]).sort((a, b) => { return new Date(a) - new Date(b) }).map((key, _) => {
                         let intimations = (this.state.toggle === false) ?
-                            this.props.activeIntimations[key].filter(i => i.isToday) :
-                            this.props.activeIntimations[key].filter(i => i.isPlanned)
+                            this.props.activeIntimations[0][key].filter(i => i.isToday) :
+                            this.props.activeIntimations[0][key].filter(i => i.isPlanned)
 
                         return (intimations.length > 0) ?
                             <Section key={shortid.generate()}
