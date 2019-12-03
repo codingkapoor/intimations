@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import platform from '../../../common/apis/platform';
+import { platform } from '../../../common/apis';
 import { FETCH_INACTIVE_INTIMATIONS } from './types';
 
 const fetchInactiveIntimations = () => async dispatch => {

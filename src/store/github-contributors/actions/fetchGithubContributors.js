@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import github from '../../../common/apis/github';
+import { github } from '../../../common/apis';
 import { FETCH_GITHUB_CONTRIBUTORS } from './types';
 
 const fetchGithubContributors = () => async dispatch => {

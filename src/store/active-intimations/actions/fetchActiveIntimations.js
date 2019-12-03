@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import platform from '../../../common/apis/platform';
+import { platform } from '../../../common/apis';
 import { updatePullToRefresh } from '../../pull-to-refresh/actions';
 import { FETCH_ACTIVE_INTIMATIONS } from './types';
 

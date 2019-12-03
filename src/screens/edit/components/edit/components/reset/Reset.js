@@ -4,7 +4,11 @@ import Styles from '../Styles';
 
 export default ({ stageIntimationIsDirty, checkoutFromActiveIntimation }) => {
     return (
-        <TouchableOpacity disabled={!stageIntimationIsDirty} style={Styles.resetWrapper} onPress={() => checkoutFromActiveIntimation()}>
+        <TouchableOpacity
+            disabled={!stageIntimationIsDirty}
+            style={Styles.resetWrapper}
+            onPress={() => checkoutFromActiveIntimation()}
+        >
             <Text style={Styles.reset}>Reset</Text>
         </TouchableOpacity>
     );

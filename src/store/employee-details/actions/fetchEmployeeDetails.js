@@ -1,4 +1,4 @@
-import platform from '../../../common/apis/platform';
+import { platform } from '../../../common/apis';
 import { FETCH_EMPLOYEE_DETAILS } from './types';
 import { updatePullToRefresh } from '../../pull-to-refresh/actions'
 
