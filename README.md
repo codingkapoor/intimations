@@ -1,5 +1,5 @@
-# intimations-mobile
-Mobile app for simple lms.
+# intimations
+Mobile app for Intimations.
 
 ## Scope
 1. Employees should be able to apply for wfh, half day & full day leaves.
