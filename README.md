@@ -1,9 +1,8 @@
 # intimations
 Mobile app for Intimations.
 
-- [intimations-platform](https://github.com/codingkapoor/intimations-platform)
-
-- [intimations-console](https://github.com/codingkapoor/intimations-console)
+Platform:[intimations-platform](https://github.com/codingkapoor/intimations-platform),
+Web console: [intimations-console](https://github.com/codingkapoor/intimations-console)
 
 ## Scope
 1. Employees should be able to apply for wfh, half day & full day leaves.
