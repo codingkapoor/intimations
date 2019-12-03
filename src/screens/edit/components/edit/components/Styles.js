@@ -39,5 +39,17 @@ export default Styles = StyleSheet.create({
     cancel: {
         color: 'white',
         fontSize: 16
+    },
+    resetWrapper: {
+        alignItems: 'center',
+        backgroundColor: '#D12219',
+        padding: 17,
+        width: 180,
+        borderRadius: 5,
+        marginBottom: 20
+    },
+    reset: {
+        color: 'white',
+        fontSize: 16
     }
 });

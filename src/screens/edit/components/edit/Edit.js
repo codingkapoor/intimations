@@ -3,6 +3,7 @@ import React from 'react';
 import UpdateContainer from './components/update/UpdateContainer';
 import CreateContainer from './components/create/CreateContainer';
 import CancelContainer from './components/cancel/CancelContainer';
+import ResetContainer from './components/reset/ResetContainer';
 
 export default ({ stageIntimation, stageIntimationIsDirty }) => {
 
@@ -17,8 +18,8 @@ export default ({ stageIntimation, stageIntimationIsDirty }) => {
     if (stageIntimation.reason || stageIntimation.requests) {
         if (stageIntimation.requests.length > 0) {
             if (stageIntimation.requests.length === 1 && isToday() && isAlready5())
-                return <CreateContainer />;
-            return stageIntimationIsDirty ? <UpdateContainer /> : <CancelContainer />;
+                return <><CreateContainer /><ResetContainer /></>;
+            return stageIntimationIsDirty ? <><UpdateContainer /><ResetContainer /></> : <CancelContainer />;
         }
     }
 
