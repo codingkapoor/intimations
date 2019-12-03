@@ -1,4 +1,4 @@
 export const platformEndPoint = {
-    interface: 'f1d8ea62.ngrok.io',
+    interface: '90ccb431.ngrok.io',
     port: '80'
 }
