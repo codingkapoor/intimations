@@ -3,7 +3,7 @@ import { Calendar } from 'react-native-calendars';
 import { Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
-import Toasts, { CREATE, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../Toasts';
+import Toasts, { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from './Styles';
 
@@ -84,7 +84,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
             setShowToast(WEEKENDS);
             setToastVisibility();
         } else if (datePressed < currentDate) {
-            setShowToast(CREATE);
+            setShowToast(PAST);
             setToastVisibility();
         } else if (datePressed === currentDate && currentDate.getHours() >= 17) {
             setShowToast(ALREADY5);

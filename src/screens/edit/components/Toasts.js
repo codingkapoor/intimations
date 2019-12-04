@@ -1,23 +1,21 @@
 import React from 'react';
 import Toast from 'react-native-root-toast';
 
-const TOASTS = {
-    Create: "Intimations can't be created for dates in the past. Please select dates in present or from future.",
-    Update: "Intimations in the past can't be modified. Please select dates in present or from future.",
-    Already5: "Can't update intimation for today after 5 PM.",
-    Weekends: "Please select dates from weekdays.",
-    IncompleteRequest: "Dates that belong to an intimation must have requests specified for both the halves."
-};
-
-export const CREATE = 'CREATE';
-export const UPDATE = 'UPDATE';
+export const PAST = 'PAST';
 export const ALREADY5 = 'ALREADY5';
 export const WEEKENDS = 'WEEKENDS';
 export const INCOMPLETE_REQUEST = 'INCOMPLETE_REQUEST';
 
+const TOASTS = {
+    Past: "Intimations can't be created/modified for dates in the past. Please select dates in present or from future.",
+    Already5: "Can't update intimation for today after 5 PM.",
+    Weekends: "Please select dates from weekdays.",
+    IncompleteRequest: "Dates that belong to an intimation must have requests specified for both the halves.",
+};
+
 export default ({ showToast, visible }) => {
     switch (showToast) {
-        case CREATE:
+        case PAST:
             return (
                 <Toast
                     visible={visible}
@@ -28,7 +26,7 @@ export default ({ showToast, visible }) => {
                     animation={false}
                     hideOnPress={false}
                 >
-                    {TOASTS['Create']}
+                    {TOASTS['Past']}
                 </Toast>
             );
 
@@ -76,7 +74,7 @@ export default ({ showToast, visible }) => {
                     {TOASTS['IncompleteRequest']}
                 </Toast>
             );
-            
+
         default:
             return null;
     }
