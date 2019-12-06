@@ -23,5 +23,5 @@ export default ({ stageIntimation, stageIntimationIsDirty }) => {
         }
     }
 
-    return <CreateContainer />;
+    return <><CreateContainer /><ResetContainer /></>;
 }

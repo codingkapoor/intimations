@@ -3,9 +3,9 @@ import { TouchableOpacity, Text } from 'react-native';
 
 import Styles from '../Styles';
 import { platform } from '../../../../../../common/apis';
-import Toasts, { INCOMPLETE_REQUEST } from '../../../Toasts';
+import Toasts, { INCOMPLETE_REQUEST, UPDATE_FAILURE } from '../../../Toasts';
 
-export default ({ stageIntimationIncompleteRequest, stageIntimationIsDirty }) => {
+export default ({ stageIntimation, stageIntimationIncompleteRequest, stageIntimationIsDirty }) => {
 
     const [showToast, setShowToast] = useState(null);
     const [visible, setVisible] = useState(false);
@@ -18,6 +18,18 @@ export default ({ stageIntimationIncompleteRequest, stageIntimationIsDirty }) =>
         if (stageIntimationIncompleteRequest.date) {
             setShowToast(INCOMPLETE_REQUEST);
             setToastVisibility();
+        } else {
+            platform.put('/employees/128/intimations', stageIntimation)
+                .then(() => {
+                    setShowToast(UPDATE_FAILURE);
+                    setToastVisibility();
+                })
+                .catch(error => {
+                    console.log(error);
+                    setShowToast(UPDATE_FAILURE);
+                    setToastVisibility();
+                });
+
         }
     }
 
