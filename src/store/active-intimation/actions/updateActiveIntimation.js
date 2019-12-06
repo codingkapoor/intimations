@@ -12,11 +12,11 @@ const updateActiveIntimation = activeIntimation => (dispatch, getState) => {
     const { activeIntimations } = getState();
 
     let filterRes = activeIntimations[1].filter(i => i.empId === 128);
-    let loggedInUsersActiveIntimation = filterRes.length > 0 ? filterRes[0] : { 'reason': '', requests: [] };
+    let loggedInUsersActiveIntimation = filterRes[0];
 
     if (
-        loggedInUsersActiveIntimation.reason !== activeIntimation.reason ||
-        loggedInUsersActiveIntimation.requests !== activeIntimation.requests
+        loggedInUsersActiveIntimation &&
+        (loggedInUsersActiveIntimation.reason !== activeIntimation.reason || loggedInUsersActiveIntimation.requests !== activeIntimation.requests)
     ) {
         loggedInUsersActiveIntimation.reason = activeIntimation.reason;
         loggedInUsersActiveIntimation.requests = activeIntimation.requests;

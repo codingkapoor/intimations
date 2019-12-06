@@ -16,6 +16,7 @@ const _remodelActiveIntimations = activeIntimations => {
     let _activeIntimations = {};
 
     const push = (intimation, isToday, isPlanned) => {
+
         let lastModified = intimation.lastModified.split('T')[0];
         if (!_activeIntimations[lastModified]) _activeIntimations[lastModified] = [];
 
