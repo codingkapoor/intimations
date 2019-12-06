@@ -12,6 +12,7 @@ const checkoutFromActiveIntimation = () => (dispatch, getState) => {
     });
 
     dispatch(setStageIntimationIncompleteRequest({}));
+    
     dispatch(setStageIntimationIsDirty(false));
 };
 
