@@ -1,6 +1,6 @@
 import { CHECKOUT, UPDATE } from '../actions/types';
 
-const stageIntimationReducer = (stageIntimation = {}, { type, payload }) => {
+const stageIntimationReducer = (stageIntimation = { 'reason': '', 'requests': [] }, { type, payload }) => {
     if (type === CHECKOUT || type === UPDATE)
         return payload;
 
