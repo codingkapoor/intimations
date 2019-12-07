@@ -10,12 +10,9 @@ const updateStageIntimation = stageIntimation => (dispatch, getState) => {
         payload: stageIntimation
     });
 
-    let { activeIntimations } = getState();
+    let { activeIntimation } = getState();
 
-    let filterRes = activeIntimations[1].filter(i => i.empId === 128);
-    let loggedInUsersActiveIntimation = filterRes.length > 0 ? filterRes[0] : { 'reason': '', requests: [] };
-
-    if (loggedInUsersActiveIntimation.reason === stageIntimation.reason && _.isEqual(loggedInUsersActiveIntimation.requests, stageIntimation.requests))
+    if (activeIntimation.reason === stageIntimation.reason && _.isEqual(activeIntimation.requests, stageIntimation.requests))
         dispatch(setStageIntimationIsDirty(false));
     else
         dispatch(setStageIntimationIsDirty(true));
