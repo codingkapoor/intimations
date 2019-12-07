@@ -14,13 +14,10 @@ const fetchActiveIntimations = (pullToRefresh = false) => async dispatch => {
     let filterRes = activeIntimations.filter(i => i.empId === 128);
     let loggedInUsersActiveIntimation = filterRes[0];
 
-    if (loggedInUsersActiveIntimation)
-        dispatch(updateActiveIntimation({
-            'reason': loggedInUsersActiveIntimation.reason,
-            'requests': loggedInUsersActiveIntimation.requests
-        }));
-    else
-        dispatch(updateActiveIntimation({}));
+    dispatch(updateActiveIntimation({
+        'reason': loggedInUsersActiveIntimation.reason ? loggedInUsersActiveIntimation.reason : '',
+        'requests': loggedInUsersActiveIntimation.requests ? loggedInUsersActiveIntimation.requests : []
+    }));
 
     if (pullToRefresh) dispatch(updatePullToRefresh(!pullToRefresh));
 };

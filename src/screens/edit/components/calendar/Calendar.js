@@ -29,8 +29,8 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
     let firstMonth = currentDate.getMonth() + 1;
     let firstYear = currentDate.getFullYear();
 
-    stageReason = stageIntimation.reason ? stageIntimation.reason : '';
-    stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
+    stageReason = stageIntimation.reason;
+    stageRequests = stageIntimation.requests;
 
     if (stageRequests.length > 0) {
         let requestDates = stageRequests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
