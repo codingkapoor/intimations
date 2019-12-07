@@ -4,7 +4,7 @@ import { UPDATE_ACTIVE_INTIMATIONS } from './types';
 
 const _remodelActiveIntimations = activeIntimations => {
     const todayDate = new Date();
-    const todayDateStr = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
+    const todayDateStr = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate().toString().padStart(2, "0")}`;
 
     const _getHalvesForToday = (request, today) => {
         if (request.date === todayDateStr) {
@@ -31,7 +31,7 @@ const _remodelActiveIntimations = activeIntimations => {
         _activeIntimations[lastModified].push(intimation);
         _activeIntimations[lastModified] = _.sortBy(_activeIntimations[lastModified], i => i.empName);
     }
-
+    
     activeIntimations.forEach(intimation =>
         intimation.requests.filter(request => request.date === todayDateStr).length === 0 ?
             push(intimation, false, true) :
@@ -46,7 +46,6 @@ const updateActiveIntimations = activeIntimations => dispatch => {
         type: UPDATE_ACTIVE_INTIMATIONS,
         payload: [_remodelActiveIntimations(activeIntimations), activeIntimations]
     });
-
 };
 
 export default updateActiveIntimations;

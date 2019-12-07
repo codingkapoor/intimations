@@ -9,24 +9,32 @@ const updateActiveIntimation = activeIntimation => (dispatch, getState) => {
         payload: activeIntimation
     });
 
-    const { activeIntimations } = getState();
+    const { activeIntimations, employeeDetails } = getState();
 
-    let filterRes = activeIntimations[1].filter(i => i.empId === 128);
+    let filterRes = activeIntimations[1].filter(i => i.empId === employeeDetails.id);
     let loggedInUsersActiveIntimation = filterRes[0];
 
-    if (
-        loggedInUsersActiveIntimation &&
-        (loggedInUsersActiveIntimation.reason !== activeIntimation.reason || loggedInUsersActiveIntimation.requests !== activeIntimation.requests)
-    ) {
+    if (loggedInUsersActiveIntimation) {
         loggedInUsersActiveIntimation.reason = activeIntimation.reason;
         loggedInUsersActiveIntimation.requests = activeIntimation.requests;
 
-        dispatch(updateActiveIntimations(
-            [
-                ...activeIntimations[1].filter(i => i.empId !== 128),
-                loggedInUsersActiveIntimation
-            ]
-        ));
+        dispatch(updateActiveIntimations([
+            ...activeIntimations[1].filter(i => i.empId !== employeeDetails.id),
+            loggedInUsersActiveIntimation
+        ]));
+    } else {
+        if (activeIntimation.reason !== '' && activeIntimation.requests.length > 0) {
+            dispatch(updateActiveIntimations([
+                ...activeIntimations[1].filter(i => i.empId !== employeeDetails.id),
+                {
+                    "empId": employeeDetails.id,
+                    "empName": employeeDetails.name,
+                    "lastModified": `${new Date().toISOString()}`,
+                    "reason": activeIntimation.reason,
+                    "requests": activeIntimation.requests,
+                }
+            ]));
+        }
     }
 };
 
