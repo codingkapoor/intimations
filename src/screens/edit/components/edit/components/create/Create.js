@@ -3,7 +3,7 @@ import { TouchableOpacity, Text } from 'react-native';
 
 import Styles from '../Styles';
 import { platform } from '../../../../../../common/apis';
-import Toasts, { INCOMPLETE_REQUEST, CREATE_FAILURE, CREATE_SUCCESS } from '../../../Toasts';
+import Toasts, { INCOMPLETE_REQUEST, CREATE_FAILURE, CREATE_SUCCESS, EMPTY_REASON } from '../../../Toasts';
 
 export default ({ stageIntimation, stageIntimationIncompleteRequest, stageIntimationIsDirty, commitToActiveIntimation }) => {
 
@@ -17,6 +17,9 @@ export default ({ stageIntimation, stageIntimationIncompleteRequest, stageIntima
     const _onPress = () => {
         if (stageIntimationIncompleteRequest.date) {
             setShowToast(INCOMPLETE_REQUEST);
+            setToastVisibility();
+        } else if (stageIntimation.reason === '') {
+            setShowToast(EMPTY_REASON);
             setToastVisibility();
         } else {
             platform.post('/employees/128/intimations', stageIntimation)
