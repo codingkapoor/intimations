@@ -15,12 +15,10 @@ export default ({ activeIntimation, stageIntimation, stageIntimationIsDirty }) =
     const isToday = () =>
         stageIntimation.requests.filter(r => r.date === currentDate).length > 0
 
-    if (stageIntimation.reason || stageIntimation.requests) {
-        if (stageIntimation.requests.length > 0) {
-            if ((stageIntimation.requests.length === 1 && isToday() && isAlready5()) || !activeIntimation.reason)
-                return <><CreateContainer /><ResetContainer /></>;
-            return stageIntimationIsDirty ? <><UpdateContainer /><ResetContainer /></> : <CancelContainer />;
-        }
+    if (stageIntimation.requests.length > 0) {
+        if (activeIntimation.reason === '' || (stageIntimation.requests.length === 1 && isToday() && isAlready5()))
+            return <><CreateContainer /><ResetContainer /></>;
+        return stageIntimationIsDirty ? <><UpdateContainer /><ResetContainer /></> : <CancelContainer />;
     }
 
     return <><CreateContainer /><ResetContainer /></>;
