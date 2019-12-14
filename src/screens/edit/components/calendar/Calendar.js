@@ -50,7 +50,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         });
 
         updateHolidaysMonthYear(firstMonth, firstYear, true);
-    }, [stageIntimation]);
+    }, [stageIntimation, inactiveRequests]);
 
     const onMonthChange = e => {
         let month = e.month;

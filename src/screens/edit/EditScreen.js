@@ -7,13 +7,25 @@ import CalendarContainer from './components/calendar/CalendarContainer';
 import { Reason } from './StyledComponents';
 import { ToggleValue } from './Constants';
 import EditContainer from './components/edit/EditContainer';
+import { getDaysInMonthYear } from '../../common/utils/dates';
 
-const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
+const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
 
     const [toggleValue, setToggleValue] = useState(ToggleValue.WFH);
 
     useEffect(() => {
-        fetchInactiveIntimations();
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1;
+        const currentYear = currentDate.getFullYear();
+
+        let start = `${currentYear}-${currentMonth - 2}-01`;
+        let end = `${currentYear}-${currentMonth}-${getDaysInMonthYear(currentMonth, currentYear)}`;
+
+        // if (activeIntimation.reason !== '') {
+
+        // }
+
+        fetchInactiveIntimations(start, end);
     }, []);
 
     stageRequests = stageIntimation.requests ? stageIntimation.requests : [];

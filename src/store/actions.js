@@ -5,7 +5,7 @@ import { fetchEmployeeDetails } from './employee-details/actions';
 import checkoutFromActiveIntimation from './stage-intimation/actions/checkoutFromActiveIntimation';
 
 export const fetchAll = () => async dispatch => {
-    await dispatch(fetchEmployeeDetails(11));
+    await dispatch(fetchEmployeeDetails(144));
     await dispatch(fetchHolidays());
     await dispatch(fetchActiveIntimations());
     await dispatch(checkoutFromActiveIntimation());

@@ -5,7 +5,7 @@ import Styles from '../Styles';
 import { platform } from '../../../../../../common/apis';
 import Toasts, { INCOMPLETE_REQUEST, CREATE_FAILURE, CREATE_SUCCESS, EMPTY_REASON } from '../../../Toasts';
 
-export default ({ stageIntimation, stageIntimationIncompleteRequest, stageIntimationIsDirty, commitToActiveIntimation }) => {
+export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteRequest, stageIntimationIsDirty, commitToActiveIntimation }) => {
 
     const [showToast, setShowToast] = useState(null);
     const [visible, setVisible] = useState(false);
@@ -22,7 +22,7 @@ export default ({ stageIntimation, stageIntimationIncompleteRequest, stageIntima
             setShowToast(EMPTY_REASON);
             setToastVisibility();
         } else {
-            platform.post('/employees/128/intimations', stageIntimation)
+            platform.post(`/employees/${employeeDetails.id}/intimations`, stageIntimation)
                 .then(() => {
                     setShowToast(CREATE_SUCCESS);
                     setToastVisibility();
