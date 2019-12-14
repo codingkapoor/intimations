@@ -52,7 +52,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         updateHolidaysMonthYear(firstMonth, firstYear, true);
     }, [stageIntimation, inactiveRequests]);
 
-    const onMonthChange = e => {
+    const _onMonthChange = e => {
         let month = e.month;
         let year = e.year;
 
@@ -77,7 +77,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         _updateStageIntimation(stageReason, requests);
     }
 
-    const onDayPress = e => {
+    const _onDayPress = e => {
         let datePressed = new Date(e.dateString);
 
         if (datePressed.getDay() === 0 || datePressed.getDay() === 6) {
@@ -118,7 +118,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         }
     }
 
-    const onDayLongPress = e => {
+    const _onDayLongPress = e => {
         if (stageIntimationIncompleteRequest.date && e.dateString !== stageIntimationIncompleteRequest.date) {
             setShowToast(INCOMPLETE_REQUEST);
             setToastVisibility();
@@ -135,9 +135,9 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
                 current={Object.keys(markedDates).sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0]}
                 style={Styles.calendar}
                 markedDates={markedDates}
-                onMonthChange={onMonthChange}
-                onDayPress={onDayPress}
-                onDayLongPress={onDayLongPress}
+                onMonthChange={_onMonthChange}
+                onDayPress={_onDayPress}
+                onDayLongPress={_onDayLongPress}
                 markingType={'multi-dot'}
                 theme={{
                     'stylesheet.day.multiDot': {
