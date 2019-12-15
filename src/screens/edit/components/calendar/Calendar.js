@@ -6,9 +6,10 @@ import HolidaysContainer from '../../../../common/components/holidays/HolidaysCo
 import Toasts, { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from './Styles';
+import { getDiffInMonths, getDaysInMonthYear } from '../../../../common/utils/dates';
 
-export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntimation, toggleValue,
-    stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest }) => {
+export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation, updateStageIntimation,
+    toggleValue, stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, fetchInactiveIntimations }) => {
 
     const [markedDates, setMarkedDates] = useState({});
 
@@ -52,9 +53,45 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         updateHolidaysMonthYear(firstMonth, firstYear, true);
     }, [stageIntimation, inactiveRequests]);
 
+    const _fetchInactiveIntimations = (month, year) => {
+        const getStartMonth = month => String(month - 2 <= 0 ? month + 10 : month - 2).padStart(2, '0');
+        const getStartYear = (month, year) => month - 2 <= 0 ? year - 1 : year;
+
+        const getEndMonth = month => String(month).padStart(2, '0');
+
+        const getStart = (month, year) => `${getStartYear(month, year)}-${getStartMonth(month)}-01`;
+        const getEnd = (month, year) => `${year}-${getEndMonth(month)}-${getDaysInMonthYear(month, year)}`;
+
+        const limit = (month, year) => [getStart(month, year), getEnd(month, year)];
+
+        const currentDate = new Date();
+
+        let navPoint = new Date(`${year}-${month}-01`);
+        let endPoint = currentDate;
+
+        if (activeIntimation.reason !== '') {
+            let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+            let lastRequestDate = new Date(requestDates[requestDates.length - 1].date);
+            endPoint = lastRequestDate;
+        }
+
+        if (navPoint < endPoint) {
+            if ((getDiffInMonths(navPoint, endPoint) + 1) % 3 == 1) {
+                console.log('navPoint: ', navPoint, ', endPoint: ', endPoint);
+
+                let [start, end] = limit(navPoint.getMonth() + 1, navPoint.getFullYear());
+                console.log('start: ', start, ', end: ', end);
+
+                fetchInactiveIntimations(start, end);
+            }
+        }
+    }
+
     const _onMonthChange = e => {
         let month = e.month;
         let year = e.year;
+
+        _fetchInactiveIntimations(month, year);
 
         updateHolidaysMonthYear(month, year, true);
 

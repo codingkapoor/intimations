@@ -12,7 +12,7 @@ import { getDaysInMonthYear } from '../../common/utils/dates';
 const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
 
     const _fetchInactiveIntimations = () => {
-        const getStartMonth = month => String(month - 2 <= 0 ? month + 10 : month).padStart(2, '0');
+        const getStartMonth = month => String(month - 2 <= 0 ? month + 10 : month - 2).padStart(2, '0');
         const getStartYear = (month, year) => month - 2 <= 0 ? year - 1 : year;
 
         const getEndMonth = month => String(month).padStart(2, '0');
@@ -23,14 +23,16 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fe
         const limit = (month, year) => [getStart(month, year), getEnd(month, year)];
 
         const currentDate = new Date();
-        let [start, end] = limit(currentDate.getMonth() + 1, currentDate.getFullYear());
+        let endPoint = currentDate;
 
         if (activeIntimation.reason !== '') {
             let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
             let lastRequestDate = new Date(requestDates[requestDates.length - 1].date);
 
-            [start, end] = limit(lastRequestDate.getMonth() + 1, lastRequestDate.getFullYear());
+            endPoint = lastRequestDate;
         }
+
+        [start, end] = limit(endPoint.getMonth() + 1, endPoint.getFullYear());
 
         fetchInactiveIntimations(start, end);
     }
