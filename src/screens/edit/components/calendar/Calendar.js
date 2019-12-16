@@ -11,6 +11,10 @@ import { getDiffInMonths, getDaysInMonthYear } from '../../../../common/utils/da
 export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation, updateStageIntimation,
     toggleValue, stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, fetchInactiveIntimations }) => {
 
+    let currentDate = new Date(new Date().toISOString().split('T')[0]);
+
+    const [[month, year], setMonthYear] = useState([currentDate.getMonth() + 1, currentDate.getFullYear()]);
+
     const [markedDates, setMarkedDates] = useState({});
 
     const [showToast, setShowToast] = useState(null);
@@ -25,32 +29,27 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
         holidaysRef.current.updateMonthYear(month, year, show);
     }
 
-    let currentDate = new Date(new Date().toISOString().split('T')[0]);
-
-    let firstMonth = currentDate.getMonth() + 1;
-    let firstYear = currentDate.getFullYear();
-
     stageReason = stageIntimation.reason;
     stageRequests = stageIntimation.requests;
 
-    if (stageRequests.length > 0) {
-        let requestDates = stageRequests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+    useEffect(() => {
+        if (stageRequests.length > 0) {
+            let requestDates = stageRequests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+            let firstRequest = requestDates[0];
+            let firstRequestDate = new Date(firstRequest.date);
 
-        let firstRequest = requestDates[0];
-        let firstRequestDate = new Date(firstRequest.date);
-
-        firstMonth = firstRequestDate.getMonth() + 1;
-        firstYear = firstRequestDate.getFullYear();
-    }
+            setMonthYear([firstRequestDate.getMonth() + 1, firstRequestDate.getFullYear()]);
+        }
+    }, []);
 
     useEffect(() => {
         setMarkedDates({
-            ..._getDatesMarkedAsHolidays(holidays, firstMonth, firstYear),
-            ..._getDatesMarkedAsRequests(inactiveRequests, firstMonth, firstYear),
-            ..._getDatesMarkedAsRequests(stageRequests, firstMonth, firstYear)
+            ..._getDatesMarkedAsHolidays(holidays, month, year),
+            ..._getDatesMarkedAsRequests(inactiveRequests, month, year),
+            ..._getDatesMarkedAsRequests(stageRequests, month, year)
         });
 
-        updateHolidaysMonthYear(firstMonth, firstYear, true);
+        updateHolidaysMonthYear(month, year, true);
     }, [stageIntimation, inactiveRequests]);
 
     const _fetchInactiveIntimations = (month, year) => {
@@ -77,11 +76,7 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
 
         if (navPoint < endPoint) {
             if ((getDiffInMonths(navPoint, endPoint) + 1) % 3 == 1) {
-                console.log('navPoint: ', navPoint, ', endPoint: ', endPoint);
-
                 let [start, end] = limit(navPoint.getMonth() + 1, navPoint.getFullYear());
-                console.log('start: ', start, ', end: ', end);
-
                 fetchInactiveIntimations(start, end);
             }
         }
@@ -93,13 +88,15 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
 
         _fetchInactiveIntimations(month, year);
 
-        updateHolidaysMonthYear(month, year, true);
-
         setMarkedDates({
             ..._getDatesMarkedAsHolidays(holidays, month, year),
             ..._getDatesMarkedAsRequests(inactiveRequests, month, year),
             ..._getDatesMarkedAsRequests(stageRequests, month, year)
         });
+
+        updateHolidaysMonthYear(month, year, true);
+        
+        setMonthYear([month, year]);
     }
 
     const _updateStageIntimation = (stageReason, requests) => {
@@ -169,7 +166,7 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
     return (
         <>
             <Calendar
-                current={Object.keys(markedDates).sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0]}
+                current={`${year}-${String(month).padStart(2, '0')}-01`}
                 style={Styles.calendar}
                 markedDates={markedDates}
                 onMonthChange={_onMonthChange}
