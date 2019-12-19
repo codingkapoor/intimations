@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 class LeavesScreen extends Component {
-    onRefresh = () => this.props.fetchEmployeeDetails(11);
+    onRefresh = () => this.props.fetchEmployeeDetails(this.props.employeeDetails.id);
 
     render() {
         let employeeDetails = this.props.employeeDetails;

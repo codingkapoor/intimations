@@ -4,21 +4,15 @@ import { setStageIntimationIsDirty } from '../../stage-intimation-is-dirty/actio
 
 const checkoutFromActiveIntimation = () => (dispatch, getState) => {
 
-    let { activeIntimations } = getState();
-
-    let filterRes = activeIntimations[1].filter(i => i.empId === 128);
-    let loggedInUsersActiveIntimation = filterRes.length > 0 ? filterRes[0] : { 'reason': '', requests: [] };
-
-    let stageIntimation = {};
-    stageIntimation['reason'] = loggedInUsersActiveIntimation.reason;
-    stageIntimation['requests'] = loggedInUsersActiveIntimation.requests;
+    let { activeIntimation } = getState();
 
     dispatch({
         type: CHECKOUT,
-        payload: stageIntimation
+        payload: activeIntimation
     });
 
     dispatch(setStageIntimationIncompleteRequest({}));
+    
     dispatch(setStageIntimationIsDirty(false));
 };
 

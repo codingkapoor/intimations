@@ -3,12 +3,17 @@ import { Calendar } from 'react-native-calendars';
 import { Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
-import Toasts, { CREATE, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../Toasts';
+import Toasts, { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from './Styles';
+import { getDiffInMonths, getDaysInMonthYear } from '../../../../common/utils/dates';
 
-export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntimation, toggleValue,
-    stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest }) => {
+export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation, updateStageIntimation,
+    toggleValue, stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, fetchInactiveIntimations }) => {
+
+    let currentDate = new Date(new Date().toISOString().split('T')[0]);
+
+    const [[month, year], setMonthYear] = useState([currentDate.getMonth() + 1, currentDate.getFullYear()]);
 
     const [markedDates, setMarkedDates] = useState({});
 
@@ -24,45 +29,74 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         holidaysRef.current.updateMonthYear(month, year, show);
     }
 
-    let currentDate = new Date(new Date().toISOString().split('T')[0]);
-
-    let firstMonth = currentDate.getMonth() + 1;
-    let firstYear = currentDate.getFullYear();
-
     stageReason = stageIntimation.reason;
     stageRequests = stageIntimation.requests;
 
-    if (stageRequests.length > 0) {
-        let requestDates = stageRequests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+    useEffect(() => {
+        if (stageRequests.length > 0) {
+            let requestDates = stageRequests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+            let firstRequest = requestDates[0];
+            let firstRequestDate = new Date(firstRequest.date);
 
-        let firstRequest = requestDates[0];
-        let firstRequestDate = new Date(firstRequest.date);
-
-        firstMonth = firstRequestDate.getMonth() + 1;
-        firstYear = firstRequestDate.getFullYear();
-    }
+            setMonthYear([firstRequestDate.getMonth() + 1, firstRequestDate.getFullYear()]);
+        }
+    }, []);
 
     useEffect(() => {
         setMarkedDates({
-            ..._getDatesMarkedAsHolidays(holidays, firstMonth, firstYear),
-            ..._getDatesMarkedAsRequests(inactiveRequests, firstMonth, firstYear),
-            ..._getDatesMarkedAsRequests(stageRequests, firstMonth, firstYear)
+            ..._getDatesMarkedAsHolidays(holidays, month, year),
+            ..._getDatesMarkedAsRequests(inactiveRequests, month, year),
+            ..._getDatesMarkedAsRequests(stageRequests, month, year)
         });
 
-        updateHolidaysMonthYear(firstMonth, firstYear, true);
-    }, [stageIntimation]);
+        updateHolidaysMonthYear(month, year, true);
+    }, [stageIntimation, inactiveRequests]);
 
-    const onMonthChange = e => {
+    const _fetchInactiveIntimations = (month, year) => {
+        const getStartMonth = month => String(month - 2 <= 0 ? month + 10 : month - 2).padStart(2, '0');
+        const getStartYear = (month, year) => month - 2 <= 0 ? year - 1 : year;
+
+        const getEndMonth = month => String(month).padStart(2, '0');
+
+        const getStart = (month, year) => `${getStartYear(month, year)}-${getStartMonth(month)}-01`;
+        const getEnd = (month, year) => `${year}-${getEndMonth(month)}-${getDaysInMonthYear(month, year)}`;
+
+        const limit = (month, year) => [getStart(month, year), getEnd(month, year)];
+
+        const currentDate = new Date();
+
+        let navPoint = new Date(`${year}-${month}-01`);
+        let endPoint = currentDate;
+
+        if (activeIntimation.reason !== '') {
+            let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+            let lastRequestDate = new Date(requestDates[requestDates.length - 1].date);
+            endPoint = lastRequestDate;
+        }
+
+        if (navPoint < endPoint) {
+            if ((getDiffInMonths(navPoint, endPoint) + 1) % 3 == 1) {
+                let [start, end] = limit(navPoint.getMonth() + 1, navPoint.getFullYear());
+                fetchInactiveIntimations(start, end);
+            }
+        }
+    }
+
+    const _onMonthChange = e => {
         let month = e.month;
         let year = e.year;
 
-        updateHolidaysMonthYear(month, year, true);
+        _fetchInactiveIntimations(month, year);
 
         setMarkedDates({
             ..._getDatesMarkedAsHolidays(holidays, month, year),
             ..._getDatesMarkedAsRequests(inactiveRequests, month, year),
             ..._getDatesMarkedAsRequests(stageRequests, month, year)
         });
+
+        updateHolidaysMonthYear(month, year, true);
+        
+        setMonthYear([month, year]);
     }
 
     const _updateStageIntimation = (stageReason, requests) => {
@@ -77,14 +111,14 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         _updateStageIntimation(stageReason, requests);
     }
 
-    const onDayPress = e => {
+    const _onDayPress = e => {
         let datePressed = new Date(e.dateString);
 
         if (datePressed.getDay() === 0 || datePressed.getDay() === 6) {
             setShowToast(WEEKENDS);
             setToastVisibility();
         } else if (datePressed < currentDate) {
-            setShowToast(CREATE);
+            setShowToast(PAST);
             setToastVisibility();
         } else if (datePressed === currentDate && currentDate.getHours() >= 17) {
             setShowToast(ALREADY5);
@@ -118,7 +152,7 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
         }
     }
 
-    const onDayLongPress = e => {
+    const _onDayLongPress = e => {
         if (stageIntimationIncompleteRequest.date && e.dateString !== stageIntimationIncompleteRequest.date) {
             setShowToast(INCOMPLETE_REQUEST);
             setToastVisibility();
@@ -132,12 +166,12 @@ export default ({ inactiveRequests, holidays, stageIntimation, updateStageIntima
     return (
         <>
             <Calendar
-                current={Object.keys(markedDates).sort((a, b) => { return new Date(a.date) - new Date(b.date) })[0]}
+                current={`${year}-${String(month).padStart(2, '0')}-01`}
                 style={Styles.calendar}
                 markedDates={markedDates}
-                onMonthChange={onMonthChange}
-                onDayPress={onDayPress}
-                onDayLongPress={onDayLongPress}
+                onMonthChange={_onMonthChange}
+                onDayPress={_onDayPress}
+                onDayLongPress={_onDayLongPress}
                 markingType={'multi-dot'}
                 theme={{
                     'stylesheet.day.multiDot': {

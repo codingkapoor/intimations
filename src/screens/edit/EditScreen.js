@@ -7,13 +7,40 @@ import CalendarContainer from './components/calendar/CalendarContainer';
 import { Reason } from './StyledComponents';
 import { ToggleValue } from './Constants';
 import EditContainer from './components/edit/EditContainer';
+import { getDaysInMonthYear } from '../../common/utils/dates';
 
-const EditScreen = ({ inactiveIntimations, stageIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
+const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
+
+    const _fetchInactiveIntimations = () => {
+        const getStartMonth = month => String(month - 2 <= 0 ? month + 10 : month - 2).padStart(2, '0');
+        const getStartYear = (month, year) => month - 2 <= 0 ? year - 1 : year;
+
+        const getEndMonth = month => String(month).padStart(2, '0');
+
+        const getStart = (month, year) => `${getStartYear(month, year)}-${getStartMonth(month)}-01`;
+        const getEnd = (month, year) => `${year}-${getEndMonth(month)}-${getDaysInMonthYear(month, year)}`;
+
+        const limit = (month, year) => [getStart(month, year), getEnd(month, year)];
+
+        const currentDate = new Date();
+        let endPoint = currentDate;
+
+        if (activeIntimation.reason !== '') {
+            let requestDates = activeIntimation.requests.sort((a, b) => { return new Date(a.date) - new Date(b.date) });
+            let lastRequestDate = new Date(requestDates[requestDates.length - 1].date);
+
+            endPoint = lastRequestDate;
+        }
+
+        [start, end] = limit(endPoint.getMonth() + 1, endPoint.getFullYear());
+
+        fetchInactiveIntimations(start, end);
+    }
 
     const [toggleValue, setToggleValue] = useState(ToggleValue.WFH);
 
     useEffect(() => {
-        fetchInactiveIntimations();
+        _fetchInactiveIntimations();
     }, []);
 
     stageRequests = stageIntimation.requests ? stageIntimation.requests : [];

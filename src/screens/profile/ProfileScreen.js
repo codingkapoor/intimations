@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView, RefreshControl, View } from 'react-native';
+import { Text, ScrollView, RefreshControl } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
@@ -12,7 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MONTH_NAMES, getOrdinal } from '../../common/utils/dates';
 
 const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, navigation }) => {
-    const onRefresh = () => fetchEmployeeDetails(128);
+    const onRefresh = () => fetchEmployeeDetails(employeeDetails.id);
 
     if (!employeeDetails.leaves)
         return (

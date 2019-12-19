@@ -7,11 +7,11 @@ const _remodelHolidays = holidays => {
     let _holidays = {};
 
     const transform = (holiday) => {
-        let dt = new Date(holiday.date)
-        let date = dt.getDate()
-        let day = dt.getDay()
-        let month = dt.getMonth() + 1
-        let year = dt.getFullYear()
+        let dt = new Date(holiday.date);
+        let date = dt.getDate();
+        let day = dt.getDay();
+        let month = String(dt.getMonth() + 1).padStart(2, "0");
+        let year = dt.getFullYear();
         let occasion = holiday.occasion;
 
         let v = {};
