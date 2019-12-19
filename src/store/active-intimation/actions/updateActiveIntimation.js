@@ -15,13 +15,19 @@ const updateActiveIntimation = activeIntimation => (dispatch, getState) => {
     let loggedInUsersActiveIntimation = filterRes[0];
 
     if (loggedInUsersActiveIntimation) {
-        loggedInUsersActiveIntimation.reason = activeIntimation.reason;
-        loggedInUsersActiveIntimation.requests = activeIntimation.requests;
+        if (activeIntimation.reason === '' && activeIntimation.requests.length === 0) {
+            dispatch(updateActiveIntimations([
+                ...activeIntimations[1].filter(i => i.empId !== employeeDetails.id)
+            ]));
+        } else {
+            loggedInUsersActiveIntimation.reason = activeIntimation.reason;
+            loggedInUsersActiveIntimation.requests = activeIntimation.requests;
 
-        dispatch(updateActiveIntimations([
-            ...activeIntimations[1].filter(i => i.empId !== employeeDetails.id),
-            loggedInUsersActiveIntimation
-        ]));
+            dispatch(updateActiveIntimations([
+                ...activeIntimations[1].filter(i => i.empId !== employeeDetails.id),
+                loggedInUsersActiveIntimation
+            ]));
+        }
     } else {
         if (activeIntimation.reason !== '' && activeIntimation.requests.length > 0) {
             dispatch(updateActiveIntimations([
