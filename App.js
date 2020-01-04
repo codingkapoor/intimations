@@ -1,5 +1,5 @@
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -30,6 +30,7 @@ import ProfileContainer from './src/screens/profile/ProfileContainer';
 import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
 import EditContainer from './src/screens/edit/EditContainer';
+import SignInScreen from './src/screens/signin/SignInScreen';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
   faCalendarDay, faPen, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
@@ -78,7 +79,7 @@ intimationsFlow.navigationOptions = ({ navigation }) => {
   };
 };
 
-const AppNavigator = createBottomTabNavigator(
+const mainFlow = createBottomTabNavigator(
   {
     intimationsFlow,
     Leaves: LeavesContainer,
@@ -99,6 +100,11 @@ const AppNavigator = createBottomTabNavigator(
     }
   }
 );
+
+const AppNavigator = createSwitchNavigator({
+  signin: SignInScreen,
+  mainFlow
+});
 
 const App = createAppContainer(AppNavigator);
 
