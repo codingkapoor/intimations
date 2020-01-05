@@ -1,8 +1,20 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { OTP, Email } from './StyledComponents';
 import Styles from './Styles';
+import { platform } from '../../common/apis';
+
+const _onPress = () => {
+    platform.get(`/passwordless/employees/mail@shivamkapoor.com/otp`)
+        .then(() => {
+            alert('OTP sent on the registered email id');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
 
 const SignInScreen = () => {
     return (
@@ -12,7 +24,10 @@ const SignInScreen = () => {
 
                 <OTP placeholder='One Time Password' />
 
-                <TouchableOpacity style={Styles.generateOTPWrapper}>
+                <TouchableOpacity
+                    style={Styles.generateOTPWrapper}
+                    onPress={_onPress}
+                >
                     <Text style={Styles.generateOTP}>Generate OTP</Text>
                 </TouchableOpacity>
 
