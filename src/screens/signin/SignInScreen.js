@@ -1,21 +1,25 @@
 import React from 'react';
-import { Text, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { OTP, Email } from './StyledComponents';
+import Styles from './Styles';
 
 const SignInScreen = () => {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
-            <TextInput placeholder='Registered Email' />
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE', justifyContent: 'flex-start', alignItems: 'center' }}>
+            <View style={{ marginTop: 200 }}>
+                <Email placeholder='Registered Email' />
 
-            <TextInput placeholder='OTP' />
-            
-            <TouchableOpacity>
-                <Text>Generate OTP</Text>
-            </TouchableOpacity>
+                <OTP placeholder='One Time Password' />
 
-            <TouchableOpacity>
-                <Text>Login</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={Styles.generateOTPWrapper}>
+                    <Text style={Styles.generateOTP}>Generate OTP</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={Styles.loginWrapper}>
+                    <Text style={Styles.login}>Login</Text>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 }
