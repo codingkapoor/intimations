@@ -16,16 +16,20 @@ const SignInScreen = () => {
                 alert('OTP sent on the registered email id');
             })
             .catch(error => {
+                alert('Something went wrong');
                 console.log(error);
             });
     }
 
     const _onPressLogin = () => {
-        platform.post(`/passwordless/employees/${email}/tokens`)
-            .then(() => {
+        platform.post(`/passwordless/employees/${email}/tokens`, otp)
+            .then(res => {
+                console.log('access: ', res.data.access);
+                console.log('refresh: ', res.data.refresh);
                 alert('Logged in')
             })
             .catch(error => {
+                alert('Something went wrong');
                 console.log(error);
             });
     }
