@@ -6,7 +6,7 @@ import { OTP, Email } from './StyledComponents';
 import Styles from './Styles';
 import { platform } from '../../common/apis';
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [otp, setOTP] = useState('');
 
@@ -21,12 +21,13 @@ const SignInScreen = () => {
             });
     }
 
+    // TODO: Save to async storage and navigate to mainFlow
     const _onPressLogin = () => {
         platform.post(`/passwordless/employees/${email}/tokens`, otp)
             .then(res => {
                 console.log('access: ', res.data.access);
                 console.log('refresh: ', res.data.refresh);
-                alert('Logged in')
+                navigation.navigate('mainFlow');
             })
             .catch(error => {
                 alert('Something went wrong');
