@@ -1,4 +1,8 @@
-# intimations
+<p align="center">
+  <img width="460" height="300" src="https://github.com/codingkapoor/intimations/blob/master/assets/logo.png">
+</p>
+
+# Intimations
 Mobile app for Intimations.
 
 *Platform: [intimations-platform](https://github.com/codingkapoor/intimations-platform),
