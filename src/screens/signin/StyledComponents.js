@@ -20,7 +20,8 @@ export const OTP = styled.TextInput`
     border-radius: 5px;
     border-color: #D8DADA;
     border-width: 1px;
-    margin-top: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 17px;
     color: #595959;
     font-size: 16px;
