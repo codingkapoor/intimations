@@ -31,6 +31,7 @@ import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
 import EditContainer from './src/screens/edit/EditContainer';
 import SignInScreen from './src/screens/signin/SignInScreen';
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
   faCalendarDay, faPen, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
@@ -102,7 +103,8 @@ const mainFlow = createBottomTabNavigator(
 );
 
 const AppNavigator = createSwitchNavigator({
-  signin: SignInScreen,
+  ResolveAuth: ResolveAuthScreen,
+  Signin: SignInScreen,
   mainFlow
 });
 
