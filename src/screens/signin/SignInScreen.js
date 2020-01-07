@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { AsyncStorage, Text, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { OTP, Email } from './StyledComponents';
 import Styles from './Styles';
 import { platform } from '../../common/apis';
+
+const saveTokens = async tokens => {
+    await AsyncStorage.setItem('access', tokens.access);
+    await AsyncStorage.setItem('refresh', tokens.refresh);
+}
 
 const SignInScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
@@ -21,12 +26,10 @@ const SignInScreen = ({navigation}) => {
             });
     }
 
-    // TODO: Save to async storage and navigate to mainFlow
     const _onPressLogin = () => {
         platform.post(`/passwordless/employees/${email}/tokens`, otp)
             .then(res => {
-                console.log('access: ', res.data.access);
-                console.log('refresh: ', res.data.refresh);
+                saveTokens(res.data);
                 navigation.navigate('mainFlow');
             })
             .catch(error => {
@@ -43,12 +46,14 @@ const SignInScreen = ({navigation}) => {
                     placeholder='Registered Email'
                     value={email}
                     onChangeText={setEmail}
+                    autoCorrect={false}
                 />
 
                 <OTP
                     placeholder='One Time Password'
                     value={otp}
                     onChangeText={setOTP}
+                    autoCorrect={false}
                 />
 
                 <TouchableOpacity
