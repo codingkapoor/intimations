@@ -4,6 +4,7 @@ import { TouchableOpacity, Text } from 'react-native';
 import Styles from '../Styles';
 import { platform } from '../../../../../../common/apis';
 import Toasts, { INCOMPLETE_REQUEST, UPDATE_FAILURE, UPDATE_SUCCESS, EMPTY_REASON } from '../../../Toasts';
+import { getAccessToken } from '../../../../../../common/utils/auth';
 
 export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteRequest, stageIntimationIsDirty, commitToActiveIntimation }) => {
 
@@ -14,7 +15,7 @@ export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteReq
         setTimeout(() => setVisible(false), 5000);
     }
 
-    const _onPress = () => {
+    const _onPress = async () => {
         if (stageIntimationIncompleteRequest.date) {
             setShowToast(INCOMPLETE_REQUEST);
             setToastVisibility();
@@ -22,7 +23,8 @@ export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteReq
             setShowToast(EMPTY_REASON);
             setToastVisibility();
         } else {
-            platform.put(`/employees/${employeeDetails.id}/intimations`, stageIntimation)
+            const access = await getAccessToken();
+            platform.put(`/employees/${employeeDetails.id}/intimations`, stageIntimation, { headers: { Authorization: "Bearer " + access } })
                 .then(() => {
                     setShowToast(UPDATE_SUCCESS);
                     setToastVisibility();

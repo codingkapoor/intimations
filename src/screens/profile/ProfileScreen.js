@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView, RefreshControl } from 'react-native';
+import { AsyncStorage, Text, ScrollView, RefreshControl } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
@@ -30,6 +30,13 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
     let phone = employeeDetails.contactInfo.phone;
     let email = employeeDetails.contactInfo.email;
     let doj = new Date(employeeDetails.doj);
+
+    const _onPressLogout = async () => {
+        await AsyncStorage.removeItem('refresh');
+        await AsyncStorage.removeItem('access');
+
+        navigation.navigate('Signin');
+    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
@@ -96,6 +103,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
                                 marginBottom: 20
                             }
                         }
+                        onPress={_onPressLogout}
                     >
                         <Text style={{ color: 'white', fontSize: 16 }}>Logout</Text>
                     </TouchableOpacity>
