@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-
 import { TouchableOpacity, Text } from 'react-native';
+
 import Styles from '../Styles';
 import { platform } from '../../../../../../common/apis';
 import Toasts, { CANCEL_SUCCESS, CANCEL_FAILURE } from '../../../Toasts';
+import { getAccessToken } from '../../../../../../common/utils/auth';
 
 export default ({ employeeDetails, stageIntimationIsDirty, reduceToInactiveIntimation, updateStageIntimation, commitToActiveIntimation }) => {
 
@@ -14,8 +15,9 @@ export default ({ employeeDetails, stageIntimationIsDirty, reduceToInactiveIntim
         setTimeout(() => setVisible(false), 5000);
     }
 
-    const _onPress = () => {
-        platform.put(`/employees/${employeeDetails.id}/intimations/cancel`)
+    const _onPress = async () => {
+        const access = await getAccessToken();
+        platform.put(`/employees/${employeeDetails.id}/intimations/cancel`, null, { headers: { Authorization: "Bearer " + access } })
             .then(() => {
                 setShowToast(CANCEL_SUCCESS);
                 setToastVisibility();

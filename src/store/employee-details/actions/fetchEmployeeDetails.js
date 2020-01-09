@@ -1,11 +1,13 @@
 import { platform } from '../../../common/apis';
 import { FETCH_EMPLOYEE_DETAILS } from './types';
-import { updatePullToRefresh } from '../../pull-to-refresh/actions'
+import { updatePullToRefresh } from '../../pull-to-refresh/actions';
+import { getAccessToken } from '../../../common/utils/auth';
 
 const fetchEmployeeDetails = (id, pullToRefresh = false) => async dispatch => {
     if (pullToRefresh) dispatch(updatePullToRefresh(pullToRefresh));
 
-    const res = await platform.get(`/employees/${id}`);
+    const access = await getAccessToken();
+    const res = await platform.get(`/employees/${id}`, { headers: { Authorization: "Bearer " + access, 'Content-Type': 'text/plain' } });
     const employeeDetails = res.data;
 
     dispatch({
