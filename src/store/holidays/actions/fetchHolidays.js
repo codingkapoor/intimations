@@ -1,18 +1,20 @@
 import _ from 'lodash';
-import axios from 'axios';
+
 import { FETCH_HOLIDAYS } from './types';
 import { WEEK_NAMES } from '../../../common/utils/dates';
+import { platform } from '../../../common/apis';
+import { getAccessToken } from '../../../common/utils/auth';
 
 const _remodelHolidays = holidays => {
     let _holidays = {};
 
     const transform = (holiday) => {
-        let dt = new Date(holiday.date);
-        let date = dt.getDate();
-        let day = dt.getDay();
-        let month = String(dt.getMonth() + 1).padStart(2, "0");
-        let year = dt.getFullYear();
-        let occasion = holiday.occasion;
+        const dt = new Date(holiday.date);
+        const date = dt.getDate();
+        const day = dt.getDay();
+        const month = String(dt.getMonth() + 1);
+        const year = dt.getFullYear();
+        const occasion = holiday.occasion;
 
         let v = {};
         v['Day'] = WEEK_NAMES[day];
@@ -36,10 +38,10 @@ const _remodelHolidays = holidays => {
 }
 
 const fetchHolidays = () => async dispatch => {
-    const res = await axios.get('https://api.myjson.com/bins/1en0qa');
-
-    let holidays = res.data;
-    let payload = [_remodelHolidays(holidays), holidays];
+    const access = await getAccessToken();
+    const res = await platform.get('/holidays?start=2020-01-01&end=2020-12-31', { headers: { Authorization: "Bearer " + access } });
+    const holidays = res.data;
+    const payload = [_remodelHolidays(holidays), holidays];
 
     dispatch({
         type: FETCH_HOLIDAYS,
