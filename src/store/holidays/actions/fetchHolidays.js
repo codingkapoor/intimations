@@ -12,7 +12,7 @@ const _remodelHolidays = holidays => {
         const dt = new Date(holiday.date);
         const date = dt.getDate();
         const day = dt.getDay();
-        const month = String(dt.getMonth() + 1);
+        const month = String(dt.getMonth() + 1).padStart(2, "0");
         const year = dt.getFullYear();
         const occasion = holiday.occasion;
 
