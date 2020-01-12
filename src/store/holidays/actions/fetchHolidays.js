@@ -37,9 +37,9 @@ const _remodelHolidays = holidays => {
     return _holidays;
 }
 
-const fetchHolidays = () => async dispatch => {
+const fetchHolidays = (start, end) => async dispatch => {
     const access = await getAccessToken();
-    const res = await platform.get('/holidays?start=2020-01-01&end=2020-12-31', { headers: { Authorization: "Bearer " + access } });
+    const res = await platform.get(`/holidays?start=${start}&end=${end}`, { headers: { Authorization: "Bearer " + access } });
     const holidays = res.data;
     const payload = [_remodelHolidays(holidays), holidays];
 
