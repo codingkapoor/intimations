@@ -31,7 +31,7 @@ import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
 import EditContainer from './src/screens/edit/EditContainer';
 import SignInScreen from './src/screens/signin/SignInScreen';
-import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
+import ResolveAuthScreen from './src/screens/signin/ResolveAuthScreen';
 import { setTopLevelNavigator } from './src/common/NavigationService';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
