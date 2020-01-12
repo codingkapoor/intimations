@@ -2,11 +2,12 @@ import { BadgeColor } from '../../Constants';
 
 export const _getDatesMarkedAsHolidays = (holidays, month, year) => {
     let _markedDates = {};
+    const _month = String(month).padStart(2, "0");
 
-    if (holidays && holidays[0][year] && holidays[0][year][month]) {
-        let data = holidays[0][year][month];
+    if (holidays && holidays[0][year] && holidays[0][year][_month]) {
+        let data = holidays[0][year][_month];
         data.forEach(holiday =>
-            _markedDates[`${year}-${month}-${holiday.Date}`] = {
+            _markedDates[`${year}-${_month}-${holiday.Date}`] = {
                 dots: [{ color: '#E5B001', borderColor: '#E5B001' }]
             }
         );

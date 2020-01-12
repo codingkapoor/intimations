@@ -7,11 +7,11 @@ class Holidays extends Component {
     constructor(props) {
         super(props);
         let date = new Date();
-        this.state = { month: date.getMonth() + 1, year: date.getFullYear(), show: true };
+        this.state = { month: String(date.getMonth() + 1).padStart(2, "0"), year: date.getFullYear(), show: true };
     }
 
     updateMonthYear = (month, year, show) => {
-        this.setState({ month, year, show });
+        this.setState({ month: String(month).padStart(2, "0"), year, show });
     }
 
     render() {
