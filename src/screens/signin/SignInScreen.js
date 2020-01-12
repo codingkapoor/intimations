@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AsyncStorage, Text, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import JwtDecode from 'jwt-decode';
 
 import { OTP, Email } from './StyledComponents';
 import Styles from './Styles';
@@ -11,7 +12,9 @@ const saveTokens = async tokens => {
     await AsyncStorage.setItem('refresh', tokens.refresh);
 }
 
-const SignInScreen = ({navigation}) => {
+const saveUserProfile = async profile => await AsyncStorage.setItem('profile', profile);
+
+const SignInScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [otp, setOTP] = useState('');
 
@@ -30,6 +33,7 @@ const SignInScreen = ({navigation}) => {
         platform.post(`/passwordless/employees/${email}/tokens`, otp)
             .then(res => {
                 saveTokens(res.data);
+                saveUserProfile(JwtDecode(res.data.access).sub);
                 navigation.navigate('mainFlow');
             })
             .catch(error => {
