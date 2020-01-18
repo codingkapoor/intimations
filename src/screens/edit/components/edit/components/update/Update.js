@@ -3,7 +3,7 @@ import { TouchableOpacity, Text } from 'react-native';
 
 import Styles from '../Styles';
 import { platform } from '../../../../../../common/apis';
-import Toasts, { INCOMPLETE_REQUEST, UPDATE_FAILURE, UPDATE_SUCCESS, EMPTY_REASON } from '../../../Toasts';
+import Toasts, { INCOMPLETE_REQUEST, UPDATE_FAILURE, UPDATE_SUCCESS, EMPTY_REASON, EMPTY_REQUESTS } from '../../../Toasts';
 import { getAccessToken } from '../../../../../../common/utils/auth';
 
 export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteRequest, stageIntimationIsDirty, commitToActiveIntimation }) => {
@@ -21,6 +21,9 @@ export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteReq
             setToastVisibility();
         } else if (stageIntimation.reason === '') {
             setShowToast(EMPTY_REASON);
+            setToastVisibility();
+        } else if (stageIntimation.requests.length === 0) {
+            setShowToast(EMPTY_REQUESTS);
             setToastVisibility();
         } else {
             const access = await getAccessToken();

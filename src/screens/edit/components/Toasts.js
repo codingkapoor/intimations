@@ -6,6 +6,7 @@ export const ALREADY5 = 'ALREADY5';
 export const WEEKENDS = 'WEEKENDS';
 export const INCOMPLETE_REQUEST = 'INCOMPLETE_REQUEST';
 export const EMPTY_REASON = 'EMPTY_REASON';
+export const EMPTY_REQUESTS = 'EMPTY_REQUESTS';
 export const CREATE_SUCCESS = 'CREATE_SUCCESS';
 export const CREATE_FAILURE = 'CREATE_FAILURE';
 export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
@@ -25,7 +26,8 @@ const TEXTS = {
     Already5: "Can't update intimation for today after 5 PM",
     Weekends: "Please select dates from weekdays",
     IncompleteRequest: "Dates that belong to an intimation must have requests specified for both the halves",
-    EmptyReason: "Please provide a reason.",
+    EmptyReason: "Please provide a reason",
+    EmptyRequests: "Intimations can't be created without any requests. Please select some date",
     CreateSuccess: "Intimation created",
     CreateFailure: "Failed to create intimation",
     UpdateSuccess: "Intimation updated",
@@ -56,6 +58,10 @@ export default ({ showToast, visible }) => {
             break;
         case EMPTY_REASON:
             text = TEXTS.EmptyReason;
+            type = TYPES.Warning;
+            break;
+        case EMPTY_REQUESTS:
+            text = TEXTS.EmptyRequests;
             type = TYPES.Warning;
             break;
         case CREATE_SUCCESS:

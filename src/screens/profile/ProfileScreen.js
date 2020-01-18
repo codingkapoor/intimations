@@ -14,11 +14,36 @@ import { MONTH_NAMES, getOrdinal } from '../../common/utils/dates';
 const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, navigation }) => {
     const onRefresh = () => fetchEmployeeDetails(employeeDetails.id);
 
+    const _onPressLogout = async () => {
+        await AsyncStorage.removeItem('refresh');
+        await AsyncStorage.removeItem('access');
+
+        navigation.navigate('Signin');
+    }
+
     if (!employeeDetails.leaves)
         return (
-            <SpinnerWrapper>
-                <WaveIndicator color="#000000" />
-            </SpinnerWrapper>
+            <>
+                <SpinnerWrapper>
+                    <WaveIndicator color="#000000" />
+                </SpinnerWrapper>
+                <TouchableOpacity
+                    style={
+                        {
+                            alignItems: 'center',
+                            backgroundColor: '#3A8BCF',
+                            padding: 17,
+                            width: 180,
+                            borderRadius: 5,
+                            marginTop: 80,
+                            marginBottom: 20
+                        }
+                    }
+                    onPress={_onPressLogout}
+                >
+                    <Text style={{ color: 'white', fontSize: 16 }}>Logout</Text>
+                </TouchableOpacity>
+            </>
         );
 
     let id = employeeDetails.id;
@@ -30,13 +55,6 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
     let phone = employeeDetails.contactInfo.phone;
     let email = employeeDetails.contactInfo.email;
     let doj = new Date(employeeDetails.doj);
-
-    const _onPressLogout = async () => {
-        await AsyncStorage.removeItem('refresh');
-        await AsyncStorage.removeItem('access');
-
-        navigation.navigate('Signin');
-    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
