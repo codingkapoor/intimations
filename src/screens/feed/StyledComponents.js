@@ -60,3 +60,13 @@ export const StyledBadge = styled.View`
     margin: 1px;
     background-color: ${props => BadgeColor[props.half]};
 `;
+
+export const NoActivityWrapper = styled.View`
+    align-items: center;
+    margin-top: 200px;
+`;
+
+export const NoActivityLabel = styled.Text`
+    color: #E2E2E2;
+    font-size: 18px; 
+`;
