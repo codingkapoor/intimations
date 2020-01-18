@@ -15,7 +15,7 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveInt
 
     const [switchSelectorState, setSwitchSelectorState] = useState({ toggle: false, toggleValue: '1' });
 
-    useEffect(() => {fetchAll()}, []);
+    useEffect(() => { fetchAll() }, []);
 
     onRefresh = () => fetchActiveIntimations();
 
@@ -25,6 +25,19 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveInt
                 <WaveIndicator color='#000000' />
             </SpinnerWrapper>
         );
+
+    let sections = Object.keys(activeIntimations[0]).sort((a, b) => { return new Date(a) - new Date(b) }).map((key, _) => {
+        let intimations = (switchSelectorState.toggle === false) ?
+            activeIntimations[0][key].filter(i => i.isToday) :
+            activeIntimations[0][key].filter(i => i.isPlanned)
+
+        return (intimations.length > 0) ?
+            <Section key={shortid.generate()}
+                activeIntimations={intimations}
+                lastModified={key}
+                toggle={switchSelectorState.toggle}
+            /> : null;
+    })
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
@@ -52,20 +65,7 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveInt
                     </View>
                 </View>
 
-                {Object.keys(activeIntimations[0]).sort((a, b) => { return new Date(a) - new Date(b) }).map((key, _) => {
-                    let intimations = (switchSelectorState.toggle === false) ?
-                        activeIntimations[0][key].filter(i => i.isToday) :
-                        activeIntimations[0][key].filter(i => i.isPlanned)
-
-                    return (intimations.length > 0) ?
-                        <Section key={shortid.generate()}
-                            activeIntimations={intimations}
-                            lastModified={key}
-                            toggle={switchSelectorState.toggle}
-                        /> : null;
-                })}
-
-                {Object.keys(activeIntimations[0]).length === 0 ? <NoActivity /> : null}
+                {sections.filter(s => s !== null).length === sections.length ? sections.length > 0 ? sections : <NoActivity /> : <NoActivity />}
 
             </ScrollView>
         </SafeAreaView>
