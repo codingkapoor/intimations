@@ -41,7 +41,6 @@ export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteReq
     return (
         <>
             <TouchableOpacity
-                disabled={!stageIntimationIsDirty}
                 style={Styles.updateWrapper}
                 onPress={_onPress}
             >
