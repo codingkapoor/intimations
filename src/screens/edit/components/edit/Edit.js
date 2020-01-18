@@ -21,5 +21,5 @@ export default ({ activeIntimation, stageIntimation, stageIntimationIsDirty }) =
         return stageIntimationIsDirty ? <><UpdateContainer /><ResetContainer /></> : <CancelContainer />;
     }
 
-    return stageIntimationIsDirty ? <><UpdateContainer /><ResetContainer /></> : <><CreateContainer /><ResetContainer /></>;
+    return activeIntimation.reason === '' ? <><CreateContainer /><ResetContainer /></> : <><UpdateContainer /><ResetContainer /></>;
 }
