@@ -3,26 +3,19 @@ import { Calendar } from 'react-native-calendars';
 import { Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
-import Toasts, { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../Toasts';
+import { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../../../../common/components/Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from './Styles';
 import { getDiffInMonths, getDaysInMonthYear } from '../../../../common/utils/dates';
 
 export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation, updateStageIntimation,
-    toggleValue, stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, fetchInactiveIntimations }) => {
+    toggleValue, stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, fetchInactiveIntimations, setToast }) => {
 
     let currentDate = new Date(new Date().toISOString().split('T')[0]);
 
     const [[month, year], setMonthYear] = useState([currentDate.getMonth() + 1, currentDate.getFullYear()]);
 
     const [markedDates, setMarkedDates] = useState({});
-
-    const [showToast, setShowToast] = useState(null);
-    const [visible, setVisible] = useState(false);
-    const setToastVisibility = () => {
-        setTimeout(() => setVisible(true), 500);
-        setTimeout(() => setVisible(false), 5000);
-    }
 
     const holidaysRef = useRef();
     const updateHolidaysMonthYear = (month, year, show) => {
@@ -95,7 +88,7 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
         });
 
         updateHolidaysMonthYear(month, year, true);
-        
+
         setMonthYear([month, year]);
     }
 
@@ -114,21 +107,17 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
     const _onDayPress = e => {
         let datePressed = new Date(e.dateString);
 
-        if (datePressed.getDay() === 0 || datePressed.getDay() === 6) {
-            setShowToast(WEEKENDS);
-            setToastVisibility();
-        } else if (datePressed < currentDate) {
-            setShowToast(PAST);
-            setToastVisibility();
-        } else if (datePressed === currentDate && currentDate.getHours() >= 17) {
-            setShowToast(ALREADY5);
-            setToastVisibility();
-        } else {
+        if (datePressed.getDay() === 0 || datePressed.getDay() === 6)
+            setToast(WEEKENDS, 100, 3000);
+        else if (datePressed < currentDate)
+            setToast(PAST, 100, 3000);
+        else if (datePressed === currentDate && currentDate.getHours() >= 17)
+            setToast(ALREADY5, 100, 3000);
+        else {
             if (stageIntimationIncompleteRequest.date) {
-                if (e.dateString !== stageIntimationIncompleteRequest.date) {
-                    setShowToast(INCOMPLETE_REQUEST);
-                    setToastVisibility();
-                } else {
+                if (e.dateString !== stageIntimationIncompleteRequest.date)
+                    setToast(INCOMPLETE_REQUEST, 100, 3000);
+                else {
                     let req = { 'date': stageIntimationIncompleteRequest.date, 'firstHalf': stageIntimationIncompleteRequest.firstHalf, 'secondHalf': toggleValue };
                     let requests = stageRequests.filter(i => i.date !== e.dateString);
                     requests.push(req);
@@ -153,10 +142,9 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
     }
 
     const _onDayLongPress = e => {
-        if (stageIntimationIncompleteRequest.date && e.dateString !== stageIntimationIncompleteRequest.date) {
-            setShowToast(INCOMPLETE_REQUEST);
-            setToastVisibility();
-        } else if (stageRequests.filter(r => r.date === e.dateString).length > 0) {
+        if (stageIntimationIncompleteRequest.date && e.dateString !== stageIntimationIncompleteRequest.date)
+            setToast(INCOMPLETE_REQUEST, 100, 3000);
+        else if (stageRequests.filter(r => r.date === e.dateString).length > 0) {
             Vibration.vibrate();
             _removeFromStageIntimationRequests(e.dateString);
             setStageIntimationIncompleteRequest({});
@@ -189,8 +177,6 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
             />
 
             <HolidaysContainer ref={holidaysRef} />
-
-            <Toasts showToast={showToast} visible={visible} />
         </>
     );
 }
