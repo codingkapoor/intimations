@@ -13,6 +13,10 @@ export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 export const UPDATE_FAILURE = 'UPDATE_FAILURE';
 export const CANCEL_SUCCESS = 'CANCEL_SUCCESS';
 export const CANCEL_FAILURE = 'CANCEL_FAILURE';
+export const OTP_SENT = "OTP_SENT";
+export const SIGNIN_FAILURE = "SIGNIN_FAILURE";
+export const REQUEST_EMAIL = "REQUEST_EMAIL";
+export const REQUEST_OTP = "REQUEST_OTP";
 
 const TYPES = {
     Info: { backgroundColor: '#3A8BCF', textColor: '#FFFFFF' },
@@ -33,7 +37,11 @@ const TEXTS = {
     UpdateSuccess: "Intimation updated",
     UpdateFailure: "Failed to update intimation",
     CancelSuccess: "Intimation cancelled",
-    CancelFailure: "Failed to cancel intimation"
+    CancelFailure: "Failed to cancel intimation",
+    OTPSent: "OTP sent to the registered email id",
+    SignInFailure: "Something went wrong",
+    RequestEmail: "Please provide a valid email id",
+    RequestOTP: "Please provide OTP received via email"
 };
 
 export default ({ showToast, visible }) => {
@@ -87,6 +95,22 @@ export default ({ showToast, visible }) => {
         case CANCEL_FAILURE:
             text = TEXTS.CancelFailure;
             type = TYPES.Failure;
+            break;
+        case OTP_SENT:
+            text = TEXTS.OTPSent;
+            type = TYPES.Info;
+            break;
+        case SIGNIN_FAILURE:
+            text = TEXTS.SignInFailure;
+            type = TYPES.Failure;
+            break;
+        case REQUEST_EMAIL:
+            text = TEXTS.RequestEmail;
+            type = TYPES.Warning;
+            break;
+        case REQUEST_OTP:
+            text = TEXTS.RequestOTP;
+            type = TYPES.Warning;
             break;
         default:
             text = '';
