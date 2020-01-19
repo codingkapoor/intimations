@@ -8,8 +8,9 @@ import { Reason } from './StyledComponents';
 import { ToggleValue } from './Constants';
 import EditContainer from './components/edit/EditContainer';
 import { getDaysInMonthYear } from '../../common/utils/dates';
+import Toasts from '../../common/components/Toasts';
 
-const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fetchInactiveIntimations, updateStageIntimation }) => {
+const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fetchInactiveIntimations, updateStageIntimation, toast }) => {
 
     const _fetchInactiveIntimations = () => {
         const getStartMonth = month => String(month - 2 <= 0 ? month + 10 : month - 2).padStart(2, '0');
@@ -39,9 +40,7 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fe
 
     const [toggleValue, setToggleValue] = useState(ToggleValue.WFH);
 
-    useEffect(() => {
-        _fetchInactiveIntimations();
-    }, []);
+    useEffect(() => { _fetchInactiveIntimations() }, []);
 
     stageRequests = stageIntimation.requests ? stageIntimation.requests : [];
 
@@ -84,6 +83,8 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fe
                     />
 
                     <EditContainer />
+
+                    <Toasts showToast={toast.type} visible={toast.visible} />
                 </View>
             </ScrollView>
         </SafeAreaView>
