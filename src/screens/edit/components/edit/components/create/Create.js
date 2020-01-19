@@ -3,14 +3,16 @@ import { TouchableOpacity, Text } from 'react-native';
 
 import Styles from '../Styles';
 import { platform } from '../../../../../../common/apis';
-import { INCOMPLETE_REQUEST, CREATE_FAILURE, CREATE_SUCCESS, EMPTY_REASON } from '../../../../../../common/components/Toasts';
+import { INCOMPLETE_REQUEST, CREATE_FAILURE, CREATE_SUCCESS, EMPTY_REASON, EMPTY_REQUESTS } from '../../../../../../common/components/Toasts';
 import { getAccessToken } from '../../../../../../common/utils/auth';
 
-export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteRequest, stageIntimationIsDirty, commitToActiveIntimation, setToast }) => {
+export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteRequest, commitToActiveIntimation, setToast }) => {
 
     const _onPress = async () => {
         if (stageIntimationIncompleteRequest.date)
             setToast(INCOMPLETE_REQUEST, 100, 3000);
+        else if (stageIntimation.requests.length === 0)
+            setToast(EMPTY_REQUESTS, 100, 3000);
         else if (stageIntimation.reason === '')
             setToast(EMPTY_REASON, 100, 3000);
         else {
@@ -29,7 +31,6 @@ export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteReq
 
     return (
         <TouchableOpacity
-            disabled={!stageIntimationIsDirty}
             style={Styles.createWrapper}
             onPress={_onPress}
         >
