@@ -30,9 +30,9 @@ import ProfileContainer from './src/screens/profile/ProfileContainer';
 import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
 import EditContainer from './src/screens/edit/EditContainer';
-import SignInScreen from './src/screens/signin/SignInScreen';
 import ResolveAuthScreen from './src/screens/signin/ResolveAuthScreen';
 import { setTopLevelNavigator } from './src/common/NavigationService';
+import SignInContainer from './src/screens/signin/SignInContainer';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
   faCalendarDay, faPen, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
@@ -44,9 +44,8 @@ const infoFlow = createStackNavigator({
 
 infoFlow.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  if (navigation.state.index > 0) {
+  if (navigation.state.index > 0)
     tabBarVisible = false;
-  }
 
   return {
     title: '',
@@ -66,9 +65,8 @@ const intimationsFlow = createStackNavigator({
 
 intimationsFlow.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  if (navigation.state.index > 0) {
+  if (navigation.state.index > 0)
     tabBarVisible = false;
-  }
 
   return {
     title: '',
@@ -105,7 +103,7 @@ const mainFlow = createBottomTabNavigator(
 
 const AppNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
-  Signin: SignInScreen,
+  Signin: SignInContainer,
   mainFlow
 });
 

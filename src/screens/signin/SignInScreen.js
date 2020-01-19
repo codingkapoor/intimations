@@ -6,6 +6,7 @@ import JwtDecode from 'jwt-decode';
 import { OTP, Email } from './StyledComponents';
 import Styles from './Styles';
 import { platform } from '../../common/apis';
+import Toasts, { OTP_SENT, SIGNIN_FAILURE, REQUEST_EMAIL, REQUEST_OTP } from '../../common/components/Toasts';
 
 const saveTokens = async tokens => {
     await AsyncStorage.setItem('access', tokens.access);
@@ -14,32 +15,40 @@ const saveTokens = async tokens => {
 
 const saveUserProfile = async profile => await AsyncStorage.setItem('profile', profile);
 
-const SignInScreen = ({ navigation }) => {
+const SignInScreen = ({ navigation, setToast, toast }) => {
     const [email, setEmail] = useState('');
     const [otp, setOTP] = useState('');
 
     const _onPressGenerateOTP = () => {
-        platform.get(`/passwordless/employees/${email}/otp`)
-            .then(() => {
-                alert('OTP sent on the registered email id');
-            })
-            .catch(error => {
-                alert('Something went wrong');
-                console.log(error);
-            });
+        if (email.trim() === "")
+            setToast(REQUEST_EMAIL, 100, 3000);
+        else {
+            platform.get(`/passwordless/employees/${email}/otp`)
+                .then(() => { setToast(OTP_SENT, 100, 3000) })
+                .catch(error => {
+                    setToast(SIGNIN_FAILURE, 100, 3000);
+                    console.log(error);
+                });
+        }
     }
 
     const _onPressLogin = () => {
-        platform.post(`/passwordless/employees/${email}/tokens`, otp)
-            .then(res => {
-                saveTokens(res.data);
-                saveUserProfile(JwtDecode(res.data.access).sub);
-                navigation.navigate('mainFlow');
-            })
-            .catch(error => {
-                alert('Something went wrong');
-                console.log(error);
-            });
+        if (email.trim() === "")
+            setToast(REQUEST_EMAIL, 100, 3000);
+        else if (otp.trim() === "")
+            setToast(REQUEST_OTP, 100, 3000);
+        else {
+            platform.post(`/passwordless/employees/${email}/tokens`, otp)
+                .then(res => {
+                    saveTokens(res.data);
+                    saveUserProfile(JwtDecode(res.data.access).sub);
+                    navigation.navigate('mainFlow');
+                })
+                .catch(error => {
+                    setToast(SIGNIN_FAILURE, 100, 3000);
+                    console.log(error);
+                });
+        }
     }
 
     return (
@@ -73,6 +82,8 @@ const SignInScreen = ({ navigation }) => {
                 >
                     <Text style={Styles.buttonText}>Log In</Text>
                 </TouchableOpacity>
+
+                <Toasts showToast={toast.type} visible={toast.visible} />
             </View>
         </SafeAreaView>
     );
