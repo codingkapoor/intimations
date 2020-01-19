@@ -68,5 +68,5 @@ export const NoActivityWrapper = styled.View`
 
 export const NoActivityLabel = styled.Text`
     color: #E2E2E2;
-    font-size: 18px; 
+    font-size: 16px; 
 `;

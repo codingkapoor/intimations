@@ -6,7 +6,7 @@ import { NoActivityWrapper, NoActivityLabel } from '../StyledComponents';
 const NoActivity = () => {
    return (
       <NoActivityWrapper>
-         <FontAwesomeIcon icon={'bell'} size={44} color={'#E2E2E2'} />
+         <FontAwesomeIcon icon={'bell'} size={36} color={'#E2E2E2'} />
          <NoActivityLabel>No Activity</NoActivityLabel>
       </NoActivityWrapper>
    );
