@@ -6,7 +6,7 @@ import { platform } from '../../../../../../common/apis';
 import { INCOMPLETE_REQUEST, UPDATE_FAILURE, UPDATE_SUCCESS, EMPTY_REASON, EMPTY_REQUESTS } from '../../../../../../common/components/Toasts';
 import { getAccessToken } from '../../../../../../common/utils/auth';
 
-export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteRequest, commitToActiveIntimation, setToast }) => {
+export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteRequest, commitToActiveIntimation, updateEmployeeLeaveDetails, setToast }) => {
 
     const _onPress = async () => {
         if (stageIntimationIncompleteRequest.date)
@@ -17,15 +17,15 @@ export default ({ employeeDetails, stageIntimation, stageIntimationIncompleteReq
             setToast(EMPTY_REQUESTS, 100, 3000);
         else {
             const access = await getAccessToken();
-            platform.put(`/employees/${employeeDetails.id}/intimations`, stageIntimation, { headers: { Authorization: "Bearer " + access } })
-                .then(() => {
-                    setToast(UPDATE_SUCCESS, 100, 3000);
-                    commitToActiveIntimation();
-                })
-                .catch(error => {
-                    console.log(error);
-                    setToast(UPDATE_FAILURE, 100, 3000);
-                });
+            try {
+                const res = await platform.put(`/employees/${employeeDetails.id}/intimations`, stageIntimation, { headers: { Authorization: "Bearer " + access } });
+                setToast(UPDATE_SUCCESS, 100, 3000);
+                commitToActiveIntimation();
+                updateEmployeeLeaveDetails(res.data);
+            } catch (error) {
+                console.log(error);
+                setToast(UPDATE_FAILURE, 100, 3000);
+            }
         }
     }
 

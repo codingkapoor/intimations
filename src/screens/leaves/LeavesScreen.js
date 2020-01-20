@@ -20,8 +20,9 @@ class LeavesScreen extends Component {
                 </SpinnerWrapper>
             );
 
-        let el = employeeDetails.leaves.earned;
-        let sl = employeeDetails.leaves.sick;
+        const el = employeeDetails.leaves.earned;
+        const sl = employeeDetails.leaves.sick;
+        const ex = employeeDetails.leaves.extra;
 
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
@@ -35,6 +36,10 @@ class LeavesScreen extends Component {
                     <StyledLeaves>
                         <Figure>{sl}</Figure>
                         <Label>Sick Leaves</Label>
+                    </StyledLeaves>
+                    <StyledLeaves>
+                        <Figure>{ex}</Figure>
+                        <Label>Extra Leaves</Label>
                     </StyledLeaves>
                 </ScrollView>
             </SafeAreaView>
