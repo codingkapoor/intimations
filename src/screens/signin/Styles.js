@@ -12,5 +12,12 @@ export default Styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 16
+    },
+    codeStyle: {
+        width: 45,
+        height: 55,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#D8DADA'
     }
 });

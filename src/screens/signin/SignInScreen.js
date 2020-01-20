@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { AsyncStorage, Text, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import JwtDecode from 'jwt-decode';
+import OTPInputView from '@twotalltotems/react-native-otp-input'
 
-import { OTP, Email } from './StyledComponents';
+import { Email } from './StyledComponents';
 import Styles from './Styles';
 import { platform } from '../../common/apis';
 import Toasts, { OTP_SENT, SIGNIN_FAILURE, REQUEST_EMAIL, REQUEST_OTP } from '../../common/components/Toasts';
@@ -62,11 +63,13 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
                     autoCorrect={false}
                 />
 
-                <OTP
-                    placeholder='One Time Password'
-                    value={otp}
-                    onChangeText={setOTP}
-                    autoCorrect={false}
+                <OTPInputView
+                    style={{ width: 320, height: 100 }}
+                    pinCount={6}
+                    code={otp}
+                    onCodeChanged={setOTP}
+                    autoFocusOnLoad={false}
+                    codeInputFieldStyle={Styles.codeStyle}
                 />
 
                 <TouchableOpacity
