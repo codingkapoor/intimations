@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { AsyncStorage, Text, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import JwtDecode from 'jwt-decode';
-import OTPInputView from '@twotalltotems/react-native-otp-input'
+import OTPInputView from '@twotalltotems/react-native-otp-input';
+import * as Permissions from 'expo-permissions';
+import { Notifications } from 'expo';
 
 import { Email } from './StyledComponents';
 import Styles from './Styles';
@@ -33,22 +35,33 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
         }
     }
 
-    const _onPressLogin = () => {
+    const _onPressLogin = async () => {
         if (email.trim() === "")
             setToast(REQUEST_EMAIL, 100, 3000);
         else if (otp.trim() === "")
             setToast(REQUEST_OTP, 100, 3000);
         else {
-            platform.post(`/passwordless/employees/${email}/tokens`, otp)
-                .then(res => {
-                    saveTokens(res.data);
-                    saveUserProfile(JwtDecode(res.data.access).sub);
-                    navigation.navigate('mainFlow');
-                })
-                .catch(error => {
-                    setToast(SIGNIN_FAILURE, 100, 3000);
-                    console.log(error);
-                });
+            try {
+                const res = await platform.post(`/passwordless/employees/${email}/tokens`, otp);
+                saveTokens(res.data);
+                saveUserProfile(JwtDecode(res.data.access).sub);
+
+                const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+                if (status !== 'granted') return;
+
+                const expoToken = await Notifications.getExpoPushTokenAsync();
+                const profile = await AsyncStorage.getItem('profile');
+                await platform.post(
+                    `/notifier/register/${profile}`,
+                    { token: expoToken },
+                    { headers: { Authorization: 'Bearer ' + res.data.access, 'Content-Type': 'application/json' } }
+                );
+
+                navigation.navigate('mainFlow');
+            } catch (error) {
+                setToast(SIGNIN_FAILURE, 100, 3000);
+                console.log(error);
+            }
         }
     }
 
