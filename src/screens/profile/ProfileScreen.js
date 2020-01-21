@@ -1,20 +1,27 @@
 import React from 'react';
-import { AsyncStorage, Text, ScrollView, RefreshControl } from 'react-native';
+import { AsyncStorage, Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SpinnerWrapper, DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../common/StyledComponents';
 import { StyledProfile, IdWrapper, DOJWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper } from './StyledComponents';
 import { Id, Name, Designation, Company, Location, Phone, Email } from './StyledComponents';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { MONTH_NAMES, getOrdinal } from '../../common/utils/dates';
+import { platform } from '../../common/apis';
 
 const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, navigation }) => {
     const onRefresh = () => fetchEmployeeDetails(employeeDetails.id);
 
     const _onPressLogout = async () => {
+        const access = await AsyncStorage.getItem('access');
+        await platform.delete(
+            `/notifier/deregister/${employeeDetails.id}`,
+            { headers: { Authorization: "Bearer " + access } }
+        );
+
         await AsyncStorage.removeItem('refresh');
         await AsyncStorage.removeItem('access');
 
