@@ -5,6 +5,10 @@ import JwtDecode from 'jwt-decode';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import * as Permissions from 'expo-permissions';
 import { Notifications } from 'expo';
+import {
+    heightPercentageToDP as hp,
+    widthPercentageToDP as wp,
+} from 'react-native-responsive-screen'
 
 import { Email } from './StyledComponents';
 import Styles from './Styles';
@@ -67,8 +71,8 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <Image source={require('./intimations.png')} style={{ width: 200, height: 200, marginTop: 50, marginBottom: 20 }} />
-            <View>
+            <Image source={require('./intimations.png')} style={{ width: wp('30%'), height: hp('30%'), marginTop: 50, marginBottom: 20 }} />
+            <View style={{ flex: 1, backgroundColor: '#FEFEFE', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <Email
                     placeholder='Registered Email'
                     value={email}
@@ -77,7 +81,7 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
                 />
 
                 <OTPInputView
-                    style={{ width: 320, height: 100 }}
+                    style={{ width: wp("77%"), height: hp("10%") }}
                     pinCount={6}
                     code={otp}
                     onCodeChanged={setOTP}
