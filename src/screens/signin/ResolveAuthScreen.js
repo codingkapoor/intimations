@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform } from 'react-native';
+import { Notifications } from 'expo';
+
+import { pushNotification } from '../../common/listeners';
 
 const ResolveAuthScreen = ({ navigation }) => {
     const resolveAuth = async () => {
@@ -10,7 +13,17 @@ const ResolveAuthScreen = ({ navigation }) => {
     }
 
     useEffect(() => {
-        resolveAuth()
+        Notifications.addListener(pushNotification);
+
+        if (Platform.OS === 'android') {
+            Notifications.createChannelAndroidAsync('push-notifications', {
+                name: 'Push Notifications',
+                sound: true,
+                vibrate: true
+            });
+        }
+
+        resolveAuth();
     }, []);
 
     return null;

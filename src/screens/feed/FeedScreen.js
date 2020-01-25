@@ -5,21 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import shortid from 'shortid';
 import SwitchSelector from "react-native-switch-selector";
-import { Notifications } from 'expo';
 
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import Section from './components/Section';
 import NoActivity from './components/NoActivity';
-import { pushNotification } from '../../common/listeners';
 
 const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveIntimations, navigation }) => {
 
     const [switchSelectorState, setSwitchSelectorState] = useState({ toggle: false, toggleValue: '1' });
 
-    useEffect(() => {
-        fetchAll();
-        Notifications.addListener(pushNotification);
-    }, []);
+    useEffect(() => { fetchAll() }, []);
 
     onRefresh = () => fetchActiveIntimations();
 
