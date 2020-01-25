@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "simple lms",
-    "slug": "simple-lms-mobile",
+    "name": "Intimations",
+    "slug": "intimations",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
