@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage, Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
+import { AsyncStorage, Text, ScrollView, RefreshControl, TouchableOpacity, View } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -30,27 +30,25 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
 
     if (!employeeDetails.leaves)
         return (
-            <>
-                <SpinnerWrapper>
-                    <WaveIndicator color="#000000" />
-                </SpinnerWrapper>
+            <View style={{ flex: 1, alignItems: 'center' }}>
+                <WaveIndicator color="#000000" />
                 <TouchableOpacity
                     style={
                         {
                             alignItems: 'center',
+                            justifyContent: 'center',
                             backgroundColor: '#3A8BCF',
                             padding: 17,
                             width: 180,
                             borderRadius: 5,
-                            marginTop: 80,
-                            marginBottom: 20
+                            marginBottom: 140
                         }
                     }
                     onPress={_onPressLogout}
                 >
                     <Text style={{ color: 'white', fontSize: 16 }}>Logout</Text>
                 </TouchableOpacity>
-            </>
+            </View>
         );
 
     let id = employeeDetails.id;
