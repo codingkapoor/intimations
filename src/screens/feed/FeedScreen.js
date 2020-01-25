@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, RefreshControl, View, Text } from 'react-native';
+import { ScrollView, RefreshControl, View, TouchableOpacity } from 'react-native';
 import { WaveIndicator } from 'react-native-indicators';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import shortid from 'shortid';
 import SwitchSelector from "react-native-switch-selector";
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Notifications } from 'expo';
 
 import { SpinnerWrapper } from '../../common/StyledComponents';
 import Section from './components/Section';
 import NoActivity from './components/NoActivity';
+import { pushNotification } from '../../common/listeners';
 
 const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveIntimations, navigation }) => {
 
     const [switchSelectorState, setSwitchSelectorState] = useState({ toggle: false, toggleValue: '1' });
 
-    useEffect(() => { fetchAll() }, []);
+    useEffect(() => {
+        fetchAll();
+        Notifications.addListener(pushNotification);
+    }, []);
 
     onRefresh = () => fetchActiveIntimations();
 
@@ -29,7 +33,7 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveInt
     let sections = Object.keys(activeIntimations[0]).sort((a, b) => { return new Date(a) - new Date(b) }).map((key, _) => {
         let intimations = (switchSelectorState.toggle === false) ?
             activeIntimations[0][key].filter(i => i.isToday) :
-            activeIntimations[0][key].filter(i => i.isPlanned)
+            activeIntimations[0][key].filter(i => i.isPlanned);
 
         return (intimations.length > 0) ?
             <Section key={shortid.generate()}
