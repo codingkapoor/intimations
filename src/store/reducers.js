@@ -10,6 +10,7 @@ import { stageIntimationIncompleteRequestReducer } from './stage-intimation-inco
 import { stageIntimationIsDirtyReducer } from './stage-intimation-is-dirty/reducers';
 import { holidaysReducer } from './holidays/reducers';
 import { toastReducer } from './toast/reducers';
+import { pushNotificationSeenReducer } from './push-notification-seen/reducers';
 
 export default combineReducers({
     employeeDetails: employeeDetailsReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
     stageIntimationIncompleteRequest: stageIntimationIncompleteRequestReducer,
     stageIntimationIsDirty: stageIntimationIsDirtyReducer,
     holidays: holidaysReducer,
-    toast: toastReducer
+    toast: toastReducer,
+    pushNotificationSeen: pushNotificationSeenReducer
 });

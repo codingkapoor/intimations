@@ -27,12 +27,11 @@ import store from './src/store';
 
 import LeavesContainer from './src/screens/leaves/LeavesContainer';
 import ProfileContainer from './src/screens/profile/ProfileContainer';
-import FeedContainer from './src/screens/feed/FeedContainer';
 import AboutContainer from './src/screens/about/AboutContainer';
-import EditContainer from './src/screens/edit/EditContainer';
 import ResolveAuthScreen from './src/screens/signin/ResolveAuthScreen';
 import { setTopLevelNavigator } from './src/common/NavigationService';
 import SignInContainer from './src/screens/signin/SignInContainer';
+import IntimationsFlowNavigator from './src/common/components/IntimationsFlowNavigator';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
   faCalendarDay, faPen, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
@@ -58,30 +57,10 @@ infoFlow.navigationOptions = ({ navigation }) => {
   };
 };
 
-const intimationsFlow = createStackNavigator({
-  Feed: FeedContainer,
-  Edit: EditContainer
-});
-
-intimationsFlow.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = true;
-  if (navigation.state.index > 0)
-    tabBarVisible = false;
-
-  return {
-    title: '',
-    tabBarIcon: ({ focused }) => {
-      let i = focused ? <FontAwesomeIcon icon={'bell'} size={29} color={'#3780BE'} />
-        : <FontAwesomeIcon icon={'bell'} size={29} color={'#393939'} />
-      return i;
-    },
-    tabBarVisible
-  };
-};
 
 const mainFlow = createBottomTabNavigator(
   {
-    intimationsFlow,
+    intimationsFlow: IntimationsFlowNavigator,
     Leaves: LeavesContainer,
     infoFlow
   },
