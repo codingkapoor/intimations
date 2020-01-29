@@ -163,6 +163,13 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
                 markingType={'multi-dot'}
                 theme={{
                     'stylesheet.day.multiDot': {
+                        today: {
+                            borderRadius: 50,
+                            backgroundColor: '#D0E1EC'
+                        },
+                        todayText: {
+                            color: '#FFFFFF'
+                        },
                         dot: {
                             width: 8,
                             height: 8,
