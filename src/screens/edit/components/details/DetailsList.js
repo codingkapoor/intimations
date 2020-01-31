@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FlatList } from 'react-native';
 
 import Details from './Details';
 
@@ -22,11 +23,21 @@ class DetailsList extends Component {
             this.setState({ ...{ details: new Map([...this.state.details, ...new Map([[id, { firstDate, lastDate, reason }]])]) } });
         }
 
-        console.log(this.state);
+        console.log(Array.from(this.state.details.values()));
     }
 
     render() {
-        return <Details firstDate={new Date("2020-01-22")} lastDate={new Date("2020-01-27")} reason="Not feeling well. Will take leave cause YOLO." />
+        return (
+            <FlatList
+                data={Array.from(this.state.details.values()).reverse()}
+                style={{ marginBottom: 15 }}
+                renderItem={({ item }) =>
+                    <Details firstDate={new Date(item.firstDate)} lastDate={new Date(item.lastDate)} reason={item.reason} />
+                }
+                flexGrow={0}
+                keyExtractor={item => item.firstDate}
+            />
+        );
     }
 }
 
