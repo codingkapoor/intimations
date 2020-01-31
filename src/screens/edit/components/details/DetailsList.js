@@ -7,7 +7,7 @@ class DetailsList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { inactiveRequestDate: null, details: new Map() };
+        this.state = { inactiveRequestDate: null, details: new Map(), timeouts: [] };
     }
 
     inactiveRequestDateSelected = inactiveRequestDate => {
@@ -22,12 +22,18 @@ class DetailsList extends Component {
 
             this.setState({ ...{ details: new Map([...this.state.details, ...new Map([[id, { firstDate, lastDate, reason }]])]) } });
 
-            setTimeout(() => {
+            const t = setTimeout(() => {
                 const details = new Map([...this.state.details]);
                 if (details.delete(id))
                     this.setState({ ...{ details } });
             }, 10000);
+
+            this.setState({ ...{ timeouts: [...this.state.timeouts, t] } });
         }
+    }
+
+    componentWillUnmount() {
+        this.state.timeouts.forEach(clearTimeout);
     }
 
     render() {
