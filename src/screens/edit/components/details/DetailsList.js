@@ -21,22 +21,28 @@ class DetailsList extends Component {
             const reason = res[0].reason;
 
             this.setState({ ...{ details: new Map([...this.state.details, ...new Map([[id, { firstDate, lastDate, reason }]])]) } });
-        }
 
-        console.log(Array.from(this.state.details.values()));
+            setTimeout(() => {
+                const details = new Map([...this.state.details]);
+                if (details.delete(id))
+                    this.setState({ ...{ details } });
+            }, 10000);
+        }
     }
 
     render() {
         return (
-            <FlatList
-                data={Array.from(this.state.details.values()).reverse()}
-                style={{ marginBottom: 15 }}
-                renderItem={({ item }) =>
-                    <Details firstDate={new Date(item.firstDate)} lastDate={new Date(item.lastDate)} reason={item.reason} />
-                }
-                flexGrow={0}
-                keyExtractor={item => item.firstDate}
-            />
+            this.state.details ?
+                <FlatList
+                    data={Array.from(this.state.details.values()).reverse()}
+                    style={{ marginBottom: 15 }}
+                    renderItem={({ item }) =>
+                        <Details firstDate={new Date(item.firstDate)} lastDate={new Date(item.lastDate)} reason={item.reason} />
+                    }
+                    flexGrow={0}
+                    keyExtractor={item => item.firstDate}
+                /> :
+                null
         );
     }
 }
