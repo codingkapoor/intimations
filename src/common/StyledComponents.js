@@ -29,3 +29,8 @@ export const StyledMonth = styled.Text`
 export const StyledYear = styled.Text`
     font-size: 16px;
 `;
+
+export const StyledSeparator = styled.Text`
+    font-size: 16px;
+    line-height: 30px;
+`;

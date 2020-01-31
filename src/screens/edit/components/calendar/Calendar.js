@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
-import { Vibration } from 'react-native';
+import { Vibration} from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../../../../common/components/Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from './Styles';
 import { getDiffInMonths, getDaysInMonthYear } from '../../../../common/utils/dates';
+import Details from '../details/Details';
 
 export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation, updateStageIntimation,
     toggleValue, stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, fetchInactiveIntimations, setToast }) => {
@@ -182,6 +183,8 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
                     }
                 }}
             />
+
+            <Details firstDate={new Date("2020-01-22")} lastDate={new Date("2020-01-27")} reason="Not feeling well. Will take leave cause YOLO."/>
 
             <HolidaysContainer ref={holidaysRef} />
         </>
