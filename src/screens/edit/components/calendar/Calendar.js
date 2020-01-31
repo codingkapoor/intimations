@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
-import { Vibration} from 'react-native';
+import { Vibration } from 'react-native';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../../../../common/components/Toasts';
@@ -149,6 +149,10 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
             Vibration.vibrate();
             _removeFromStageIntimationRequests(e.dateString);
             setStageIntimationIncompleteRequest({});
+        } else {
+            const selected = inactiveRequests.filter(ir => ir.date === e.dateString);
+            if (selected.length > 0)
+                console.log(selected[0]);
         }
     }
 
@@ -184,7 +188,7 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
                 }}
             />
 
-            <Details firstDate={new Date("2020-01-22")} lastDate={new Date("2020-01-27")} reason="Not feeling well. Will take leave cause YOLO."/>
+            <Details firstDate={new Date("2020-01-22")} lastDate={new Date("2020-01-27")} reason="Not feeling well. Will take leave cause YOLO." />
 
             <HolidaysContainer ref={holidaysRef} />
         </>
