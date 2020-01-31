@@ -1,12 +1,12 @@
-<p align="center">
-  <img width="300" height="300" src="https://github.com/codingkapoor/intimations/blob/master/assets/logo.png">
-</p>
-
 # Intimations
 Mobile app for Intimations.
 
 *Platform: [intimations-platform](https://github.com/codingkapoor/intimations-platform),
 Web console: [intimations-console](https://github.com/codingkapoor/intimations-console)*
+
+<p align="left">
+  <img width="200" height="200" src="https://github.com/codingkapoor/intimations/blob/master/assets/logo.png">
+</p>
 
 ## Scope
 1. Employees should be able to apply for wfh, half day & full day leaves.
