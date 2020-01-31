@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
+
 import Holiday from './Holiday';
 import shortid from 'shortid';
 

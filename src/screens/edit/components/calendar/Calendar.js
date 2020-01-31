@@ -7,6 +7,7 @@ import { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../../../../common
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
 import Styles from './Styles';
 import { getDiffInMonths, getDaysInMonthYear } from '../../../../common/utils/dates';
+import DetailsListContainer from '../details/DetailsListContainer';
 
 export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation, updateStageIntimation,
     toggleValue, stageIntimationIncompleteRequest, setStageIntimationIncompleteRequest, fetchInactiveIntimations, setToast }) => {
@@ -18,9 +19,12 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
     const [markedDates, setMarkedDates] = useState({});
 
     const holidaysRef = useRef();
-    const updateHolidaysMonthYear = (month, year, show) => {
+    const updateHolidaysMonthYear = (month, year, show) =>
         holidaysRef.current.updateMonthYear(month, year, show);
-    }
+
+    const detailsListRef = useRef();
+    const inactiveRequestDateSelected = inactiveRequestDate =>
+        detailsListRef.current.inactiveRequestDateSelected(inactiveRequestDate);
 
     stageReason = stageIntimation.reason;
     stageRequests = stageIntimation.requests;
@@ -148,6 +152,10 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
             Vibration.vibrate();
             _removeFromStageIntimationRequests(e.dateString);
             setStageIntimationIncompleteRequest({});
+        } else {
+            const selected = inactiveRequests.filter(ir => ir.date === e.dateString);
+            if (selected.length > 0)
+                inactiveRequestDateSelected(selected[0].date);
         }
     }
 
@@ -182,6 +190,8 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
                     }
                 }}
             />
+
+            <DetailsListContainer ref={detailsListRef} />
 
             <HolidaysContainer ref={holidaysRef} />
         </>
