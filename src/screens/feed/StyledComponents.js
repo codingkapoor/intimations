@@ -20,10 +20,8 @@ export const HeaderWrapper = styled.View`
     margin-right: 20px;
     padding: 10px;
     padding-left: 15px;
-    border-width: 1;
-    border-color: #D8DADA;
     border-radius: 10px;
-    background-color: white;
+    background-color: #E1E5F7;
 `;
 
 export const TitleWrapper = styled.View`
