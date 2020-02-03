@@ -13,10 +13,10 @@ export const fetchAll = () => async dispatch => {
     const getStartMonth = month => String(month - 6 <= 0 ? month + 6 : month - 6).padStart(2, '0');
     const getStartYear = (month, year) => month - 6 <= 0 ? year - 1 : year;
 
-    const getEndMonth = month => String(month + 11).padStart(2, '0');
+    const getEndMonth = month => String(month + 6 > 12 ? month - 6 : month + 6).padStart(2, '0');
 
     const getStart = (month, year) => `${getStartYear(month, year)}-${getStartMonth(month)}-01`;
-    const getEnd = (month, year) => `${year}-${getEndMonth(month)}-${getDaysInMonthYear(month, year)}`;
+    const getEnd = (month, year) => `${year}-${getEndMonth(month)}-${getDaysInMonthYear(getEndMonth(month), year)}`;
 
     const limit = (month, year) => [getStart(month, year), getEnd(month, year)];
 
