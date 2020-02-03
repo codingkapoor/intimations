@@ -17,15 +17,18 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
 
     const _onPressLogout = async () => {
         const access = await AsyncStorage.getItem('access');
-        await platform.delete(
-            `/notifier/deregister/${employeeDetails.id}`,
-            { headers: { Authorization: "Bearer " + access } }
-        );
 
-        await AsyncStorage.removeItem('refresh');
-        await AsyncStorage.removeItem('access');
+        try {
+            await platform.delete(
+                `/notifier/deregister/${employeeDetails.id}`,
+                { headers: { Authorization: "Bearer " + access } }
+            );
+        } finally {
+            await AsyncStorage.removeItem('refresh');
+            await AsyncStorage.removeItem('access');
 
-        navigation.navigate('Signin');
+            navigation.navigate('Signin');
+        }
     }
 
     if (!employeeDetails.leaves)
