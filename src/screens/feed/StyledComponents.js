@@ -21,7 +21,7 @@ export const HeaderWrapper = styled.View`
     padding: 10px;
     padding-left: 15px;
     border-radius: 10px;
-    background-color: #E1E5F7;
+    background-color: #EFF0F8;
 `;
 
 export const TitleWrapper = styled.View`
@@ -31,12 +31,13 @@ export const TitleWrapper = styled.View`
 `;
 
 export const Name = styled.Text`
-    font-weight: bold;
+    font-family: open-sans-regular;
     font-size: 18px;
     padding-bottom: 2px;
 `;
 
 export const Reason = styled.Text`
+    font-family: montserrat-light;
     font-size: 16;
     padding-bottom: 5px;
     margin-bottom: 5px;
