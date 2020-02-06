@@ -170,13 +170,17 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
                 onDayLongPress={_onDayLongPress}
                 markingType={'multi-dot'}
                 theme={{
+                    calendarBackground: '#FBFBFB',
+                    textDayFontFamily: 'open-sans-light',
+                    textMonthFontFamily: 'montserrat-bold',
+                    textDayHeaderFontFamily: 'montserrat-light',
                     'stylesheet.day.multiDot': {
                         today: {
                             borderRadius: 50,
-                            backgroundColor: '#D0E1EC'
+                            backgroundColor: '#F4F7FA'
                         },
                         todayText: {
-                            color: '#FFFFFF'
+                            color: '#3A8BCF'
                         },
                         dot: {
                             width: 8,

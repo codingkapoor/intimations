@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { HolidayWrapper, DayWrapper, Day, Date, OccasionWrapper, Occasion } from './StyledComponents';
 
 const Holiday = ({ day, date, occasion }) => {

@@ -5,7 +5,7 @@ export const HolidayWrapper = styled.View`
     flex-direction: row; 
     align-items: center; 
     justify-content: flex-start; 
-    margin-top: 10;
+    margin-bottom: 15;
 `;
 
 export const DayWrapper = styled.View`

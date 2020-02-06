@@ -5,10 +5,10 @@ export const Reason = styled.TextInput`
     height: 100;
     border-color: gray;
     border-radius: 10px;
-    border-color: #D8DADA;
-    border-width: 1px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 15px;
     color: #595959;
     font-size: 16px;
+    font-family: montserrat-light;
+    background-color: #FBFBFB;
 `;
