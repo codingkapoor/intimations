@@ -61,6 +61,9 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fe
                         buttonColor={'#3A8BCF'}
                         hasPadding
                         style={{ width: 250, marginBottom: 10 }}
+                        borderColor={'#FFFFFF'}
+                        backgroundColor={'#F4F7FA'}
+                        textStyle={{ fontFamily: 'open-sans-light' }}
                         height={38}
                         options={[
                             { label: 'Office ', value: ToggleValue.OFFICE },

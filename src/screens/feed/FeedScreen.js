@@ -51,7 +51,7 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveInt
                         buttonColor={'#3A8BCF'}
                         hasPadding
                         borderColor={'#FFFFFF'}
-                        backgroundColor={'#F0F3F6'}
+                        backgroundColor={'#F4F7FA'}
                         textStyle={{ fontFamily: 'open-sans-light' }}
                         style={{ width: 200 }}
                         height={38}
