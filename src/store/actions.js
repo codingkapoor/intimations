@@ -32,6 +32,9 @@ export const fetchAll = () => async dispatch => {
 export const loadAllFonts = async () => {
     await Font.loadAsync({
         'open-sans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
-        'open-sans-regular': require('../../assets/fonts/OpenSans-Regular.ttf')
+        'open-sans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+        'quick-sand-light': require('../../assets/fonts/Quicksand-Light.ttf'),
+        'merri-weather-bold': require('../../assets/fonts/Merriweather-Bold.ttf'),
+        'merri-weather-light': require('../../assets/fonts/Merriweather-Light.ttf')
     });
 };
