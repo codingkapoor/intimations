@@ -8,11 +8,13 @@ export const StyledLeaves = styled.View`
 `;
 
 export const Figure = styled.Text`
+    fontFamily: open-sans-regular;
     font-size: 60px;
     color: #393939;
 `;
 
 export const Label = styled.Text`
+    fontFamily: open-sans-light;
     font-size: 18px;
     color: #393939;
 `;

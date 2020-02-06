@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { AsyncStorage, Platform } from 'react-native';
 import { Notifications } from 'expo';
+import { loadAllFonts } from '../../store/actions';
 
 import { pushNotification } from '../../common/listeners';
 
 const ResolveAuthScreen = ({ navigation }) => {
     const resolveAuth = async () => {
+        loadAllFonts();
+
         const refresh = await AsyncStorage.getItem('refresh');
         // console.log(await AsyncStorage.getItem('access'));
         if (refresh) navigation.navigate('mainFlow');
