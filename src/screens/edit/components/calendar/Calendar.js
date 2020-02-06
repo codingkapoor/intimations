@@ -5,7 +5,7 @@ import { Vibration } from 'react-native';
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { PAST, ALREADY5, WEEKENDS, INCOMPLETE_REQUEST } from '../../../../common/components/Toasts';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
-import Styles from './Styles';
+import Styles, { CalendarTheme } from '../../../../common/Styles';
 import { getDiffInMonths, getDaysInMonthYear } from '../../../../common/utils/dates';
 import DetailsListContainer from '../details/DetailsListContainer';
 
@@ -169,30 +169,7 @@ export default ({ inactiveRequests, holidays, activeIntimation, stageIntimation,
                 onDayPress={_onDayPress}
                 onDayLongPress={_onDayLongPress}
                 markingType={'multi-dot'}
-                theme={{
-                    calendarBackground: '#FBFBFB',
-                    textDayFontFamily: 'open-sans-light',
-                    textMonthFontFamily: 'montserrat-bold',
-                    textDayHeaderFontFamily: 'montserrat-light',
-                    'stylesheet.day.multiDot': {
-                        today: {
-                            borderRadius: 50,
-                            backgroundColor: '#F4F7FA'
-                        },
-                        todayText: {
-                            color: '#3A8BCF'
-                        },
-                        dot: {
-                            width: 8,
-                            height: 8,
-                            marginTop: 1,
-                            marginLeft: 1,
-                            marginRight: 1,
-                            borderRadius: 2,
-                            opacity: 0
-                        }
-                    }
-                }}
+                theme={CalendarTheme}
             />
 
             <DetailsListContainer ref={detailsListRef} />
