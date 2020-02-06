@@ -65,6 +65,7 @@ export const NoActivityWrapper = styled.View`
 `;
 
 export const NoActivityLabel = styled.Text`
+    font-family: open-sans-light;
     color: #E2E2E2;
     font-size: 16px; 
 `;
