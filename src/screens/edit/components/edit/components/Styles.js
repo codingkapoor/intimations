@@ -12,7 +12,8 @@ export default Styles = StyleSheet.create({
     },
     create: {
         color: 'white',
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'open-sans-light'
     },
     updateWrapper: {
         alignItems: 'center',
@@ -25,7 +26,8 @@ export default Styles = StyleSheet.create({
     },
     udpate: {
         color: 'white',
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'open-sans-light'
     },
     cancelWrapper: {
         alignItems: 'center',
@@ -38,7 +40,8 @@ export default Styles = StyleSheet.create({
     },
     cancel: {
         color: 'white',
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'open-sans-light'
     },
     resetWrapper: {
         alignItems: 'center',
@@ -50,6 +53,7 @@ export default Styles = StyleSheet.create({
     },
     reset: {
         color: 'white',
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'open-sans-light'
     }
 });
