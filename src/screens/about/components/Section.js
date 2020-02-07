@@ -1,7 +1,7 @@
 import React from 'react';
-import { Linking, Text} from 'react-native';
-import { Header } from '../StyledComponents';
-import { FlatList } from 'react-native-gesture-handler';
+
+import { Linking, FlatList } from 'react-native';
+import { Header, Resource } from '../StyledComponents';
 
 const Section = ({ headerTitle, data }) => {
     return (
@@ -9,12 +9,11 @@ const Section = ({ headerTitle, data }) => {
             <Header>{headerTitle}</Header>
             <FlatList
                 data={data}
-                style={{ marginBottom: 15 }}
+                style={{ marginBottom: 20 }}
                 renderItem={({ item }) =>
-                    <Text style={{ color: 'blue', paddingLeft: 10, fontSize: 18, marginBottom: 5 }}
-                        onPress={() => Linking.openURL(`${item.url}`)}>
+                    <Resource onPress={() => Linking.openURL(`${item.url}`)}>
                         {item.title}
-                    </Text>
+                    </Resource>
                 }
                 flexGrow={0}
                 keyExtractor={item => item.title}

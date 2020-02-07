@@ -27,15 +27,18 @@ export const IdWrapper = styled.View`
 `;
 
 export const Id = styled.Text`
+    font-family: merriweather-light;
     font-size: 16px;
 `;
 
 export const Name = styled.Text`
+    font-family: merriweather-bold;
     font-size: 20px;
     margin-top: 10px;
 `;
 
 export const Designation = styled.Text`
+    font-family: quick-sand-light;
     font-size: 20px;
     margin-bottom: 10px;
 `;
@@ -46,6 +49,7 @@ export const DOJWrapper = styled.View`
 `;
 
 export const Company = styled.Text`
+    font-family: merriweather-light;
     font-size: 16px;
 `;
 
@@ -55,6 +59,7 @@ export const LocationWrapper = styled.View`
 `;
 
 export const Location = styled.Text`
+    font-family: merriweather-light;
     font-size: 16px;
 `;
 
@@ -68,7 +73,8 @@ export const PhoneWrapper = styled.View`
 `;
 
 export const Phone = styled.Text`
-    font-size: 16px;
+    font-family: quick-sand-light;
+    font-size: 18px;
 `;
 
 export const EmailWrapper = styled.View`
@@ -78,5 +84,12 @@ export const EmailWrapper = styled.View`
 `;
 
 export const Email = styled.Text`
-    font-size: 16px;
+    font-family: quick-sand-light;
+    font-size: 18px;
+`;
+
+export const Logout = styled.Text`
+    color: white; 
+    font-size: 16;
+    font-family: open-sans-light;
 `;

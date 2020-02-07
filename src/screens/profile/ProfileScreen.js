@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Henry, James, Luke, Oliver } from '../../common/svg-components/avatars';
 import { Ellie, Lily, Maya, Zoey } from '../../common/svg-components/avatars';
 import { DateWrapper, Ordinal, StyledDate, StyledMonth, StyledYear } from '../../common/StyledComponents';
-import { StyledProfile, IdWrapper, DOJWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper } from './StyledComponents';
+import { StyledProfile, IdWrapper, DOJWrapper, LocationWrapper, ContactInfoWrapper, PhoneWrapper, EmailWrapper, AvatarWrapper, AboutWrapper, Logout } from './StyledComponents';
 import { Id, Name, Designation, Company, Location, Phone, Email } from './StyledComponents';
 import { MONTH_NAMES, getOrdinal } from '../../common/utils/dates';
 import { platform } from '../../common/apis';
@@ -70,7 +70,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
 
                 <AboutWrapper>
                     <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                        <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 50, textAlign: 'right' }} color={'#393939'} />
+                        <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 30, textAlign: 'right' }} color={'#393939'} />
                     </TouchableOpacity>
                 </AboutWrapper>
 
@@ -131,7 +131,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
                         }
                         onPress={_onPressLogout}
                     >
-                        <Text style={{ color: 'white', fontSize: 16 }}>Logout</Text>
+                        <Logout>Logout</Logout>
                     </TouchableOpacity>
                 </StyledProfile>
 

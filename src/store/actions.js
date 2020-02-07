@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import * as Font from 'expo-font';
 
 import { fetchActiveIntimations } from './active-intimations/actions';
 import { fetchHolidays } from './holidays/actions';
@@ -26,4 +27,16 @@ export const fetchAll = () => async dispatch => {
     await dispatch(fetchHolidays(start, end));
     await dispatch(fetchActiveIntimations());
     await dispatch(checkoutFromActiveIntimation());
+};
+
+export const loadAllFonts = async () => {
+    await Font.loadAsync({
+        'open-sans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
+        'open-sans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+        'quick-sand-light': require('../../assets/fonts/Quicksand-Light.ttf'),
+        'montserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
+        'montserrat-light': require('../../assets/fonts/Montserrat-Light.ttf'),
+        'merriweather-bold': require('../../assets/fonts/Merriweather-Bold.ttf'),
+        'merriweather-light': require('../../assets/fonts/Merriweather-Light.ttf')
+    });
 };

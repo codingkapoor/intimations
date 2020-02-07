@@ -50,6 +50,9 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveInt
                         onPress={value => (value !== switchSelectorState.toggleValue) ? setSwitchSelectorState({ toggle: !switchSelectorState.toggle, toggleValue: value }) : null}
                         buttonColor={'#3A8BCF'}
                         hasPadding
+                        borderColor={'#FFFFFF'}
+                        backgroundColor={'#F4F7FA'}
+                        textStyle={{ fontFamily: 'open-sans-light' }}
                         style={{ width: 200 }}
                         height={38}
                         options={[

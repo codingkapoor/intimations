@@ -1,18 +1,19 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { FooterWrapper, FooterText } from '../StyledComponents';
 
 const Footer = () => {
     return (
-        <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent:'center' }}>
-            <Text>Made with </Text>
+        <FooterWrapper>
+            <FooterText>Made with </FooterText>
             <FontAwesomeIcon icon='heart' size={16} color={'#393939'} />
-            <Text> by </Text>
-            <Text style={{ color: 'blue' }}
+            <FooterText> by </FooterText>
+            <FooterText style={{ color: 'blue' }}
                 onPress={() => Linking.openURL('https://github.com/codingkapoor')}>
                 codingkapoor
-            </Text>
-        </View>
+            </FooterText>
+        </FooterWrapper>
     );
 }
 

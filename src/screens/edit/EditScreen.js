@@ -61,6 +61,9 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fe
                         buttonColor={'#3A8BCF'}
                         hasPadding
                         style={{ width: 250, marginBottom: 10 }}
+                        borderColor={'#FFFFFF'}
+                        backgroundColor={'#F4F7FA'}
+                        textStyle={{ fontFamily: 'open-sans-light' }}
                         height={38}
                         options={[
                             { label: 'Office ', value: ToggleValue.OFFICE },
@@ -94,7 +97,11 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fe
 EditScreen.navigationOptions = {
     title: 'Edit',
     headerTintColor: '#393939',
-    headerTitleStyle: { width: Dimensions.get('window').width },
+    headerTitleStyle: { 
+        width: Dimensions.get('window').width,
+        fontFamily: 'open-sans-regular',
+        fontWeight: '200'
+    },
     tabBarVisible: 'false'
 }
 

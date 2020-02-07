@@ -3,7 +3,7 @@ import { Calendar } from 'react-native-calendars';
 
 import HolidaysContainer from '../../../../common/components/holidays/HolidaysContainer';
 import { _getDatesMarkedAsHolidays, _getDatesMarkedAsRequests } from '../../../../common/utils/calendar';
-import Styles from '../../Styles';
+import Styles, { CalendarTheme } from '../../../../common/Styles';
 
 export default ({ requests, holidays }) => {
 
@@ -62,19 +62,7 @@ export default ({ requests, holidays }) => {
                 onMonthChange={onMonthChange}
                 markedDates={markedDates}
                 markingType={'multi-dot'}
-                theme={{
-                    'stylesheet.day.multiDot': {
-                        dot: {
-                            width: 8,
-                            height: 8,
-                            marginTop: 1,
-                            marginLeft: 1,
-                            marginRight: 1,
-                            borderRadius: 2,
-                            opacity: 0
-                        }
-                    }
-                }}
+                theme={CalendarTheme}
             />
 
             <HolidaysContainer ref={holidaysRef} />
