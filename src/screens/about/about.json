@@ -9,16 +9,7 @@
         ]
     },
     {
-        "headerTitle": "Report Issues",
-        "data": [
-            {
-                "title": "https://github.com/codingkapoor/intimations-mobile/issues",
-                "url": "https://github.com/codingkapoor/intimations-mobile/issues"
-            }
-        ]
-    },
-    {
-        "headerTitle": "Request Features/Enhancements",
+        "headerTitle": "Report Issues/Features/Enhancements",
         "data": [
             {
                 "title": "https://github.com/codingkapoor/intimations-mobile/issues",
