@@ -36,7 +36,6 @@ export const loadAllFonts = async () => {
         'quick-sand-light': require('../../assets/fonts/Quicksand-Light.ttf'),
         'montserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
         'montserrat-light': require('../../assets/fonts/Montserrat-Light.ttf'),
-        'montserrat-regular': require('../../assets/fonts/Montserrat-Regular.ttf'),
         'merriweather-bold': require('../../assets/fonts/Merriweather-Bold.ttf'),
         'merriweather-light': require('../../assets/fonts/Merriweather-Light.ttf')
     });
