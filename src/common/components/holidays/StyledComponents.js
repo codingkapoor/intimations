@@ -14,19 +14,20 @@ export const DayWrapper = styled.View`
 
 export const Day = styled.Text`
     font-size: 10; 
+    font-family: open-sans-light;
     color: #999898;
 `;
 
 export const Date = styled.Text`
     font-size: 16; 
-    font-weight: bold;
+    font-family: open-sans-regular;
 `;
 
 export const OccasionWrapper = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-    height: 30;
+    height: 33;
     background-color: #E5B001;
     border-radius: 5;
     margin-left: 10;
@@ -34,4 +35,6 @@ export const OccasionWrapper = styled.View`
 
 export const Occasion = styled.Text`
     color: #FFFFFF;
+    font-size: 16px;
+    font-family: open-sans-light;
 `;
