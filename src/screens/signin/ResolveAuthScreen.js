@@ -7,7 +7,7 @@ import { pushNotification } from '../../common/listeners';
 
 const ResolveAuthScreen = ({ navigation }) => {
     const resolveAuth = async () => {
-        loadAllFonts();
+        await loadAllFonts();
 
         const refresh = await AsyncStorage.getItem('refresh');
         // console.log(await AsyncStorage.getItem('access'));

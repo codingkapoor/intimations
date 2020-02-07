@@ -9,6 +9,6 @@ export const Email = styled.TextInput`
     margin-top: 15px;
     padding: 17px;
     color: #595959;
-    font-size: 16px;
+    font-size: 18px;
+    font-family: open-sans-light;
 `;
-
