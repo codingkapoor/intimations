@@ -51,7 +51,11 @@ const _redefineContributorsDataKeys = data => {
 AboutScreen.navigationOptions = {
     title: 'About',
     headerTintColor: '#393939',
-    headerTitleStyle: { width: Dimensions.get('window').width },
+    headerTitleStyle: {
+        width: Dimensions.get('window').width,
+        fontFamily: 'open-sans-light',
+        fontWeight: '200'
+    },
     tabBarVisible: 'false'
 }
 

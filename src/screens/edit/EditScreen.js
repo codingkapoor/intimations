@@ -97,7 +97,11 @@ const EditScreen = ({ inactiveIntimations, stageIntimation, activeIntimation, fe
 EditScreen.navigationOptions = {
     title: 'Edit',
     headerTintColor: '#393939',
-    headerTitleStyle: { width: Dimensions.get('window').width },
+    headerTitleStyle: { 
+        width: Dimensions.get('window').width,
+        fontFamily: 'open-sans-regular',
+        fontWeight: '200'
+    },
     tabBarVisible: 'false'
 }
 
