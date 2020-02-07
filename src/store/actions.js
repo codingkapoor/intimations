@@ -37,7 +37,7 @@ export const loadAllFonts = async () => {
         'montserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
         'montserrat-light': require('../../assets/fonts/Montserrat-Light.ttf'),
         'montserrat-regular': require('../../assets/fonts/Montserrat-Regular.ttf'),
-        'merri-weather-bold': require('../../assets/fonts/Merriweather-Bold.ttf'),
-        'merri-weather-light': require('../../assets/fonts/Merriweather-Light.ttf')
+        'merriweather-bold': require('../../assets/fonts/Merriweather-Bold.ttf'),
+        'merriweather-light': require('../../assets/fonts/Merriweather-Light.ttf')
     });
 };

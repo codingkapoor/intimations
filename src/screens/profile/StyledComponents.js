@@ -27,12 +27,12 @@ export const IdWrapper = styled.View`
 `;
 
 export const Id = styled.Text`
-    font-family: merri-weather-light;
+    font-family: merriweather-light;
     font-size: 16px;
 `;
 
 export const Name = styled.Text`
-    font-family: merri-weather-bold;
+    font-family: merriweather-bold;
     font-size: 20px;
     margin-top: 10px;
 `;
@@ -49,7 +49,7 @@ export const DOJWrapper = styled.View`
 `;
 
 export const Company = styled.Text`
-    font-family: merri-weather-light;
+    font-family: merriweather-light;
     font-size: 16px;
 `;
 
@@ -59,7 +59,7 @@ export const LocationWrapper = styled.View`
 `;
 
 export const Location = styled.Text`
-    font-family: merri-weather-light;
+    font-family: merriweather-light;
     font-size: 16px;
 `;
 
