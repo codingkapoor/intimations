@@ -20,6 +20,7 @@ export default Styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         borderColor: '#D8DADA',
-        fontFamily: 'open-sans-light'
+        fontFamily: 'open-sans-light',
+        fontSize: 16
     }
 });
