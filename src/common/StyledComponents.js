@@ -33,3 +33,9 @@ export const StyledYear = styled.Text`
     font-family: merri-weather-light;
     font-size: 16px;
 `;
+
+export const StyledSeparator = styled.Text`
+    font-family: merri-weather-light;
+    font-size: 14px;
+    line-height: 30px;
+`;

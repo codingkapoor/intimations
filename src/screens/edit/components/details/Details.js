@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { DetailsWrapper, Ordinal, DateWrapper, StyledDate, StyledSeparator, Reason } from './StyledComponents';
+import { DetailsWrapper, Reason } from './StyledComponents';
+import { Ordinal, DateWrapper, StyledDate, StyledSeparator } from '../../../../common/StyledComponents';
 import { getOrdinal } from '../../../../common/utils/dates';
 
 const Details = ({ firstDate, lastDate, reason }) => {
