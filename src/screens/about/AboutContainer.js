@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 import AboutScreen from './AboutScreen';
-import { fetchGithubContributors } from '../../store/github-contributors/actions';
 
-const mapStateToProps = ({ githubContributors }) => {
-    return { githubContributors };
+const mapStateToProps = ({}) => {
+    return {};
 };
 
-export default connect(mapStateToProps, { fetchGithubContributors })(AboutScreen);
+export default connect(mapStateToProps, null)(AboutScreen);
