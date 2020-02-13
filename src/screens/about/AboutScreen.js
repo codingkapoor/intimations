@@ -10,24 +10,10 @@ import sections from './about.json';
 import shortid from 'shortid';
 
 class AboutScreen extends Component {
-    componentDidMount() {
-        this.props.fetchGithubContributors();
-    }
-
     render() {
-        let githubContributors = this.props.githubContributors;
-
-        if (githubContributors.size === 0)
-            return (
-                <SpinnerWrapper>
-                    <WaveIndicator color="#000000" />
-                </SpinnerWrapper>
-            );
-
         return (
             <SafeAreaView style={{ flex: 1, wordWrap: 'break-word', justifyContent: 'space-between', backgroundColor: '#FEFEFE' }}>
                 <View>
-                    <Section headerTitle='Contributors' data={_redefineContributorsDataKeys(githubContributors)} />
                     {sections.map(e => { return <Section key={shortid.generate()} headerTitle={e.headerTitle} data={e.data} /> })}
                 </View>
 
