@@ -16,6 +16,7 @@
     "@twotalltotems/react-native-otp-input": "^1.1.4",
     "axios": "^0.19.0",
     "expo": "^35.0.0",
+    "expo-web-browser": "^8.0.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "react": "16.8.3",

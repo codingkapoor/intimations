@@ -25,3 +25,11 @@ export const FooterText = styled.Text`
     font-family: open-sans-light;
     font-size: 16;
 `;
+
+export const StyledAsset = styled.Text`
+    font-size: 20;
+    font-family: open-sans-light;
+    padding-left: 10px;
+    color: #0000FF; 
+    margin-bottom: 20px;
+`;
