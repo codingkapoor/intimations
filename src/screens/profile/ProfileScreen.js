@@ -11,6 +11,7 @@ import { StyledProfile, IdWrapper, DOJWrapper, LocationWrapper, ContactInfoWrapp
 import { Id, Name, Designation, Company, Location, Phone, Email } from './StyledComponents';
 import { MONTH_NAMES, getOrdinal } from '../../common/utils/dates';
 import { platform } from '../../common/apis';
+import Styles from './Styles';
 
 const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, navigation }) => {
     const onRefresh = () => fetchEmployeeDetails(employeeDetails.id);
@@ -36,20 +37,10 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <WaveIndicator color="#000000" />
                 <TouchableOpacity
-                    style={
-                        {
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            backgroundColor: '#3A8BCF',
-                            padding: 17,
-                            width: 180,
-                            borderRadius: 5,
-                            marginBottom: 140
-                        }
-                    }
+                    style={Styles.logoutStandalone}
                     onPress={_onPressLogout}
                 >
-                    <Text style={{ color: 'white', fontSize: 16 }}>Logout</Text>
+                    <Logout>Logout</Logout>
                 </TouchableOpacity>
             </View>
         );
@@ -70,7 +61,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
 
                 <AboutWrapper>
                     <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                        <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: 30, textAlign: 'right' }} color={'#393939'} />
+                        <FontAwesomeIcon icon='info-circle' size={19} style={{ marginTop: '100%', textAlign: 'right' }} color={'#393939'} />
                     </TouchableOpacity>
                 </AboutWrapper>
 
@@ -118,17 +109,7 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
                     </ContactInfoWrapper>
 
                     <TouchableOpacity
-                        style={
-                            {
-                                alignItems: 'center',
-                                backgroundColor: '#3A8BCF',
-                                padding: 17,
-                                width: 180,
-                                borderRadius: 5,
-                                marginTop: 80,
-                                marginBottom: 20
-                            }
-                        }
+                        style={Styles.logout}
                         onPress={_onPressLogout}
                     >
                         <Logout>Logout</Logout>

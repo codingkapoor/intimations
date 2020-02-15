@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 export const HolidayWrapper = styled.View`
-    width: 370; 
+    width: ${wp('90%')}; 
     flex-direction: row; 
     align-items: center; 
     justify-content: flex-start; 
