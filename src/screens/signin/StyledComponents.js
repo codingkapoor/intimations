@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 export const Email = styled.TextInput`
-    width: 320;
+    width: ${wp('77%')};
     height: 55;
     border-radius: 5px;
     border-color: #D8DADA;

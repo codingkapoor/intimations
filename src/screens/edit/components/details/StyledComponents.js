@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 export const DetailsWrapper = styled.View`
-    width: 370;
+    width: ${wp('90%')};
     border-radius: 10px;
     padding: 15px;
     padding-top: 10px;

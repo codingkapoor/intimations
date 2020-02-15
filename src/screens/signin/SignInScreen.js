@@ -68,7 +68,7 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE', justifyContent: 'flex-start', alignItems: 'center' }}>
             <Image source={require('./intimations.png')} style={{ width: 200, height: 200, marginTop: 50, marginBottom: 20 }} />
-            <View>
+            <View style={{ alignItems: 'center' }}>
                 <Email
                     placeholder='Registered Email'
                     value={email}
@@ -77,7 +77,7 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
                 />
 
                 <OTPInputView
-                    style={{ width: 320, height: 100 }}
+                    style={Styles.otpInput}
                     pinCount={6}
                     code={otp}
                     onCodeChanged={setOTP}

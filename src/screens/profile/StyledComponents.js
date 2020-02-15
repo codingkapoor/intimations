@@ -9,7 +9,7 @@ export const AboutWrapper = styled.View`
 export const StyledProfile = styled.View`
     align-items: center;
     justify-content: center;
-    padding-top: 30px;
+    padding-top: 10%;
 `;
 
 export const AvatarWrapper = styled.View`
@@ -18,7 +18,7 @@ export const AvatarWrapper = styled.View`
     justify-content: center;
     width: 100px;
     height: 100px;
-    margin-bottom: 30px;
+    margin-bottom: 7%;
 `;
 
 export const IdWrapper = styled.View`
@@ -64,7 +64,7 @@ export const Location = styled.Text`
 `;
 
 export const ContactInfoWrapper = styled.View`
-    margin-top: 50px;
+    margin-top: 12%;
 `;
 
 export const PhoneWrapper = styled.View`

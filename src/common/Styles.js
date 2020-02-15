@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 export const CalendarTheme = {
     calendarBackground: '#FBFBFB',
@@ -27,7 +28,7 @@ export const CalendarTheme = {
 
 export default Styles = StyleSheet.create({
     calendar: {
-        width: 370,
+        width: wp('90%'),
         borderRadius: 10,
         paddingBottom: 15,
         marginTop: 15
