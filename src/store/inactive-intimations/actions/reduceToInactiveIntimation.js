@@ -1,6 +1,6 @@
 import { REDUCE_TO_INACTIVE_INTIMATION } from './types';
 
-const updateInactiveIntimations = () => (dispatch, getState) => {
+const reduceToInactiveIntimation = () => (dispatch, getState) => {
 
     const { employeeDetails, activeIntimations, inactiveIntimations } = getState();
 
@@ -30,4 +30,4 @@ const updateInactiveIntimations = () => (dispatch, getState) => {
     }
 };
 
-export default updateInactiveIntimations;
+export default reduceToInactiveIntimation;

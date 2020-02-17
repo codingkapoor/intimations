@@ -36,7 +36,7 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveInt
                 lastModified={key}
                 toggle={switchSelectorState.toggle}
             /> : null;
-    })
+    });
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFEFE' }}>
