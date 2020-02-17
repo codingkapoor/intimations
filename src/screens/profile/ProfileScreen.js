@@ -20,8 +20,8 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
         const access = await AsyncStorage.getItem('access');
 
         try {
-            await platform.delete(
-                `/notifier/deregister/${employeeDetails.id}`,
+            await platform.put(
+                `/notifier/employees/${employeeDetails.id}/unsubscribe`,
                 { headers: { Authorization: "Bearer " + access } }
             );
         } finally {

@@ -51,10 +51,10 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
 
                 const expoToken = await Notifications.getExpoPushTokenAsync();
                 const profile = await AsyncStorage.getItem('profile');
-                await platform.post(
-                    `/notifier/register/${profile}`,
-                    { token: expoToken },
-                    { headers: { Authorization: 'Bearer ' + res.data.access, 'Content-Type': 'application/json' } }
+                await platform.put(
+                    `/notifier/employees/${profile}/subscribe`,
+                    expoToken,
+                    { headers: { Authorization: 'Bearer ' + res.data.access, 'Content-Type': 'text/plain' } }
                 );
 
                 navigation.navigate('mainFlow');
