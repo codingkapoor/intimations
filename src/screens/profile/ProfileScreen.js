@@ -22,7 +22,8 @@ const ProfileScreen = ({ employeeDetails, pullToRefresh, fetchEmployeeDetails, n
         try {
             await platform.put(
                 `/notifier/employees/${employeeDetails.id}/unsubscribe`,
-                { headers: { Authorization: "Bearer " + access } }
+                null,
+                { headers: { Authorization: 'Bearer ' + access, 'Content-Type': 'text/plain' } }
             );
         } finally {
             await AsyncStorage.removeItem('refresh');
