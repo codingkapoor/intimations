@@ -5,7 +5,7 @@ export const Email = styled.TextInput`
     width: ${wp('77%')};
     height: 55;
     border-radius: 5px;
-    border-color: #D8DADA;
+    border-color: #EEEEEE;
     border-width: 1px;
     margin-top: 15px;
     padding: 17px;

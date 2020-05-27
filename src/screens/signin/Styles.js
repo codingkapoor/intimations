@@ -23,7 +23,7 @@ export default Styles = StyleSheet.create({
         height: 55,
         borderWidth: 1,
         borderRadius: 5,
-        borderColor: '#D8DADA',
+        borderColor: '#EEEEEE',
         fontFamily: 'open-sans-light',
         fontSize: 16
     }

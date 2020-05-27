@@ -10,7 +10,7 @@ import { SpinnerWrapper } from '../../common/StyledComponents';
 import Section from './components/Section';
 import NoActivity from './components/NoActivity';
 
-const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveIntimations, navigation }) => {
+const FeedScreen = ({ activeIntimation, activeIntimations, pullToRefresh, fetchAll, fetchActiveIntimations, navigation }) => {
 
     const [switchSelectorState, setSwitchSelectorState] = useState({ toggle: false, toggleValue: '1' });
 
@@ -60,11 +60,13 @@ const FeedScreen = ({ activeIntimations, pullToRefresh, fetchAll, fetchActiveInt
                             { label: 'Planned ', value: '2' }
                         ]}
                     />
-                    <View style={{ position: 'absolute', top: 8, right: 20 }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
-                            <FontAwesomeIcon icon={'pen'} size={22} color={'#3780BE'} />
-                        </TouchableOpacity>
-                    </View>
+                    {(activeIntimation.reason === 'Maternity Leave' || activeIntimation.reason === 'Paternity Leave' || activeIntimation.reason === 'Sabbatical Leave') ? null :
+                        <View style={{ position: 'absolute', top: 8, right: 20 }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
+                                <FontAwesomeIcon icon={'pen'} size={22} color={'#3780BE'} />
+                            </TouchableOpacity>
+                        </View>
+                    }
                 </View>
 
                 {sections.filter(s => s !== null).length === sections.length ? sections.length > 0 ? sections : <NoActivity /> : <NoActivity />}
