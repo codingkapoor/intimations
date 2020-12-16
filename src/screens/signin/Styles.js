@@ -3,7 +3,7 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 export default Styles = StyleSheet.create({
     otpInput: {
-        width: wp('77%'), height: 100 
+        width: wp('79%'), height: 50, marginTop: 15, marginBottom: 40
     },
     buttonWrapper: {
         alignItems: 'center',
@@ -19,9 +19,10 @@ export default Styles = StyleSheet.create({
         fontFamily: 'open-sans-light'
     },
     codeStyle: {
-        width: 45,
+        width: 42,
         height: 55,
         borderWidth: 1,
+        borderBottomWidth: 1,
         borderRadius: 5,
         borderColor: '#EEEEEE',
         fontFamily: 'open-sans-light',

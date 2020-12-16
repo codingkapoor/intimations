@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { AsyncStorage, Text, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import JwtDecode from 'jwt-decode';
-import OTPInputView from '@twotalltotems/react-native-otp-input';
 import * as Permissions from 'expo-permissions';
-import { Notifications } from 'expo';
+import * as Notifications from 'expo-notifications';
+import OTPTextView from 'react-native-otp-textinput';
 
 import { Email } from './StyledComponents';
 import Styles from './Styles';
@@ -49,7 +49,8 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
                 const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
                 if (status !== 'granted') return;
 
-                const expoToken = await Notifications.getExpoPushTokenAsync();
+                const expoToken = (await Notifications.getExpoPushTokenAsync()).data;
+                console.log(expoToken);
                 const profile = await AsyncStorage.getItem('profile');
                 await platform.put(
                     `/notifier/employees/${profile}/subscribe`,
@@ -76,13 +77,14 @@ const SignInScreen = ({ navigation, setToast, toast }) => {
                     autoCorrect={false}
                 />
 
-                <OTPInputView
-                    style={Styles.otpInput}
-                    pinCount={6}
-                    code={otp}
-                    onCodeChanged={setOTP}
-                    autoFocusOnLoad={false}
-                    codeInputFieldStyle={Styles.codeStyle}
+                <OTPTextView 
+                    inputCount={6}
+                    keyboardType="numeric"
+                    textInputStyle={Styles.codeStyle}
+                    containerStyle={Styles.otpInput}
+                    tintColor="#EEEEEE"
+                    offTintColor="#EEEEEE"
+                    handleTextChange={setOTP}
                 />
 
                 <TouchableOpacity
