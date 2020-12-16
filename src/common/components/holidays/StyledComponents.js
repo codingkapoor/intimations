@@ -6,21 +6,21 @@ export const HolidayWrapper = styled.View`
     flex-direction: row; 
     align-items: center; 
     justify-content: flex-start; 
-    margin-bottom: 15;
+    margin-bottom: 15px;
 `;
 
 export const DayWrapper = styled.View`
-    width: 25;
+    width: 25px;
 `;
 
 export const Day = styled.Text`
-    font-size: 10; 
+    font-size: 10px; 
     font-family: open-sans-light;
     color: #999898;
 `;
 
 export const Date = styled.Text`
-    font-size: 16; 
+    font-size: 16px; 
     font-family: open-sans-regular;
 `;
 
@@ -28,10 +28,10 @@ export const OccasionWrapper = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-    height: 33;
+    height: 33px;
     background-color: #E5B001;
-    border-radius: 5;
-    margin-left: 10;
+    border-radius: 5px;
+    margin-left: 10px;
 `;
 
 export const Occasion = styled.Text`

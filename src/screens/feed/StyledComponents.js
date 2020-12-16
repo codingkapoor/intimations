@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { BadgeColor } from '../../common/Constants';
 
 export const SectionWrapper = styled.View`
-    margin-bottom: 10; 
+    margin-bottom: 10px; 
     justify-content: center;
 `;
 
@@ -38,7 +38,7 @@ export const Name = styled.Text`
 
 export const Reason = styled.Text`
     font-family: montserrat-light;
-    font-size: 16;
+    font-size: 16px;
     padding-bottom: 5px;
     margin-bottom: 5px;
     margin-top: 8px;
@@ -51,8 +51,8 @@ export const BadgeWrapper = styled.View`
 `;
 
 export const StyledBadge = styled.View`
-    width: 10;
-    height: 10;
+    width: 10px;
+    height: 10px;
     border-radius: 2px;
     border-width: 1px;
     border-color: ${props => BadgeColor[props.half]}; 

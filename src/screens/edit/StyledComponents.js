@@ -3,7 +3,7 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 export const Reason = styled.TextInput`
     width: ${wp('90%')};
-    height: 100;
+    height: 100px;
     border-color: gray;
     border-radius: 10px;
     margin-top: 20px;

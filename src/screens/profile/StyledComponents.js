@@ -90,6 +90,6 @@ export const Email = styled.Text`
 
 export const Logout = styled.Text`
     color: white; 
-    font-size: 16;
+    font-size: 16px;
     font-family: open-sans-light;
 `;

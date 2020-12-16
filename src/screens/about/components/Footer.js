@@ -1,4 +1,5 @@
 import React from 'react';
+import { Linking } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { FooterWrapper, FooterText } from '../StyledComponents';
 
