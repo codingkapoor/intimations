@@ -32,6 +32,7 @@ import ResolveAuthScreen from './src/screens/signin/ResolveAuthScreen';
 import { setTopLevelNavigator } from './src/common/NavigationService';
 import SignInContainer from './src/screens/signin/SignInContainer';
 import IntimationsFlowNavigator from './src/common/components/IntimationsFlowNavigator';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 library.add(fab, faPhoneSquareAlt, faEnvelope, faUserAlt, faBox, faMapMarkerAlt, faBusinessTime, faIdBadge,
   faCalendarDay, faPen, faInfoCircle, faHeart, faExternalLinkSquareAlt, faBell);
@@ -91,7 +92,10 @@ const App = createAppContainer(AppNavigator);
 export default () => {
   return <Provider store={store}>
     <SafeAreaProvider>
-      <App ref={navigatorRef => { setTopLevelNavigator(navigatorRef) }} />
+      // https://github.com/magicismight/react-native-root-toast/issues/124#issuecomment-629960966
+      <RootSiblingParent>
+        <App ref={navigatorRef => { setTopLevelNavigator(navigatorRef) }} />
+      </RootSiblingParent>
     </SafeAreaProvider>
   </Provider>
 }; 
